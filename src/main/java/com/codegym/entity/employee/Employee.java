@@ -2,6 +2,7 @@ package com.codegym.entity.employee;
 
 import com.codegym.entity.order.Orders;
 import com.codegym.entity.account.Account;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,10 +42,12 @@ public class Employee {
     @JoinColumn(name = "level_id", referencedColumnName = "levelId")
     private Level level;
 
+    @JsonBackReference(value = "employee_account")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "accountId")
     private Account account;
 
+    @JsonBackReference(value = "employee_orders")
     @OneToMany(mappedBy = "employee")
     private Set<Orders> ordersSet;
 

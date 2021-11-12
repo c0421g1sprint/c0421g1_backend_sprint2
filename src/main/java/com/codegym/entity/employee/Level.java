@@ -1,5 +1,6 @@
 package com.codegym.entity.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class Level {
 
     private String levelName;
 
+    @JsonBackReference(value = "level_employee")
     @OneToMany(mappedBy = "level")
     private Set<Employee> employeeSet;
 
