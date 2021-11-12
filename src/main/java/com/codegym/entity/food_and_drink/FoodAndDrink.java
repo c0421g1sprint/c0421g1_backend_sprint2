@@ -27,7 +27,10 @@ public class FoodAndDrink {
 
     private String fadCode;
 
-    private double price;
+    private double fadPrice;
+
+    private Integer fadWaitTime;
+
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id",referencedColumnName = "categoryId")
