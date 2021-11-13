@@ -42,7 +42,6 @@ public class Employee {
     @JoinColumn(name = "level_id", referencedColumnName = "levelId")
     private Level level;
 
-    @JsonBackReference(value = "employee_account")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "accountId")
     private Account account;
