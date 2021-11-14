@@ -21,15 +21,14 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
-    private double price;
+    private String createDate;
 
     @ManyToOne(targetEntity = Employee.class)
     @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")
     private Employee employee;
 
-    @JsonBackReference(value = "order_detail")
     @OneToMany(mappedBy = "orders")
-    Set<OrderDetail> orderDetails;
+    private Set<OrderDetail> orderDetails;
 
     @ManyToOne(targetEntity = Tables.class)
     @JoinColumn(name = "table_id",referencedColumnName = "tableId")
