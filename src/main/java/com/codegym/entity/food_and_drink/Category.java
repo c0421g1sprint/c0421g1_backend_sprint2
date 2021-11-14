@@ -1,5 +1,6 @@
 package com.codegym.entity.food_and_drink;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,9 @@ public class Category {
 
     private String categoryName;
 
+    private String categoryCode;
+
+    @JsonBackReference(value = "category_items")
     @OneToMany(mappedBy = "category")
     private Set<FoodAndDrink> foodAndDrink;
 }
