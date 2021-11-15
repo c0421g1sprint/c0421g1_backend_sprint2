@@ -23,11 +23,11 @@ public class FoodAndDrinkController {
 
     //LamNT create category
     @PostMapping("/create")
-    public ResponseEntity<Integer> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
+    public ResponseEntity<?> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDto, category);
         foodAndDrinkService.saveCategory(category);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(category, HttpStatus.CREATED);
     }
 
     //LamNT update category
@@ -41,11 +41,11 @@ public class FoodAndDrinkController {
 
     //LamNT create FoodAndDrink
     @PostMapping("/create-fad")
-    public ResponseEntity<Integer> createFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
+    public ResponseEntity<?> createFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
         FoodAndDrink foodAndDrink = new FoodAndDrink();
         BeanUtils.copyProperties(foodAndDrinkDto, foodAndDrink);
         foodAndDrinkService.createFoodAndDrink(foodAndDrink);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(foodAndDrink, HttpStatus.CREATED);
     }
 
     //LamNT update FoodAndDrink

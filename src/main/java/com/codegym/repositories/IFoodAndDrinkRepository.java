@@ -15,7 +15,7 @@ public interface IFoodAndDrinkRepository extends JpaRepository<FoodAndDrink, Int
 
     //LamNT Create Category
     @Modifying
-    @Query(value = "insert into `category` (category_name, category_code) values (?1,?2)", nativeQuery = true)
+    @Query(value = "insert into `category` (delete_flag, category_name, category_code) values (0,?1,?2)", nativeQuery = true)
     void saveCategory(String category_name, String category_code);
 
     //LamNT Update Category
