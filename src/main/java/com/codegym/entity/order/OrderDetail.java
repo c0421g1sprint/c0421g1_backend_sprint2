@@ -1,6 +1,7 @@
 package com.codegym.entity.order;
 
 import com.codegym.entity.food_and_drink.FoodAndDrink;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class OrderDetail {
     @EmbeddedId
     private OrderDetailKey orderDetailId;
 
+    @JsonBackReference(value = "order_detail")
     @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name = "order_id")
