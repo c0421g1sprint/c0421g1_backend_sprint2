@@ -21,6 +21,8 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
+    private String orderCode;
+
     private String createDate;
 
     @ManyToOne(targetEntity = Employee.class)
