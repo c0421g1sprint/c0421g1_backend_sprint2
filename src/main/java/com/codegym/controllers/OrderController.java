@@ -28,7 +28,7 @@ public class OrderController {
         if (date.equals("null")){
             date = null;
         }
-        Page<Orders> ordersList = this.orderService.findAllAdv(pageable, date, orderCode) ;
+        Page<Orders> ordersList = this.orderService.findAllAdv(pageable, date, orderCode);
         if (!ordersList.getContent().isEmpty()){
             return new ResponseEntity<>(ordersList,HttpStatus.OK);
         }
