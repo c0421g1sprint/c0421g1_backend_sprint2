@@ -1,6 +1,7 @@
 package com.codegym.entity.food_and_drink;
 
 import com.codegym.entity.order.OrderDetail;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,12 +28,15 @@ public class FoodAndDrink {
 
     private String fadCode;
 
-    private double price;
+    private double fadPrice;
+
+    private Integer fadWaitTime;
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id",referencedColumnName = "categoryId")
     private Category category;
 
+    @JsonBackReference(value = "items_orders")
     @OneToMany(mappedBy = "fad")
     Set<OrderDetail> orderDetails;
 }
