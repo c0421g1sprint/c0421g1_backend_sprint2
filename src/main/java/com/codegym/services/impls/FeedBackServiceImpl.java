@@ -19,8 +19,8 @@ public class FeedBackServiceImpl implements IFeedBackService {
 
     }
 
-    @Override
-    public List<FeedBack> findAllFeedbackByQuery() {
-        return feedBackRepository.findAllFeedbackByQuery();
-    }
+//    @Override
+//    public List<FeedBack> findAllFeedbackByQuery() {
+//        return feedBackRepository.findAllFeedbackByQuery();
+//    }
 }
