@@ -3,6 +3,8 @@ package com.codegym.services;
 import com.codegym.entity.food_and_drink.Category;
 import com.codegym.entity.food_and_drink.FoodAndDrink;
 
+import java.util.List;
+
 public interface IFoodAndDrinkService {
 
     //LamNT create category
@@ -16,4 +18,11 @@ public interface IFoodAndDrinkService {
 
     //LamNT update foodAndDrink
     void updateFoodAndDrink(FoodAndDrink foodAndDrink);
+
+
+    //HaNTT: get top 5 new food
+    List<FoodAndDrink> topFiveNewProduct ();
+
+    //HaNTT: get top 5 popular food
+    List<FoodAndDrink> topFivePopularProduct ();
 }
