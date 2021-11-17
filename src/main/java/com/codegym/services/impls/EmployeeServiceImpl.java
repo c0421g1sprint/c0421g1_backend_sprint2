@@ -35,6 +35,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
 
+
+
     @Override
     public void update(Employee employee) {
         employeeRepository.updateEmployee(employee.isDeleteFlag(),employee.getEmployeeAddress(),
@@ -42,8 +44,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 employee.getEmployeeName(),employee.getEmployeePhone(),employee.getEmployeeSalary(),employee.getLevel().getLevelId(),employee.getAccountName(),employee.getEmployeeId());
     }
 
-//    @Override
-//    public void save(Employee employee) {
-//        employeeRepository.save(employee);
-//    }
+
+
+    @Override
+    public Employee getEmployeeByAccountName(String name) {
+        return employeeRepository.getEmployeeByAccountName(name);
+    }
+
+
 }

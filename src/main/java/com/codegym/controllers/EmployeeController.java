@@ -29,12 +29,16 @@ public class EmployeeController {
         if (employee != null) {
             return new ResponseEntity<>(employee,HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
     public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto,BindingResult bindingResult) {
+        Employee employeeCheck=iEmployeeService.getEmployeeByAccountName(employeeDto.getAccountName());
+        if(employeeCheck!=null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -53,10 +57,6 @@ public class EmployeeController {
             Employee employee=new Employee();
             BeanUtils.copyProperties(employeeDto,employee);
             this.iEmployeeService.update(employee);
-
-//            Account account=iAccountService.findAccountById(employee.getAccount().getAccountId());
-//            account.setAccountUsername(employee.getAccountName());
-//            this.iAccountService.save(account);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
