@@ -20,15 +20,15 @@ public class FeedBackController {
     @Autowired
     private IFeedBackService iFeedbackService;
 
-//    @GetMapping("")
-//    public ResponseEntity<List<FeedBack>> listFeedback() {
-//        List<FeedBack> feedBacks = iFeedbackService.findAllFeedbackByQuery();
-//        if (feedBacks.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(feedBacks, HttpStatus.OK);
-//
-//    }
+    @GetMapping("")
+    public ResponseEntity<List<FeedBack>> listFeedback() {
+        List<FeedBack> feedBacks = iFeedbackService.findAllFeedbackByQuery();
+        if (feedBacks.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(feedBacks, HttpStatus.OK);
+
+    }
 
     // Diep tao feedback 12/11
     @RequestMapping(value = "/add", method = RequestMethod.POST)

@@ -19,8 +19,8 @@ public interface IFeedBackRepository extends JpaRepository<FeedBack,Integer> {
             "VALUES (?1,?2,?3,?4,?5,?6,?7)", nativeQuery = true)
     void createFeedback(Integer feedback_id, String feedback_code, String feedback_content,
                         String feedback_creator, String feedback_date, String feedback_email, String feedback_image);
-//    @Query(value = "select" +
-//            " feedback_id, feedback_code,feedback_content, feedback_creator, feedback_date,feedback_email, feedback_image" +
-//            " from feed_back ", nativeQuery = true, countQuery = "select count(*)  from feed_back")
-//    List<FeedBack> findAllFeedbackByQuery();
+    @Query(value = "select" +
+            " feedback_id, feedback_code,feedback_content, feedback_creator, feedback_date,feedback_email, feedback_image" +
+            " from feed_back ", nativeQuery = true, countQuery = "select count(*)  from feed_back")
+    List<FeedBack> findAllFeedbackByQuery();
 }
