@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/table")
 public class TableController {
+
 }

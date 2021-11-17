@@ -16,27 +16,19 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodAndDrink {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer fadId;
-
-    private String fadName;
-
-    private String fadImage;
-
-    private boolean deleteFlag;
-
-    private String fadCode;
-
-    private double fadPrice;
-
-    private Integer fadWaitTime;
-
-    @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name = "category_id",referencedColumnName = "categoryId")
-    private Category category;
-
     @JsonBackReference(value = "items_orders")
     @OneToMany(mappedBy = "fad")
     Set<OrderDetail> orderDetails;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer fadId;
+    private String fadName;
+    private String fadImage;
+    private boolean deleteFlag;
+    private String fadCode;
+    private double fadPrice;
+    private Integer fadWaitTime;
+    @ManyToOne(targetEntity = Category.class)
+    @JoinColumn(name = "category_id",referencedColumnName = "categoryId")
+    private Category category;
 }

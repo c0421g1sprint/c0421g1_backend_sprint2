@@ -32,6 +32,8 @@ public class Tables {
 
     private String maximumCapacity;
 
+    private int onService;
+
     @JsonBackReference(value = "table_order")
     @OneToMany(mappedBy = "tables")
     private Set<Orders> orders;

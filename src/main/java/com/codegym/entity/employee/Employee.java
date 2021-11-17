@@ -38,6 +38,8 @@ public class Employee {
 
     private boolean deleteFlag;
 
+    private String accountName;
+
     @ManyToOne(targetEntity = Level.class)
     @JoinColumn(name = "level_id", referencedColumnName = "levelId")
     private Level level;
