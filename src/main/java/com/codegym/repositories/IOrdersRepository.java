@@ -8,13 +8,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Repository
 @Transactional
 public interface IOrdersRepository extends JpaRepository<Orders,Integer> {
 
-    //DanhNT: Danh sách hoá đơn phân trang
+
+
+
+
+
+
+
+    //DanhNT: Tìm kiếm hoá đơn
     @Query(value = "select *\n" +
             "from orders o\n" +
             "where (?1 IS NULL OR o.create_date = ?1)\n" +

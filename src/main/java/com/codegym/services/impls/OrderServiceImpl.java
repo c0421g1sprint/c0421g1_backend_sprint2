@@ -13,6 +13,42 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     IOrdersRepository ordersRepository;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //DanhNT: Danh sách hoá đơn phân trang
     @Override
     public Page<Orders> findAllAdv(Pageable pageable, String date, String code) {

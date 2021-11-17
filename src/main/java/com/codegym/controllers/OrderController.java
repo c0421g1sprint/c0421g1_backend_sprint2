@@ -17,6 +17,54 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //DanhNT: Danh sách hoá đơn phân trang
     @GetMapping("/list/{orderCode}/{date}")
     public ResponseEntity<Page<Orders>> showList(@PageableDefault(value = 5) Pageable pageable,
