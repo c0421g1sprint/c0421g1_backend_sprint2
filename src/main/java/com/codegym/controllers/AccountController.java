@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 public class AccountController {
     @Autowired
     private IAccountService accountService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 //    Code accountById of Nhật
     @GetMapping(value = "/{accountId}")
@@ -30,20 +34,20 @@ public class AccountController {
         }
     }
 
+// code edit password by Nhật
+    @PatchMapping( value = "/editPass" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> editPassword (@RequestBody @Valid EditPasswordAccountDto editPasswordAccountDto , BindingResult bindingResult) {
+        Integer id = editPasswordAccountDto.getAccountId();
+        Account account = accountService.getAccountById(id);
+        if (!passwordEncoder.matches(editPasswordAccountDto.getOldPassword(), account.getAccountPassword())
+                || bindingResult.hasFieldErrors()
+                ||!editPasswordAccountDto.getConfirmPassword().equals(editPasswordAccountDto.getAccountPassword()))  {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
 
-//    @PatchMapping( value = "/editPass" , consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String> editPassword (@RequestBody @Valid EditPasswordAccountDto editPasswordAccountDto , BindingResult bindingResult) {
-//        Integer id = editPasswordAccountDto.getAccountId();
-//        Account account = accountService.getAccountById(id);
-//        if (!passwordEncoder.matches(editPasswordAccountDto.getOldPassword(), account.getAccountPassword())
-//                || bindingResult.hasFieldErrors()
-//                ||!editPasswordAccountDto.getConfirmPassword().equals(editPasswordAccountDto.getAccountPassword()))  {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        } else {
-//
-//            accountService.editPassword(editPasswordAccountDto.getAccountId(), editPasswordAccountDto.getAccountPassword());
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//    }
+            accountService.editPassword(editPasswordAccountDto.getAccountId(), editPasswordAccountDto.getAccountPassword());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 
 }
