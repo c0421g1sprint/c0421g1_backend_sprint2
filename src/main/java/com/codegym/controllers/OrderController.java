@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/order")
@@ -61,5 +62,23 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    //DanhNT: Danh sách hoá đơn phân trang
+    @GetMapping("/list/{orderCode}/{date}")
+    public ResponseEntity<Page<Orders>> showList(@PageableDefault(value = 5) Pageable pageable,
+            @PathVariable(required = false) String orderCode,
+                                      @PathVariable(required = false) String date){
+        if (orderCode.equals("null")){
+            orderCode = null;
+        }
+        if (date.equals("null")){
+            date = null;
+        }
+        Page<Orders> ordersList = this.iOrderService.findAllAdv(pageable, date, orderCode);
+        if (!ordersList.getContent().isEmpty()){
+            return new ResponseEntity<>(ordersList,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 }

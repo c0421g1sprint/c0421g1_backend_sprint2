@@ -21,4 +21,7 @@ public interface IOrderService {
 
     // TaiHVK coding show table order detail method 17/11/2021
     Orders showOrderDetail(Integer id);
+
+    //DanhNT: tìm kiếm hoá đơn
+    Page<Orders> findAllAdv(Pageable pageable, String date, String code);
 }
