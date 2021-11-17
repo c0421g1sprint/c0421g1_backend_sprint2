@@ -1,6 +1,7 @@
 package com.codegym.entity.table;
 
 import com.codegym.entity.order.Orders;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,9 @@ public class Tables {
 
     private String maximumCapacity;
 
+    private int onService;
+
+    @JsonBackReference(value = "table_order")
     @OneToMany(mappedBy = "tables")
     private Set<Orders> orders;
 }
