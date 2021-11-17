@@ -1,5 +1,6 @@
 package com.codegym.controllers;
 
+
 import com.codegym.dto.FeedBackDto;
 import com.codegym.entity.feedback.FeedBack;
 import com.codegym.services.IFeedBackService;
@@ -13,11 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/feed-back")
 public class FeedBackController {
     @Autowired
+
     private IFeedBackService iFeedbackService;
 
 //    @GetMapping("")
@@ -42,6 +50,22 @@ public class FeedBackController {
             this.iFeedbackService.save(feedback);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
+    }
+
+
+    IFeedBackService feedBackService;
+//    QuanTA codeing back-end search feed back by date 14/11/2021
+    @GetMapping(value = "/list-by-date/{feedBackDate}")
+    public ResponseEntity<Page<FeedBack>> showListFeedBackByDate(@PageableDefault(value = 5) Pageable pageable,
+                                                                 @PathVariable(required = false) String feedBackDate) {
+        if (feedBackDate.equals("null")){
+            feedBackDate = null;
+        }
+        Page<FeedBack> feedBackPage = feedBackService.findAllFeedBackByDate(feedBackDate,pageable);
+        if (feedBackPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(feedBackPage, HttpStatus.OK);
     }
 
 }

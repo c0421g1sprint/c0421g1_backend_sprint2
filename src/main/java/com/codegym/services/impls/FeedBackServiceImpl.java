@@ -4,7 +4,9 @@ import com.codegym.entity.feedback.FeedBack;
 import com.codegym.repositories.IFeedBackRepository;
 import com.codegym.services.IFeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 public class FeedBackServiceImpl implements IFeedBackService {
     @Autowired
     IFeedBackRepository feedBackRepository;
+
 // diep create feedback 12/11
     @Override
     public void save(FeedBack feedback) {
@@ -23,4 +26,13 @@ public class FeedBackServiceImpl implements IFeedBackService {
 //    public List<FeedBack> findAllFeedbackByQuery() {
 //        return feedBackRepository.findAllFeedbackByQuery();
 //    }
+
+
+
+
+    @Override
+    public Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable) {
+        return this.feedBackRepository.findAllFeedBackByDate(feedBackDate,pageable);
+    }
+
 }

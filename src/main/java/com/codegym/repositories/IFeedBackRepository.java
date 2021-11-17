@@ -1,8 +1,12 @@
 package com.codegym.repositories;
 
 import com.codegym.entity.feedback.FeedBack;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.Modifying;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +15,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+
 public interface IFeedBackRepository extends JpaRepository<FeedBack,Integer> {
     //DiepLV do create feedback 12/11
     @Modifying
@@ -23,4 +28,12 @@ public interface IFeedBackRepository extends JpaRepository<FeedBack,Integer> {
 //            " feedback_id, feedback_code,feedback_content, feedback_creator, feedback_date,feedback_email, feedback_image" +
 //            " from feed_back ", nativeQuery = true, countQuery = "select count(*)  from feed_back")
 //    List<FeedBack> findAllFeedbackByQuery();
+
+
+
+    //QuanTA get danh sach feed back theo ngay 13/11/2021
+    @Query(value = "select * from feed_back where (?1 is null or feedback_date = ?1)",
+            countQuery = "select count(*) from feed_back where (?1 is null or feedback_date = ?1);",nativeQuery = true)
+    Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable);
+
 }
