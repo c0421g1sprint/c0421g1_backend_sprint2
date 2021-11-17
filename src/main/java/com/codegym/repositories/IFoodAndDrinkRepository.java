@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -35,4 +36,22 @@ public interface IFoodAndDrinkRepository extends JpaRepository<FoodAndDrink, Int
     @Query(value = "update `food_and_drink` set fad_code = ?1, fad_image = ?2," +
             "fad_name = ?3, fad_price = ?4, category_id = ?5 where fad_id = ?6", nativeQuery = true)
     void updateFoodAndDrink(String fad_code, String fad_image, String fad_name, Double fad_price, Integer category_id, Integer fad_id);
+
+    //HaNTT: get top 5 new food
+    @Query(value = "SELECT fad_id, delete_flag, fad_code, fad_image, fad_name, fad_price, fad_wait_time, category_id\n" +
+            "FROM food_and_drink\n" +
+            "WHERE delete_flag = 0\n" +
+            "ORDER BY fad_id DESC\n" +
+            "LIMIT 5;", nativeQuery = true)
+    List<FoodAndDrink> topFiveNewProduct ();
+
+    //HaNTT: get top 5 popular food
+    @Query(value = "SELECT fad.fad_id, delete_flag, fad_code, fad_image, fad_name, fad_price, fad_wait_time, category_id, sum(quantity) as poppularIndex\n" +
+            "FROM food_and_drink fad\n" +
+            "INNER JOIN order_detail od ON fad.fad_id = od.fad_id\n" +
+            "WHERE fad.delete_flag = 0\n" +
+            "GROUP BY od.fad_id\n" +
+            "ORDER BY poppularIndex DESC\n" +
+            "LIMIT 5;", nativeQuery = true)
+    List<FoodAndDrink> topFivePopularProduct ();
 }

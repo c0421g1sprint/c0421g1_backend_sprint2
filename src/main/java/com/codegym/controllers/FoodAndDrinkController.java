@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/food-and-drink")
@@ -55,5 +58,27 @@ public class FoodAndDrinkController {
         BeanUtils.copyProperties(foodAndDrinkDto, foodAndDrink);
         foodAndDrinkService.updateFoodAndDrink(foodAndDrink);
         return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
+    }
+
+    //HaNTT: get top 5 new food
+    @GetMapping("/find-top-five-new")
+    public ResponseEntity<List<FoodAndDrink>> getTopFiveNew() {
+        List<FoodAndDrink> foodAndDrinkList;
+        foodAndDrinkList = foodAndDrinkService.topFiveNewProduct();
+        if (foodAndDrinkList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+    }
+
+    //HaNTT: get top 5 popular food
+    @GetMapping("/find-top-five-popular")
+    public ResponseEntity<List<FoodAndDrink>> getTopFivePopular() {
+        List<FoodAndDrink> foodAndDrinkList;
+        foodAndDrinkList = foodAndDrinkService.topFivePopularProduct();
+        if (foodAndDrinkList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
     }
 }
