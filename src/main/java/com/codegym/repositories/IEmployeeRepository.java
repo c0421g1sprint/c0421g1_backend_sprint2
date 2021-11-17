@@ -13,14 +13,14 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
-    @Query(value = "SELECT employee_id,delete_flag, employee_address, employee_birthday, employee_gender, employee_image,employee_name,employee_phone,employee_salary, account_id,level_id\n" +
+    @Query(value = "SELECT employee_id,delete_flag, employee_address, employee_birthday, employee_gender, employee_image,employee_name,employee_phone,employee_salary, account_id,level_id,account_name\n" +
             "FROM employee\n" +
             "WHERE delete_flag = false ",
             countQuery = "select count(*)  from employee where delete_flag = false;"
             ,nativeQuery = true)
     Page<Employee> getAllEmployee(Pageable page);
 
-    @Query(value= "SELECT e.employee_id,e.delete_flag, e.employee_address, e.employee_birthday, e.employee_gender, e.employee_image,e.employee_name,e.employee_phone,e.employee_salary, e.account_id,e.level_id\n" +
+    @Query(value= "SELECT e.employee_id,e.delete_flag, e.employee_address, e.employee_birthday, e.employee_gender, e.employee_image,e.employee_name,e.employee_phone,e.employee_salary, e.account_id,e.level_id,account_name\n" +
             "FROM employee e\n" +
             "WHERE employee_id = ?1", nativeQuery = true)
     Employee findEmployeeById(Integer id);
@@ -29,7 +29,7 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query(value = "update employee set delete_flag = true where employee_id = :id ", nativeQuery = true)
     void deleteEmployee(Integer id);
 
-    @Query(value="SELECT e.employee_id,e.delete_flag, e.employee_address, e.employee_birthday, e.employee_gender, e.employee_image,e.employee_name,e.employee_phone,e.employee_salary, e.account_id,e.level_id\n" +
+    @Query(value="SELECT e.employee_id,e.delete_flag, e.employee_address, e.employee_birthday, e.employee_gender, e.employee_image,e.employee_name,e.employee_phone,e.employee_salary, e.account_id,e.level_id,account_name\n" +
             "FROM employee e\n" +
             "JOIN account a ON a.account_id = e.account_id\n" +
             "JOIN `level` l ON l.level_id = e.level_id\n" +
