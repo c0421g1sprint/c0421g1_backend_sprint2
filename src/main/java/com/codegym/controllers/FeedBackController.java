@@ -1,11 +1,32 @@
 package com.codegym.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.codegym.entity.feedback.FeedBack;
+import com.codegym.services.IFeedBackService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/feed-back")
 public class FeedBackController {
+    @Autowired
+    IFeedBackService feedBackService;
+//    QuanTA codeing back-end search feed back by date 14/11/2021
+    @GetMapping(value = "/list-by-date/{feedBackDate}")
+    public ResponseEntity<Page<FeedBack>> showListFeedBackByDate(@PageableDefault(value = 5) Pageable pageable,
+                                                                 @PathVariable(required = false) String feedBackDate) {
+        if (feedBackDate.equals("null")){
+            feedBackDate = null;
+        }
+        Page<FeedBack> feedBackPage = feedBackService.findAllFeedBackByDate(feedBackDate,pageable);
+        if (feedBackPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(feedBackPage, HttpStatus.OK);
+    }
 }
