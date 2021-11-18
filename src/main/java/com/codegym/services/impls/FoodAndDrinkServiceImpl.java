@@ -15,24 +15,14 @@ public class FoodAndDrinkServiceImpl implements IFoodAndDrinkService {
     @Autowired
     IFoodAndDrinkRepository foodAndDrinkRepository;
 
-    //LamNT create category
-    @Override
-    public void saveCategory(Category category) {
-        foodAndDrinkRepository.saveCategory(category.getCategoryName(), category.getCategoryCode());
-    }
-
-    //LamNT update category
-    @Override
-    public void updateCategory(Category category) {
-        foodAndDrinkRepository.updateCategory(category.getCategoryName(), category.getCategoryCode(), category.getCategoryId());
-    }
-
+    //LamNT create fad
     @Override
     public void createFoodAndDrink(FoodAndDrink foodAndDrink) {
         foodAndDrinkRepository.createFoodAndDrink(foodAndDrink.getFadCode(), foodAndDrink.getFadImage(),
                 foodAndDrink.getFadName(), foodAndDrink.getFadPrice(), foodAndDrink.getCategory().getCategoryId());
     }
 
+    //LamNT update fad
     @Override
     public void updateFoodAndDrink(FoodAndDrink foodAndDrink) {
         foodAndDrinkRepository.updateFoodAndDrink(foodAndDrink.getFadCode(), foodAndDrink.getFadImage(), foodAndDrink.getFadName(),

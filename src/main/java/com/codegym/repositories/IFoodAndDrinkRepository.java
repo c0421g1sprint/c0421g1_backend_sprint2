@@ -14,16 +14,6 @@ import java.util.List;
 @Transactional
 public interface IFoodAndDrinkRepository extends JpaRepository<FoodAndDrink, Integer> {
 
-    //LamNT Create Category
-    @Modifying
-    @Query(value = "insert into `category` (delete_flag, category_name, category_code) values (0,?1,?2)", nativeQuery = true)
-    void saveCategory(String category_name, String category_code);
-
-    //LamNT Update Category
-    @Modifying
-    @Query(value = "update `category` set category_name = ?1, category_code = ?2 where (category_id = ?3)", nativeQuery = true)
-    void updateCategory(String category_name, String category_code, Integer category_id);
-
     //LamNT Create FoodAndDrink
     @Modifying
     @Query(value = "insert into `food_and_drink` (delete_flag, fad_wait_time, fad_code, fad_image, fad_name, fad_price, category_id) " +
