@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class AccountDto {
     @NotBlank
     @NotNull
+
     private String accountUsername;
 
     @NotBlank
