@@ -27,6 +27,7 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query(value = "update employee set delete_flag = true where employee_id = :id ", nativeQuery = true)
     void deleteEmployee(Integer id);
 
+    //MinhNN
     @Query(value="SELECT e.employee_id,e.delete_flag, e.employee_address, e.employee_birthday, e.employee_gender, e.employee_image,e.employee_name,e.employee_phone,e.employee_salary, e.account_id,e.level_id,account_name\n" +
             "FROM employee e\n" +
             "JOIN account a ON a.account_id = e.account_id\n" +
