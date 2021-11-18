@@ -2,6 +2,7 @@ package com.codegym.entity.employee;
 
 import com.codegym.entity.order.Orders;
 import com.codegym.entity.account.Account;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,8 @@ public class Employee {
 
     private boolean deleteFlag;
 
+    private String accountName;
+
     @ManyToOne(targetEntity = Level.class)
     @JoinColumn(name = "level_id", referencedColumnName = "levelId")
     private Level level;
@@ -45,6 +48,7 @@ public class Employee {
     @JoinColumn(name = "account_id", referencedColumnName = "accountId")
     private Account account;
 
+    @JsonBackReference(value = "employee_orders")
     @OneToMany(mappedBy = "employee")
     private Set<Orders> ordersSet;
 
