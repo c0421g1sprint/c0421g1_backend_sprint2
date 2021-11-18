@@ -93,10 +93,6 @@ public class OrderController {
         return new ResponseEntity<>(incomesDto, HttpStatus.ACCEPTED);
     }
 
-
-
-
-
     // TaiHVK coding show all available tables by list method 17/11/2021
     @GetMapping(value = "/on-service")
     public ResponseEntity<Page<Tables>> showTableOnService(@PageableDefault(size = 6) Pageable pageable) {
@@ -108,7 +104,6 @@ public class OrderController {
 
         return new ResponseEntity<>(tablesPage, HttpStatus.OK);
     }
-
 
     // TaiHVK coding change table on service status method 17/11/2021
     @PatchMapping(value = "/on-service/handle/{id}")
@@ -126,7 +121,6 @@ public class OrderController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     // TaiHVK coding show table order detail method 17/11/2021
     @GetMapping(value = "/on-service/{id}")
