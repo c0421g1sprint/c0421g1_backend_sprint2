@@ -25,16 +25,17 @@ import org.springframework.data.web.PageableDefault;
 @RequestMapping("/api/order")
 public class OrderController {
 
+    // TaiHVK inject interfaces IOrderService 17/11/2021
     @Autowired
-    private IOrderService orderService;
+    private IOrderService iOrderService;
 
     //TaiNP coding show IncomeWithDate
     @GetMapping(value = "/income-date")
     public ResponseEntity<IncomeWithDateDto> showIncomeWithDate(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws ParseException {
-        if (startDate == "" || endDate == ""){
+        if (startDate.equals("") || endDate.equals("")){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        IncomeWithDateDto incomeWithDateDto = this.orderService.findIncomeWithDate(startDate, endDate);
+        IncomeWithDateDto incomeWithDateDto = this.iOrderService.findIncomeWithDate(startDate, endDate);
         return new ResponseEntity<>(incomeWithDateDto, HttpStatus.ACCEPTED);
     }
 
@@ -60,42 +61,40 @@ public class OrderController {
             lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
 
-        if(date.name() == "MONDAY"){
+        if(date.name().equals("MONDAY")){
             monDay = dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.plusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        if(date.name() == "TUESDAY"){
+        if(date.name().equals("TUESDAY")){
             monDay = dateNow.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.plusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        if(date.name() == "WEDNESDAY"){
+        if(date.name().equals("WEDNESDAY")){
             monDay = dateNow.minusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.plusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        if(date.name() == "THURSDAY"){
+        if(date.name().equals("THURSDAY")){
             monDay = dateNow.minusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        if(date.name() == "FRIDAY"){
+        if(date.name().equals("FRIDAY")){
             monDay = dateNow.minusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        if(date.name() == "SATURDAY"){
+        if(date.name().equals("SATURDAY")){
             monDay = dateNow.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        if(date.name() == "SUNDAY"){
+        if(date.name().equals("SUNDAY")){
             monDay = dateNow.minusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             sunDay = dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
-        List<IncomesDto> incomesDto = orderService.statisticsIncomes(dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
+        List<IncomesDto> incomesDto = iOrderService.statisticsIncomes(dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
         return new ResponseEntity<>(incomesDto, HttpStatus.ACCEPTED);
     }
 
 
-    // TaiHVK inject interfaces IOrderService 17/11/2021
-    @Autowired
-    private IOrderService iOrderService;
+
 
 
     // TaiHVK coding show all available tables by list method 17/11/2021
