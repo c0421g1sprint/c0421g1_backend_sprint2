@@ -4,6 +4,8 @@ import com.codegym.entity.table.Tables;
 import com.codegym.repositories.ITablesRepository;
 import com.codegym.services.ITableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,5 +25,23 @@ private ITablesRepository tablesRepository;
     @Override
     public String checkTableCode(String tableCode) {
         return this.tablesRepository.checkTableCode(tableCode);
+    }
+
+    //HauPT do at 17/11/2021
+    @Override
+    public Page<Tables> getListTable(Pageable pageable) {
+        return tablesRepository.getListTable(pageable);
+    }
+
+    //HauPT do at 17/11/2021
+    @Override
+    public void deleteTableById(Integer id) {
+        tablesRepository.deleteTableById(id);
+    }
+
+    //HauPT do at 17/11/2021
+    @Override
+    public Page<Tables> getListTableByCodeAndStatus(Pageable pageable, String tableCode, String tableStatus) {
+        return tablesRepository.getListTableByCodeAndStatus(pageable,tableCode,tableStatus);
     }
 }
