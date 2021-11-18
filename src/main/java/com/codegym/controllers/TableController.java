@@ -76,9 +76,9 @@ public class TableController {
 
     //HauPT do at 18/11/2021
     @GetMapping(value = "/search")
-    public ResponseEntity<Page<Tables>> SearchTable(@RequestParam( name = "tableCode" ,required = false) String tableCode,
-                                                    @RequestParam( name = "tableStatus" ,required = false) String tableStatus,
-                                                    @PageableDefault(value = 5) Pageable pageable){
+    public ResponseEntity<Page<Tables>> searchTable(@PageableDefault(value = 5) Pageable pageable,
+                                                    @RequestParam( name = "tableCode" ,required = false) String tableCode,
+                                                    @RequestParam( name = "tableStatus" ,required = false) String tableStatus){
         Page<Tables> tables = tableService.getListTableByCodeAndStatus(pageable , tableCode ,tableStatus);
         if (tables.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
