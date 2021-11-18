@@ -20,9 +20,11 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/table")
 public class TableController {
+
     @Autowired
     private ITableService tableService;
 
+    //DucLVH do at 17/11/2021
     @PostMapping(value = "/add")
     public ResponseEntity<List<FieldError>> createTable(@RequestBody TablesDto tablesDto) {
         String tableCode = tableService.checkTableCode(tablesDto.getTableCode());
@@ -35,6 +37,8 @@ public class TableController {
         this.tableService.saveQuery(tables.getLocation(), tables.getMaximumCapacity(), tables.getTableCode());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    //DucLVH do at 17/11/2021
     @RequestMapping(value = "/update", method = RequestMethod.PATCH)
     public ResponseEntity<?> updateTeacher(@RequestBody @Validated TablesDto tablesDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {

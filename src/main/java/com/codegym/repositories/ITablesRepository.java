@@ -12,11 +12,14 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface ITablesRepository extends JpaRepository<Tables,Integer> {
+
+    //DucLVH do at 17/11/2021
     @Transactional
     @Modifying
     @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status) values (0,0,?1,?2,?3,'trống')", nativeQuery = true)
     void saveQuery(String location,String maximumCapacity,String tableCode);
 
+    //DucLVH do at 17/11/2021
     @Query(value ="SELECT * FROM tables WHERE table_code = ?1",nativeQuery = true)
     String checkTableCode(String tableCode);
 
@@ -34,6 +37,7 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
             "and (table_status = ?2 OR ?2 IS NULL)",nativeQuery = true)
     Page<Tables> getListTableByCodeAndStatus(Pageable pageable, String tableCode , String tableStatus);
 
+    //DucLVH do at 17/11/2021
     @Modifying
     @Query(value = "update tables set location = ?1,maximum_capacity= ?2,table_code = ?3,table_status=?4,available_flag=?5 \n" +
             "where (table_id = ?6);", nativeQuery = true)

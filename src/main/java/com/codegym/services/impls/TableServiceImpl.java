@@ -12,16 +12,20 @@ import org.springframework.stereotype.Service;
 public class TableServiceImpl implements ITableService {
     @Autowired
 private ITablesRepository tablesRepository;
+
+    //DucLVH do at 17/11/2021
     @Override
     public void saveQuery(String location, String maximumCapacity, String tableCode) {
         this.tablesRepository.saveQuery(location,maximumCapacity,tableCode);
     }
 
+    //DucLVH do at 17/11/2021
     @Override
     public void updateTable(Tables tables) {
         tablesRepository.updateTable(tables.getLocation(),tables.getMaximumCapacity(),tables.getTableCode(),tables.getTableStatus(),tables.isAvailableFlag(),tables.getTableId());
     }
 
+    //DucLVH do at 17/11/2021
     @Override
     public String checkTableCode(String tableCode) {
         return this.tablesRepository.checkTableCode(tableCode);
