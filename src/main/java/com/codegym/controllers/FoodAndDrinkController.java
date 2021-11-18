@@ -54,7 +54,7 @@ public class FoodAndDrinkController {
         if (foodAndDrinkList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+        return new ResponseEntity<>(foodAndDrinkList, HttpStatus.OK);
     }
 
     //HaNTT: get top 5 popular food
@@ -65,49 +65,49 @@ public class FoodAndDrinkController {
         if (foodAndDrinkList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+        return new ResponseEntity<>(foodAndDrinkList, HttpStatus.OK);
     }
 
     //LinhDN: view all food
     @GetMapping("/list")
-    public ResponseEntity<Page<FoodAndDrink>> viewAllFad(@PageableDefault(value = 2,sort = "fad_id",direction = Sort.Direction.ASC)Pageable pageable, @RequestParam(value = "name",required = false) String name,
-                                                         @RequestParam(value = "code",required = false) String code,
-                                                         @RequestParam(value = "price",required = false) Double price,
-                                                         @RequestParam(value = "id",required = false) Integer id){
-        Page<FoodAndDrink> foodAndDrinkList = foodAndDrinkService.viewAllFoodAndDrink(pageable,code,name,price,id);
-        if (!foodAndDrinkList.isEmpty()){
-            return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+    public ResponseEntity<Page<FoodAndDrink>> viewAllFad(@PageableDefault(value = 2, sort = "fad_id", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam(value = "name", required = false) String name,
+                                                         @RequestParam(value = "code", required = false) String code,
+                                                         @RequestParam(value = "price", required = false) Double price,
+                                                         @RequestParam(value = "id", required = false) Integer id) {
+        Page<FoodAndDrink> foodAndDrinkList = foodAndDrinkService.viewAllFoodAndDrink(pageable, code, name, price, id);
+        if (!foodAndDrinkList.isEmpty()) {
+            return new ResponseEntity<>(foodAndDrinkList, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //LinhDN xem chi tiet 1 food
     @GetMapping("/detail/{id}")
-    public ResponseEntity<FoodAndDrink> viewDetailFad(@PathVariable("id") Integer id){
+    public ResponseEntity<FoodAndDrink> viewDetailFad(@PathVariable("id") Integer id) {
         FoodAndDrink foodAndDrink = foodAndDrinkService.viewDetailFoodAndDrink(id);
-        if (foodAndDrink!=null){
-            return new ResponseEntity<>(foodAndDrink,HttpStatus.OK);
+        if (foodAndDrink != null) {
+            return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //LinhDN xoa 1 food
     @PatchMapping("/delete/{id}")
-    public void deleteFad(@PathVariable("id") Integer id){
+    public void deleteFad(@PathVariable("id") Integer id) {
         FoodAndDrink foodAndDrink = foodAndDrinkService.viewDetailFoodAndDrink(id);
-        if (foodAndDrink!=null){
+        if (foodAndDrink != null) {
             foodAndDrinkService.deleteDetailFoodAndDrink(id);
         }
     }
 
     //LinhDN: view all food No Id
     @GetMapping("/listNoId")
-    public ResponseEntity<Page<FoodAndDrink>> viewAllFadNoId(@PageableDefault(value = 2,sort = "fad_id",direction = Sort.Direction.ASC)Pageable pageable, @RequestParam(value = "name",required = false) String name,
-                                                         @RequestParam(value = "code",required = false) String code,
-                                                         @RequestParam(value = "price",required = false) Double price){
-        Page<FoodAndDrink> foodAndDrinkList = foodAndDrinkService.viewAllFoodAndDrinkNoId(pageable,code,name,price);
-        if (!foodAndDrinkList.isEmpty()){
-            return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+    public ResponseEntity<Page<FoodAndDrink>> viewAllFadNoId(@PageableDefault(value = 2, sort = "fad_id", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam(value = "name", required = false) String name,
+                                                             @RequestParam(value = "code", required = false) String code,
+                                                             @RequestParam(value = "price", required = false) Double price) {
+        Page<FoodAndDrink> foodAndDrinkList = foodAndDrinkService.viewAllFoodAndDrinkNoId(pageable, code, name, price);
+        if (!foodAndDrinkList.isEmpty()) {
+            return new ResponseEntity<>(foodAndDrinkList, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
