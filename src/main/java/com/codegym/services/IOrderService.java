@@ -1,11 +1,23 @@
 package com.codegym.services;
 
+import com.codegym.dto.IncomeWithDateDto;
+import com.codegym.dto.IncomesDto;
+
+import java.util.List;
+
 import com.codegym.entity.order.Orders;
 import com.codegym.entity.table.Tables;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IOrderService {
+
+    //TaiNP coding find IncomeWithDate
+    IncomeWithDateDto findIncomeWithDate(String startDate, String endDate);
+
+    //TaiNP coding show statisticsIncome
+    List<IncomesDto> statisticsIncomes(String dateNow, String monDay, String sunDay, String firstMoth, String lastMonth, String firstYear, String lastYear);
+
 
     // TaiHVK coding show all available tables by list method 17/11/2021
     Page<Tables> showTableList(Pageable pageable);
