@@ -28,10 +28,6 @@ public class OrderController {
         if (startDate == "" || endDate == ""){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        startDate = myFormat.format(fromUser.parse(startDate));
-//        endDate = myFormat.format(fromUser.parse(endDate));
         IncomeWithDateDto incomeWithDateDto = this.orderService.findIncomeWithDate(startDate, endDate);
         return new ResponseEntity<>(incomeWithDateDto, HttpStatus.ACCEPTED);
     }
