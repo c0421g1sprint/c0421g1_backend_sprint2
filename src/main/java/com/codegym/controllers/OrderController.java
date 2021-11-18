@@ -9,11 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import com.codegym.entity.order.Orders;
+import com.codegym.entity.table.Tables;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -85,4 +90,69 @@ public class OrderController {
         return new ResponseEntity<>(incomesDto, HttpStatus.ACCEPTED);
     }
 
+
+    // TaiHVK inject interfaces IOrderService 17/11/2021
+    @Autowired
+    private IOrderService iOrderService;
+
+
+    // TaiHVK coding show all available tables by list method 17/11/2021
+    @GetMapping(value = "/on-service")
+    public ResponseEntity<Page<Tables>> showTableOnService(@PageableDefault(size = 6) Pageable pageable) {
+        Page<Tables> tablesPage = this.iOrderService.showTableList(pageable);
+
+        if (tablesPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(tablesPage, HttpStatus.OK);
+    }
+
+
+    // TaiHVK coding change table on service status method 17/11/2021
+    @PatchMapping(value = "/on-service/handle/{id}")
+    public ResponseEntity<Void> changeTableOnServiceStatus(@PathVariable int id) {
+        this.iOrderService.changeTableOnServiceStatus(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    // TaiHVK coding reset table status method 17/11/2021
+    @PatchMapping(value = "/on-service/reset/{id}")
+    public ResponseEntity<Void> changeTableStatus(@PathVariable int id) {
+        this.iOrderService.resetTableStatus(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    // TaiHVK coding show table order detail method 17/11/2021
+    @GetMapping(value = "/on-service/{id}")
+    public ResponseEntity<Orders> showOrderDetail(@PathVariable(value = "id") Integer id) {
+        Orders orders = this.iOrderService.showOrderDetail(id);
+
+        if (orders == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    //DanhNT: Danh sách hoá đơn phân trang
+    @GetMapping("/list/{orderCode}/{date}")
+    public ResponseEntity<Page<Orders>> showList(@PageableDefault(value = 5) Pageable pageable,
+            @PathVariable(required = false) String orderCode,
+                                      @PathVariable(required = false) String date){
+        if (orderCode.equals("null")){
+            orderCode = null;
+        }
+        if (date.equals("null")){
+            date = null;
+        }
+        Page<Orders> ordersList = this.iOrderService.findAllAdv(pageable, date, orderCode);
+        if (!ordersList.getContent().isEmpty()){
+            return new ResponseEntity<>(ordersList,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
 }
