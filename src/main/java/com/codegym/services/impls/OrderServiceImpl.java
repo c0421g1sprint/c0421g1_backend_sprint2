@@ -20,20 +20,20 @@ public class OrderServiceImpl implements IOrderService {
     // TaiHVK inject interfaces IOrdersRepository and ITablesRepository 17/11/2021
     @Autowired
     IOrdersRepository ordersRepository;
+    @Autowired
+    private ITablesRepository iTablesRepository;
 
+    //TaiNP coding find IncomeWithDate
     @Override
     public IncomeWithDateDto findIncomeWithDate(String startDate, String endDate) {
         return ordersRepository.findIncomeWithDate(startDate, endDate);
     }
 
+    //TaiNP coding show statisticsIncome
     @Override
     public List<IncomesDto> statisticsIncomes(String dateNow, String monDay, String sunDay, String firstMoth, String lastMonth, String firstYear, String lastYear) {
         return ordersRepository.statisticsIncomes(dateNow, monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
     }
-    private IOrdersRepository ordersRepository;
-    @Autowired
-    private ITablesRepository iTablesRepository;
-
 
     // TaiHVK coding show all available tables by list method 17/11/2021
     @Override

@@ -11,8 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IOrderService {
+
+    //TaiNP coding find IncomeWithDate
     IncomeWithDateDto findIncomeWithDate(String startDate, String endDate);
 
+    //TaiNP coding show statisticsIncome
     List<IncomesDto> statisticsIncomes(String dateNow, String monDay, String sunDay, String firstMoth, String lastMonth, String firstYear, String lastYear);
 
 

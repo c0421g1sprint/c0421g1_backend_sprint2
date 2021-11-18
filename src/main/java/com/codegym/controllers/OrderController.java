@@ -28,6 +28,7 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+    //TaiNP coding show IncomeWithDate
     @GetMapping(value = "/income-date")
     public ResponseEntity<IncomeWithDateDto> showIncomeWithDate(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws ParseException {
         if (startDate == "" || endDate == ""){
@@ -37,6 +38,7 @@ public class OrderController {
         return new ResponseEntity<>(incomeWithDateDto, HttpStatus.ACCEPTED);
     }
 
+    //TaiNP coding show statisticsIncome
     @GetMapping(value = "/income-statistics")
     public ResponseEntity<List<IncomesDto>> statisticsIncome() {
         String monDay = "";
