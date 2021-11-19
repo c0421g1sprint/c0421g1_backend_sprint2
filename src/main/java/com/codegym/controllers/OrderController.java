@@ -58,7 +58,7 @@ public class OrderController {
         Orders orders = this.iOrderService.showOrderDetail(id);
 
         if (orders == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }

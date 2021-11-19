@@ -39,4 +39,24 @@ public interface IOrdersRepository extends JpaRepository<Orders,Integer> {
                     "inner join food_and_drink on food_and_drink.fad_id = order_detail.fad_id" +
                     " inner join tables on `orders`.table_id = tables.table_id where tables.table_id = :id", nativeQuery = true)
     Orders showOrderDetail(Integer id);
+
+    public static void main(String[] args) {
+        int run = 2;
+
+        while (true) {
+            int count = 0;
+            for (int i = 1; i <= run; i++) {
+                if (run % i == 0) {
+                    count++;
+                }
+            }
+            if (count == 2) {
+                System.out.println(run);
+            }
+            if (run >= 100) {
+                break;
+            }
+            run++;
+        }
+    }
 }
