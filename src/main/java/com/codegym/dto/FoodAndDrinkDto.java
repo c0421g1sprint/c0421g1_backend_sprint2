@@ -8,6 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter
@@ -16,20 +20,17 @@ import java.util.Set;
 @AllArgsConstructor
 public class FoodAndDrinkDto {
     private Integer fadId;
-
+    @NotEmpty(message = "Tên món không được để trống")
+    @Size(min = 5, message = "Tên món không được ít hơn 5 chữ cái")
     private String fadName;
-
+    @NotEmpty
     private String fadImage;
-
     private boolean deleteFlag;
-
+    @NotEmpty
     private String fadCode;
-
-    private double fadPrice;
-
+    private Double fadPrice;
     private Integer fadWaitTime;
 
     private Category category;
-
     Set<OrderDetail> orderDetails;
 }
