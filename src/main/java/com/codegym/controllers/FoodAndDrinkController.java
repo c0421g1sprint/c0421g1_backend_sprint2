@@ -11,24 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import com.codegym.dto.CategoryDto;
-import com.codegym.dto.FoodAndDrinkDto;
-import com.codegym.entity.food_and_drink.Category;
-import com.codegym.entity.food_and_drink.FoodAndDrink;
-import com.codegym.repositories.IFoodAndDrinkRepository;
-import com.codegym.services.IFoodAndDrinkService;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -82,7 +66,7 @@ public class FoodAndDrinkController {
         if (foodAndDrinkList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+        return new ResponseEntity<>(foodAndDrinkList, HttpStatus.OK);
     }
 
     //HaNTT: get top 5 popular food
@@ -93,6 +77,6 @@ public class FoodAndDrinkController {
         if (foodAndDrinkList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(foodAndDrinkList,HttpStatus.OK);
+        return new ResponseEntity<>(foodAndDrinkList, HttpStatus.OK);
     }
 }
