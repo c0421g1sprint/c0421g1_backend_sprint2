@@ -52,12 +52,15 @@ public class CategoryController {
     }
 
     //LinhDN delete category
+    //update lan 1 19/11
     @PatchMapping("/delete/{id}")
-    public void deleteCategory(@PathVariable("id") Integer id){
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") Integer id){
         Category category = categoryService.detailCategory(id);
         if (category!=null){
             categoryService.deleteCategory(id);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //LinhDN xem 1 category

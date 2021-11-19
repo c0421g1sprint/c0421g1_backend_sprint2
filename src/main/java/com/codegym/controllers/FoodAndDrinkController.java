@@ -1,10 +1,7 @@
 package com.codegym.controllers;
 
-import com.codegym.dto.CategoryDto;
 import com.codegym.dto.FoodAndDrinkDto;
-import com.codegym.entity.food_and_drink.Category;
 import com.codegym.entity.food_and_drink.FoodAndDrink;
-import com.codegym.repositories.IFoodAndDrinkRepository;
 import com.codegym.services.IFoodAndDrinkService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,12 +89,15 @@ public class FoodAndDrinkController {
     }
 
     //LinhDN xoa 1 food
+    //update lan 1 19/11
     @PatchMapping("/delete/{id}")
-    public void deleteFad(@PathVariable("id") Integer id){
+    public ResponseEntity<?> deleteFad(@PathVariable("id") Integer id){
         FoodAndDrink foodAndDrink = foodAndDrinkService.viewDetailFoodAndDrink(id);
         if (foodAndDrink!=null){
             foodAndDrinkService.deleteDetailFoodAndDrink(id);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //LinhDN: view all food No Id
