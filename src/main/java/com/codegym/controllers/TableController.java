@@ -43,7 +43,6 @@ public class TableController {
             this.tableService.updateTable(tables);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
     }
 }
 
