@@ -1,5 +1,6 @@
 package com.codegym.controllers;
 
+import com.codegym.dto.FeedBackDto;
 import com.codegym.entity.feedback.FeedBack;
 import com.codegym.services.IFeedBackService;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.*;
 public class FeedBackController {
     @Autowired
     IFeedBackService feedBackService;
-    //    QuanTA codeing back-end search feed back by date 14/11/2021
+
+//    QuanTA codeing back-end search feed back by date 14/11/2021
     @GetMapping(value = "/list-by-date/{feedBackDate}")
     public ResponseEntity<Page<FeedBack>> showListFeedBackByDate(@PageableDefault(value = 5) Pageable pageable,
                                                                  @PathVariable(required = false) String feedBackDate) {
@@ -32,6 +34,7 @@ public class FeedBackController {
         }
         return new ResponseEntity<>(feedBackPage, HttpStatus.OK);
     }
+
     // QuanTA coding findby id feedback 19/11/2021
     @GetMapping(value = "/find-feed-back-by-id/{id}")
     public ResponseEntity<FeedBack> findFeedBackById (@PathVariable(required = false) Integer id){
