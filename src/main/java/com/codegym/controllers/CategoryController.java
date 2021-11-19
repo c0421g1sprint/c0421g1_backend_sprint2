@@ -20,7 +20,7 @@ public class CategoryController {
     private ICategoryService iCategoryService;
 
     @GetMapping("/menu")
-    private ResponseEntity<List<Category>> findAllName() {
+    public ResponseEntity<List<Category>> findAllName() {
         List<Category> list = this.iCategoryService.listAll();
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

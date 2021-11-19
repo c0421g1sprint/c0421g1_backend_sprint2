@@ -24,11 +24,9 @@ public class FoodAndDrinkServiceImpl implements IFoodAndDrinkService {
     }
 
 
-
-
     @Override
-    public List<FoodAndDrink> listAll() {
-        return this.foodAndDrinkRepository.findAll();
+    public List<FoodAndDrink> listAll( ) {
+        return this.foodAndDrinkRepository.findAllFood();
     }
 
 

@@ -22,17 +22,12 @@ import java.util.Optional;
 @RequestMapping("/api/food-and-drink")
 public class FoodAndDrinkController {
 
-    @ModelAttribute("cart")
-    public CartDto innitCart() {
-        return new CartDto();
-    }
-
 
     @Autowired
     private IFoodAndDrinkService foodAndDrinkService;
 
     @GetMapping("/{id}") // loc theo category cua food
-    private ResponseEntity<List<FoodAndDrink>> findFoodCategoryId(@PathVariable int id) {
+    public ResponseEntity<List<FoodAndDrink>> findFoodCategoryId(@PathVariable int id) {
         List<FoodAndDrink> list = this.foodAndDrinkService.findFoodCategoryId(id);
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -43,18 +38,18 @@ public class FoodAndDrinkController {
     }
 
     @GetMapping("/allFood") // lay all food
-    private ResponseEntity<List<FoodAndDrink>> listAllFood() {
+    public ResponseEntity<List<FoodAndDrink>> listAllFood() {
         List<FoodAndDrink> list = this.foodAndDrinkService.listAll();
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            return new ResponseEntity<>(list,HttpStatus.OK);
         }
     }
 
 
     @GetMapping("/food/{id}") // tim theo id food
-    private ResponseEntity<Optional<FoodAndDrink>> findFoodAndDrinkById(@PathVariable int id) {
+    public ResponseEntity<Optional<FoodAndDrink>> findFoodAndDrinkById(@PathVariable int id) {
         Optional<FoodAndDrink> foodAndDrink = this.foodAndDrinkService.findFoodById(id);
 
         if (foodAndDrink.isPresent()) {

@@ -28,6 +28,8 @@ public interface IFoodAndDrinkRepository extends JpaRepository<FoodAndDrink,Inte
             "where fad_id = ?1",nativeQuery = true)
     Optional<FoodAndDrink> findFoodById(int foodId);
 
+
+
     @Query(value = "select * from food_and_drink",nativeQuery = true)
-    List<FoodAndDrink>listAllFood();
+    List<FoodAndDrink> findAllFood();
 }
