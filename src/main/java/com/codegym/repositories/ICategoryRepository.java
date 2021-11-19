@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -21,4 +22,8 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
     @Modifying
     @Query(value = "update `category` set category_name = ?1, category_code = ?2 where (category_id = ?3)", nativeQuery = true)
     void updateCategory(String category_name, String category_code, Integer category_id);
+
+    //LamNT Find All Category
+    @Query(value = "select category_id, category_name, category_code, delete_flag from `category`", nativeQuery = true)
+    List<Category> findAllCategory();
 }

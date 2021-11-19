@@ -2,6 +2,8 @@ package com.codegym.services;
 
 import com.codegym.entity.food_and_drink.Category;
 
+import java.util.List;
+
 public interface ICategoryService {
 
     //LamNT create category
@@ -9,4 +11,7 @@ public interface ICategoryService {
 
     //LamNT update category
     void updateCategory(Category category);
+
+    //LamNT find all category
+    List<Category> findAllCategory();
 }

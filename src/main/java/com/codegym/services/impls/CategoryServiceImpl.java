@@ -6,6 +6,8 @@ import com.codegym.services.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements ICategoryService {
 
@@ -22,5 +24,10 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public void updateCategory(Category category) {
         categoryRepository.updateCategory(category.getCategoryName(), category.getCategoryCode(), category.getCategoryId());
+    }
+
+    @Override
+    public List<Category> findAllCategory() {
+        return categoryRepository.findAllCategory();
     }
 }

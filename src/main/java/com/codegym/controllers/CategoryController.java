@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/category")
@@ -34,5 +36,14 @@ public class CategoryController {
         BeanUtils.copyProperties(categoryDto, category);
         categoryService.updateCategory(category);
         return new ResponseEntity<>(category, HttpStatus.OK);
+    }
+
+    @GetMapping("find-all")
+    public ResponseEntity<List<Category>> showAll() {
+        List<Category> categoryList = categoryService.findAllCategory();
+        if (categoryList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
 }
