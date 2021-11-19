@@ -67,4 +67,10 @@ public class OrderServiceImpl implements IOrderService {
     public Page<Orders> findAllAdv(Pageable pageable, String date, String code) {
         return this.ordersRepository.findAllAdv(pageable, date, code);
     }
+
+    //DanhNT: Tìm hoá đơn theo ID
+    @Override
+    public Orders findById(Integer id) {
+        return this.ordersRepository.findById(id).orElse(null);
+    }
 }

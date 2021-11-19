@@ -36,4 +36,7 @@ public interface IOrderService {
 
     //DanhNT: tìm kiếm hoá đơn
     Page<Orders> findAllAdv(Pageable pageable, String date, String code);
+
+    //DanhNT: Tìm hoá đơn theo ID
+    Orders findById(Integer id);
 }

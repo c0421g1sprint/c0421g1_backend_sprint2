@@ -150,4 +150,14 @@ public class OrderController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
+
+    //DanhNT: Tìm hoá đơn theo ID
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Orders> showById(@PathVariable Integer id){
+        Orders orders = this.iOrderService.findById(id);
+        if (orders != null){
+            return new ResponseEntity<>(orders,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
