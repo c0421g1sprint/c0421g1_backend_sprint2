@@ -35,16 +35,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
 
-
-
     @Override
     public void update(Employee employee) {
         employeeRepository.updateEmployee(employee.isDeleteFlag(),employee.getEmployeeAddress(),
                 employee.getEmployeeBirthday(),employee.getEmployeeGender(),employee.getEmployeeImage(),
                 employee.getEmployeeName(),employee.getEmployeePhone(),employee.getEmployeeSalary(),employee.getLevel().getLevelId(),employee.getAccountName(),employee.getEmployeeId());
     }
-
-
 
     @Override
     public Employee getEmployeeByAccountName(String name) {

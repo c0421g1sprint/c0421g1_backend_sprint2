@@ -3,6 +3,7 @@ package com.codegym.controllers;
 import com.codegym.dto.EmployeeDto;
 import com.codegym.entity.account.Account;
 import com.codegym.entity.employee.Employee;
+import com.codegym.entity.employee.Level;
 import com.codegym.services.IAccountService;
 import com.codegym.services.IEmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -37,13 +40,14 @@ public class EmployeeController {
     public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto,BindingResult bindingResult) {
         Employee employeeCheck=iEmployeeService.getEmployeeByAccountName(employeeDto.getAccountName());
         if(employeeCheck!=null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
+//            employee.setDeleteFlag(false);
             this.iEmployeeService.save(employee);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -60,7 +64,40 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+    @GetMapping("/listLevel")
+    public ResponseEntity<List<Level>> getLevelList
+            () {
+        List<Level> levelList = iEmployeeService.findAllLevelByQuery();
+        if (levelList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(levelList, HttpStatus.OK);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

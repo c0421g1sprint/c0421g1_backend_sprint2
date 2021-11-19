@@ -19,6 +19,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
+
     private String employeeName;
     private String employeeAddress;
     private String employeePhone;
@@ -26,6 +27,7 @@ public class Employee {
     private Byte employeeGender;
     private String employeeBirthday;
     private double employeeSalary;
+
     private boolean deleteFlag;
 
     //tu them vao PhucNK
