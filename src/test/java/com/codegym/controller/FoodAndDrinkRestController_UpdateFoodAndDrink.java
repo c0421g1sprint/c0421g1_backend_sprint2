@@ -1,6 +1,5 @@
 package com.codegym.controller;
 
-import com.codegym.dto.CategoryDto;
 import com.codegym.dto.FoodAndDrinkDto;
 import com.codegym.entity.food_and_drink.Category;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FoodAndDrinkRestController_CreateFoodAndDrink {
+public class FoodAndDrinkRestController_UpdateFoodAndDrink {
 
     @Autowired
     private MockMvc mockMvc;
@@ -26,7 +25,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     private ObjectMapper objectMapper;
 
     @Test
-    public void createFoodAndDrink_name_1() throws Exception {
+    public void updateFoodAndDrink_name_1() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -46,7 +45,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_name_2() throws Exception {
+    public void updateFoodAndDrink_name_2() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -66,7 +65,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_name_3() throws Exception {
+    public void updateFoodAndDrink_name_3() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -86,7 +85,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_category_4() throws Exception {
+    public void updateFoodAndDrink_category_4() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         foodAndDrinkDto.setFadName("Cà phê sữa");
         foodAndDrinkDto.setFadCode("CFS123");
@@ -101,7 +100,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_category_5() throws Exception {
+    public void updateFoodAndDrink_category_5() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -121,7 +120,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_code_6() throws Exception {
+    public void updateFoodAndDrink_code_6() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -141,7 +140,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_code_7() throws Exception {
+    public void updateFoodAndDrink_code_7() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -161,7 +160,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_price_8() throws Exception {
+    public void updateFoodAndDrink_price_8() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -181,7 +180,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_price_9() throws Exception {
+    public void updateFoodAndDrink_price_9() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -201,7 +200,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_price_10() throws Exception {
+    public void updateFoodAndDrink_price_10() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -221,7 +220,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_price_11() throws Exception {
+    public void updateFoodAndDrink_price_11() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
@@ -241,7 +240,7 @@ public class FoodAndDrinkRestController_CreateFoodAndDrink {
     }
 
     @Test
-    public void createFoodAndDrink_price_12() throws Exception {
+    public void updateFoodAndDrink_price_12() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);

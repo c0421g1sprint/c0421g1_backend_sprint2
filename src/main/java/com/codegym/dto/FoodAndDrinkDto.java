@@ -7,11 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Getter
@@ -23,14 +21,15 @@ public class FoodAndDrinkDto {
     @NotEmpty(message = "Tên món không được để trống")
     @Size(min = 5, message = "Tên món không được ít hơn 5 chữ cái")
     private String fadName;
-    @NotEmpty
+    @NotEmpty(message = "Ảnh không được để trống")
     private String fadImage;
     private boolean deleteFlag;
-    @NotEmpty
+    @NotEmpty(message = "Mã món không được để trống")
     private String fadCode;
+    @NotNull(message = "Giá không được để trống")
+    @DecimalMin(value = "5000", inclusive = false, message = "Giá phải lớn hơn 5.000 VNĐ")
     private Double fadPrice;
     private Integer fadWaitTime;
-
     private Category category;
     Set<OrderDetail> orderDetails;
 }
