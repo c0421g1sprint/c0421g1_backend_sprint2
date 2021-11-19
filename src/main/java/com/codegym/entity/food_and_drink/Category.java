@@ -23,7 +23,7 @@ public class Category {
 
     private String categoryCode;
 
-    private boolean deleteFlag;
+    private Boolean deleteFlag;
 
     @JsonBackReference(value = "category_items")
     @OneToMany(mappedBy = "category")

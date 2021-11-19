@@ -17,4 +17,8 @@ public interface IFeedBackRepository extends JpaRepository<FeedBack, Integer> {
     @Query(value = "select * from feed_back where (?1 is null or feedback_date = ?1)",
             countQuery = "select count(*) from feed_back where (?1 is null or feedback_date = ?1);",nativeQuery = true)
     Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable);
+
+    //QuanTA query findById 1 doi tuong feedback 19/11/2021
+    @Query(value= "select * from feed_back where feedback_id = ?;",nativeQuery=true)
+    FeedBack findFeedbackById(Integer id);
 }
