@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IFeedBackService {
     Page<FeedBack> findAllFeedBackByDate(String feedBackDate,Pageable pageable);
+    FeedBack findFeedBackById (Integer id);
 }

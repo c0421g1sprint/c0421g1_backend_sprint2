@@ -19,4 +19,9 @@ public class FeedBackServiceImpl implements IFeedBackService {
     public Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable) {
         return this.feedBackRepository.findAllFeedBackByDate(feedBackDate,pageable);
     }
+
+    @Override
+    public FeedBack findFeedBackById(Integer id) {
+        return this.feedBackRepository.findFeedbackById(id);
+    }
 }

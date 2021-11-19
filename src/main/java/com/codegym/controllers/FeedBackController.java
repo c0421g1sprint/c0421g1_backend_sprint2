@@ -29,4 +29,17 @@ public class FeedBackController {
         }
         return new ResponseEntity<>(feedBackPage, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/find-feed-back-by-id/{id}")
+    public ResponseEntity<FeedBack> findFeedBackById (@PathVariable(required = false) Integer id){
+        if (id == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        FeedBack feedBack = this.feedBackService.findFeedBackById(id);
+        if (feedBack == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(feedBack, HttpStatus.OK);
+        }
+    }
 }
