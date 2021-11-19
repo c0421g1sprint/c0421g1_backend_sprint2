@@ -22,17 +22,10 @@ public class FeedBackServiceImpl implements IFeedBackService {
 
     }
 
-//    @Override
-//    public List<FeedBack> findAllFeedbackByQuery() {
-//        return feedBackRepository.findAllFeedbackByQuery();
-//    }
 
 
 
 
-    @Override
-    public Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable) {
-        return this.feedBackRepository.findAllFeedBackByDate(feedBackDate,pageable);
-    }
+
 
 }

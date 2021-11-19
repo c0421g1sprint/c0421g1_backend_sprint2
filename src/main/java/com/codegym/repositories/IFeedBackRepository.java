@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 @Transactional
 
-public interface IFeedBackRepository extends JpaRepository<FeedBack,Integer> {
+public interface IFeedBackRepository extends JpaRepository<FeedBack, Integer> {
     //DiepLV do create feedback 12/11
     @Modifying
     @Query(value = "insert into feed_back (feedback_id, feedback_code,feedback_content, feedback_creator, feedback_date,feedback_email, " +
@@ -24,16 +24,6 @@ public interface IFeedBackRepository extends JpaRepository<FeedBack,Integer> {
             "VALUES (?1,?2,?3,?4,?5,?6,?7)", nativeQuery = true)
     void createFeedback(Integer feedback_id, String feedback_code, String feedback_content,
                         String feedback_creator, String feedback_date, String feedback_email, String feedback_image);
-//    @Query(value = "select" +
-//            " feedback_id, feedback_code,feedback_content, feedback_creator, feedback_date,feedback_email, feedback_image" +
-//            " from feed_back ", nativeQuery = true, countQuery = "select count(*)  from feed_back")
-//    List<FeedBack> findAllFeedbackByQuery();
 
-
-
-    //QuanTA get danh sach feed back theo ngay 13/11/2021
-    @Query(value = "select * from feed_back where (?1 is null or feedback_date = ?1)",
-            countQuery = "select count(*) from feed_back where (?1 is null or feedback_date = ?1);",nativeQuery = true)
-    Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable);
 
 }

@@ -12,9 +12,7 @@ public interface IFeedBackService {
 
     // Diep tao feedback 12/11
     void save(FeedBack feedback);
-//    List<FeedBack> findAllFeedbackByQuery();
 
 
-    Page<FeedBack> findAllFeedBackByDate(String feedBackDate,Pageable pageable);
 
 }

@@ -28,15 +28,6 @@ public class FeedBackController {
 
     private IFeedBackService iFeedbackService;
 
-//    @GetMapping("")
-//    public ResponseEntity<List<FeedBack>> listFeedback() {
-//        List<FeedBack> feedBacks = iFeedbackService.findAllFeedbackByQuery();
-//        if (feedBacks.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(feedBacks, HttpStatus.OK);
-//
-//    }
 
     // Diep tao feedback 12/11
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -52,20 +43,5 @@ public class FeedBackController {
         }
     }
 
-
-    IFeedBackService feedBackService;
-//    QuanTA codeing back-end search feed back by date 14/11/2021
-    @GetMapping(value = "/list-by-date/{feedBackDate}")
-    public ResponseEntity<Page<FeedBack>> showListFeedBackByDate(@PageableDefault(value = 5) Pageable pageable,
-                                                                 @PathVariable(required = false) String feedBackDate) {
-        if (feedBackDate.equals("null")){
-            feedBackDate = null;
-        }
-        Page<FeedBack> feedBackPage = feedBackService.findAllFeedBackByDate(feedBackDate,pageable);
-        if (feedBackPage.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(feedBackPage, HttpStatus.OK);
-    }
 
 }
