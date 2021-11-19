@@ -1,15 +1,23 @@
 package com.codegym.controllers;
 
-import com.codegym.entity.order.Orders;
-import com.codegym.entity.table.Tables;
+import com.codegym.dto.IncomeWithDateDto;
+import com.codegym.dto.IncomesDto;
 import com.codegym.services.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import com.codegym.entity.order.Orders;
+import com.codegym.entity.table.Tables;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 
 @RestController
@@ -21,6 +29,69 @@ public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
+    //TaiNP coding show IncomeWithDate
+    @GetMapping(value = "/income-date")
+    public ResponseEntity<IncomeWithDateDto> showIncomeWithDate(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws ParseException {
+        if (startDate.equals("") || endDate.equals("")){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        IncomeWithDateDto incomeWithDateDto = this.iOrderService.findIncomeWithDate(startDate, endDate);
+        return new ResponseEntity<>(incomeWithDateDto, HttpStatus.ACCEPTED);
+    }
+
+    //TaiNP coding show statisticsIncome
+    @GetMapping(value = "/income-statistics")
+    public ResponseEntity<List<IncomesDto>> statisticsIncome() {
+        String monDay = "";
+        String sunDay = "";
+        String firstMoth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String lastMonth = "";
+        String firstYear = LocalDate.of(LocalDate.now().getYear(), 1, 1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String lastYear = LocalDate.of(LocalDate.now().getYear(), 12, 31).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate dateNow = LocalDate.now();
+        DayOfWeek date = dateNow.getDayOfWeek();
+
+        if(LocalDate.now().getMonthValue() == 1|| LocalDate.now().getMonthValue() == 3|| LocalDate.now().getMonthValue() == 5||
+                LocalDate.now().getMonthValue() == 7|| LocalDate.now().getMonthValue() == 8|| LocalDate.now().getMonthValue() == 10||
+                LocalDate.now().getMonthValue() == 12){
+            lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 31).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }else if(LocalDate.now().getMonthValue() == 2){
+            lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 29).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }else {
+            lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+
+        if(date.name().equals("MONDAY")){
+            monDay = dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.plusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        if(date.name().equals("TUESDAY")){
+            monDay = dateNow.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.plusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        if(date.name().equals("WEDNESDAY")){
+            monDay = dateNow.minusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.plusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        if(date.name().equals("THURSDAY")){
+            monDay = dateNow.minusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        if(date.name().equals("FRIDAY")){
+            monDay = dateNow.minusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        if(date.name().equals("SATURDAY")){
+            monDay = dateNow.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        if(date.name().equals("SUNDAY")){
+            monDay = dateNow.minusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            sunDay = dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        List<IncomesDto> incomesDto = iOrderService.statisticsIncomes(dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
+        return new ResponseEntity<>(incomesDto, HttpStatus.ACCEPTED);
+    }
 
     // TaiHVK coding show all available tables by list method 17/11/2021
     @GetMapping(value = "/on-service")
@@ -33,7 +104,6 @@ public class OrderController {
 
         return new ResponseEntity<>(tablesPage, HttpStatus.OK);
     }
-
 
     // TaiHVK coding change table on service status method 17/11/2021
     @PatchMapping(value = "/on-service/handle/{id}")
@@ -51,7 +121,6 @@ public class OrderController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     // TaiHVK coding show table order detail method 17/11/2021
     @GetMapping(value = "/on-service/{id}")
@@ -80,5 +149,15 @@ public class OrderController {
             return new ResponseEntity<>(ordersList,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    //DanhNT: Tìm hoá đơn theo ID
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Orders> showById(@PathVariable Integer id){
+        Orders orders = this.iOrderService.findById(id);
+        if (orders != null){
+            return new ResponseEntity<>(orders,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
