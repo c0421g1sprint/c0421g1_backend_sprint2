@@ -26,4 +26,9 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
     //LamNT Find All Category
     @Query(value = "select category_id, category_name, category_code, delete_flag from `category`", nativeQuery = true)
     List<Category> findAllCategory();
+
+    //LamNT find By Id
+    @Query(value = "select category_id, category_name, category_code, delete_flag " +
+            "from `category` where category_id = :id", nativeQuery = true)
+    Category findCategoryById(int id);
 }

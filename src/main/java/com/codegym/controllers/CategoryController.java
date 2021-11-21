@@ -46,4 +46,13 @@ public class CategoryController {
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
+
+    @GetMapping("find/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Integer id) {
+        Category category = categoryService.findCategoryById(id);
+        if (category != null) {
+            return new ResponseEntity<>(category, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

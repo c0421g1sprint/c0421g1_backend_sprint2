@@ -14,4 +14,7 @@ public interface ICategoryService {
 
     //LamNT find all category
     List<Category> findAllCategory();
+
+    //LamNT find category By Id
+    Category findCategoryById(int id);
 }

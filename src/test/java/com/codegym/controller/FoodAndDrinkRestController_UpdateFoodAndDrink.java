@@ -37,7 +37,7 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         foodAndDrinkDto.setFadPrice(5000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -57,7 +57,7 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         foodAndDrinkDto.setFadPrice(5000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -69,15 +69,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
         foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(5000.0);
+        foodAndDrinkDto.setFadPrice(10000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -87,12 +87,12 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
     @Test
     public void updateFoodAndDrink_category_4() throws Exception {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(5000.0);
+        foodAndDrinkDto.setFadPrice(10000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -104,15 +104,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
         foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(5000.0);
+        foodAndDrinkDto.setFadPrice(10000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -124,15 +124,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
         foodAndDrinkDto.setFadCode(null);
-        foodAndDrinkDto.setFadPrice(5000.0);
+        foodAndDrinkDto.setFadPrice(10000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -144,15 +144,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
-        foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(5000.0);
+        foodAndDrinkDto.setFadCode("ND111");
+        foodAndDrinkDto.setFadPrice(10000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -164,15 +164,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
-        foodAndDrinkDto.setFadCode("CFS123");
+        foodAndDrinkDto.setFadCode("ND111");
         foodAndDrinkDto.setFadPrice(null);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -184,15 +184,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
-        foodAndDrinkDto.setFadCode("CFS123");
+        foodAndDrinkDto.setFadCode("ND111");
         foodAndDrinkDto.setFadPrice(3000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -204,15 +204,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
-        foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(10000.0);
+        foodAndDrinkDto.setFadCode("ND111");
+        foodAndDrinkDto.setFadPrice(30000.0);
         foodAndDrinkDto.setFadImage("tra.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -224,15 +224,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
-        foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(10000.0);
+        foodAndDrinkDto.setFadCode("ND111");
+        foodAndDrinkDto.setFadPrice(30000.0);
         foodAndDrinkDto.setFadImage(null);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -244,15 +244,15 @@ public class FoodAndDrinkRestController_UpdateFoodAndDrink {
         FoodAndDrinkDto foodAndDrinkDto = new FoodAndDrinkDto();
         Category category = new Category();
         category.setCategoryId(1);
-        category.setCategoryName("Cà phê");
-        category.setCategoryCode("CAFE");
-        foodAndDrinkDto.setFadName("Cà phê sữa");
+        category.setCategoryName("Nước Giải khát");
+        category.setCategoryCode("NGK");
+        foodAndDrinkDto.setFadName("Nước dừa");
         foodAndDrinkDto.setCategory(category);
-        foodAndDrinkDto.setFadCode("CFS123");
-        foodAndDrinkDto.setFadPrice(10000.0);
-        foodAndDrinkDto.setFadImage("tra.jpg");
+        foodAndDrinkDto.setFadCode("ND111");
+        foodAndDrinkDto.setFadPrice(30000.0);
+        foodAndDrinkDto.setFadImage("dua.jpg");
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/food-and-drink/create")
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/api/food-and-drink/update")
                         .content(this.objectMapper.writeValueAsString(foodAndDrinkDto))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

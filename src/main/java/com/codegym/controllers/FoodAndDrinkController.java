@@ -38,4 +38,13 @@ public class FoodAndDrinkController {
         foodAndDrinkService.updateFoodAndDrink(foodAndDrink);
         return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
     }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<FoodAndDrink> findById(@PathVariable Integer id) {
+        FoodAndDrink foodAndDrink = foodAndDrinkService.findFoodAndDrinkById(id);
+        if (foodAndDrink != null) {
+            return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

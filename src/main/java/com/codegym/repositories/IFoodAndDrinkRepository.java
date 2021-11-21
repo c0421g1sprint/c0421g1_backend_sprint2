@@ -25,4 +25,9 @@ public interface IFoodAndDrinkRepository extends JpaRepository<FoodAndDrink, Int
     @Query(value = "update `food_and_drink` set fad_code = ?1, fad_image = ?2," +
             "fad_name = ?3, fad_price = ?4, category_id = ?5 where fad_id = ?6", nativeQuery = true)
     void updateFoodAndDrink(String fad_code, String fad_image, String fad_name, Double fad_price, Integer category_id, Integer fad_id);
+
+    //LamNT FindById
+    @Query(value = "select fad_id, fad_name, fad_code, fad_price, fad_image, category_id,fad_wait_time, delete_flag " +
+            "from `food_and_drink` where fad_id = :id", nativeQuery = true)
+    FoodAndDrink findFoodAndDrinkById(int id);
 }

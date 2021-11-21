@@ -10,4 +10,7 @@ public interface IFoodAndDrinkService {
 
     //LamNT update foodAndDrink
     void updateFoodAndDrink(FoodAndDrink foodAndDrink);
+
+    //LamNT findById
+    FoodAndDrink findFoodAndDrinkById(int id);
 }
