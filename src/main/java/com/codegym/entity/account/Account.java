@@ -2,6 +2,7 @@ package com.codegym.entity.account;
 
 import com.codegym.entity.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
