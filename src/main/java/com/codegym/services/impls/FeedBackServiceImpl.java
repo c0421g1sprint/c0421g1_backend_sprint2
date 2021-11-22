@@ -13,16 +13,18 @@ public class FeedBackServiceImpl implements IFeedBackService {
     @Autowired
     IFeedBackRepository feedBackRepository;
 
-// diep create feedback 12/11
+    // diep create feedback 12/11
     @Override
     public void save(FeedBack feedback) {
-        this.feedBackRepository.createFeedback(feedback.getFeedbackId(), feedback.getFeedbackCode(), feedback.getFeedbackContent(),feedback.getFeedbackCreator(), feedback.getFeedbackDate(), feedback.getFeedbackEmail(), feedback.getFeedbackImage());
+        this.feedBackRepository.createFeedback(feedback.getFeedbackId(), feedback.getFeedbackCode(),
+                feedback.getFeedbackContent(), feedback.getFeedbackCreator(), feedback.getFeedbackDate(),
+                feedback.getFeedbackEmail(), feedback.getFeedbackImage());
     }
 
     //QuanTA
     @Override
     public Page<FeedBack> findAllFeedBackByDate(String feedBackDate, Pageable pageable) {
-        return this.feedBackRepository.findAllFeedBackByDate(feedBackDate,pageable);
+        return this.feedBackRepository.findAllFeedBackByDate(feedBackDate, pageable);
     }
 
     //QuanTa
