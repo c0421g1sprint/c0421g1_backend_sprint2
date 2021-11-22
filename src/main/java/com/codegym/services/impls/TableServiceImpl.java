@@ -8,10 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TableServiceImpl implements ITableService {
     @Autowired
-private ITablesRepository tablesRepository;
+    private ITablesRepository tablesRepository;
 
     //DucLVH do at 17/11/2021
     @Override
@@ -47,5 +49,34 @@ private ITablesRepository tablesRepository;
     @Override
     public Page<Tables> getListTableByCodeAndStatus(Pageable pageable, String tableCode, String tableStatus) {
         return tablesRepository.getListTableByCodeAndStatus(pageable,tableCode,tableStatus);
+    }
+
+    //BaoHG
+    @Override
+    public void callFoodAndDrink(int id) {
+        this.tablesRepository.callFood(id);
+    }
+
+    //BaoHG
+    @Override
+    public void callEmp(int id) {
+        this.tablesRepository.callEmployee(id);
+    }
+
+    //BaoHG
+    @Override
+    public void pay(int id) {
+        this.tablesRepository.callPay(id);
+    }
+
+    //BaoHG
+    @Override
+    public Optional<Tables> tableRandom() {
+        return this.tablesRepository.getTable();
+    }
+
+    @Override
+    public Tables findByIdQuery(int tableId) {
+        return tablesRepository.findByIdTableByQuery(tableId).orElse(null);
     }
 }

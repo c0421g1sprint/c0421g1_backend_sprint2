@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -30,9 +30,9 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
     //LinhDN showList category
     @Query(value = "select category_id, category_code, category_name, delete_flag from category " +
             "where delete_flag = false and ((?1 is null or category_code like %?1%) and (?2 is null or category_name like %?2%)) ",
-    countQuery ="select category_id, category_code, category_name, delete_flag from category " +
-            "where delete_flag = false and ((?1 is null or category_code like %?1%) and (?2 is null or category_name like %?2%)) ",
-    nativeQuery = true)
+            countQuery = "select category_id, category_code, category_name, delete_flag from category " +
+                    "where delete_flag = false and ((?1 is null or category_code like %?1%) and (?2 is null or category_name like %?2%)) ",
+            nativeQuery = true)
     Page<Category> viewAllCategoryByQuery(Pageable pageable, @RequestParam("code") String code, @RequestParam("name") String name);
 
     //LinhDN delete category
@@ -43,4 +43,9 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
     //LinhDN xem chi tiet category
     @Query(value = "select category_id, category_code, category_name, delete_flag from category where delete_flag = false and category_id =?1", nativeQuery = true)
     Category viewDetailCategory(@Param("id") Integer id);
+
+    //BaoHG
+    @Query(value = "select category_id, category_name , category_code,delete_flag\n" +
+            "from category", nativeQuery = true)
+    List<Category> listAllNameCategory();
 }

@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/category")
@@ -68,5 +70,16 @@ public class CategoryController {
             return new ResponseEntity<>(category,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    //BaoHG
+    @GetMapping("/menu")
+    public ResponseEntity<List<Category>> findAllName() {
+        List<Category> list = this.categoryService.listAll();
+        if (list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
     }
 }

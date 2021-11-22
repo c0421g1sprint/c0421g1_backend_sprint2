@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -16,8 +18,8 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
     //DucLVH do at 17/11/2021
     @Transactional
     @Modifying
-    @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status) values (0,0,?1,?2,?3,'trống')", nativeQuery = true)
-    void saveQuery(String location,String maximumCapacity,String tableCode);
+    @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status,on_Service) values (0,0,?1,?2,?3,'trống','0')", nativeQuery = true)
+    void saveQuery(String location, String maximumCapacity, String tableCode);
 
     //DucLVH do at 17/11/2021
     @Query(value ="SELECT * FROM tables WHERE table_code = ?1",nativeQuery = true)
@@ -50,4 +52,32 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
             countQuery = "select count(*) from tables " +
                     " where tables.delete_flag = false order by tables.table_code ",  nativeQuery = true)
     Page<Tables> showTableList(Pageable pageable);
+
+    //BaoHG
+    @Modifying
+    @Query(value ="UPDATE `tables` SET `on_service` = 1 WHERE (`table_id` = ?1);\n",nativeQuery = true)
+    void callFood(int id);
+
+    //BaoHG
+    @Modifying
+    @Query(value ="UPDATE `tables` SET `on_service` = 2 WHERE (`table_id` = ?1);\n",nativeQuery = true)
+    void callEmployee(int id);
+
+    //BaoHG
+    @Modifying
+    @Query(value ="UPDATE `tables` SET `on_service` = 3 WHERE (`table_id` = ?1);\n",nativeQuery = true)
+    void callPay(int id);
+
+    //BaoHG
+    @Query(value = "select *\n" +
+            "from `tables`\n" +
+            "where table_status = 'Trống'\n" +
+            "order by rand()\n" +
+            "LIMIT 1;",nativeQuery = true)
+    Optional<Tables> getTable();
+
+    //DucLVH
+    @Query(value = "select table_id,location, maximum_capacity, table_code, table_status, available_flag,delete_flag,on_Service "+
+            "from tables where table_id = ?1", nativeQuery = true)
+    Optional<Tables> findByIdTableByQuery(int id);
 }
