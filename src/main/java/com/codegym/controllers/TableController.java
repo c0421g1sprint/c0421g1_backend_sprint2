@@ -86,5 +86,16 @@ public class TableController {
             return new ResponseEntity<>(tables,HttpStatus.OK);
         }
     }
+
+    //DucLVH
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Tables> findByIdQuery(@PathVariable int id) {
+        Tables account = this.tableService.findByIdQuery(id);
+        if (account == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        System.out.println(account);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
 }
 

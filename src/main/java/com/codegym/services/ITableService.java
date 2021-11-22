@@ -38,4 +38,7 @@ public interface ITableService {
 
     //BaoHG
     Optional<Tables> tableRandom();
+
+    //DucLVH
+    Tables findByIdQuery(int tableId);
 }

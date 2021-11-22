@@ -74,4 +74,9 @@ public class TableServiceImpl implements ITableService {
     public Optional<Tables> tableRandom() {
         return this.tablesRepository.getTable();
     }
+
+    @Override
+    public Tables findByIdQuery(int tableId) {
+        return tablesRepository.findByIdTableByQuery(tableId).orElse(null);
+    }
 }

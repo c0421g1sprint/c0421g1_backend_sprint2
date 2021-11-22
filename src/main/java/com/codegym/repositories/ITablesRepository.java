@@ -18,8 +18,8 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
     //DucLVH do at 17/11/2021
     @Transactional
     @Modifying
-    @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status) values (0,0,?1,?2,?3,'trống')", nativeQuery = true)
-    void saveQuery(String location,String maximumCapacity,String tableCode);
+    @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status,on_Service) values (0,0,?1,?2,?3,'trống','0')", nativeQuery = true)
+    void saveQuery(String location, String maximumCapacity, String tableCode);
 
     //DucLVH do at 17/11/2021
     @Query(value ="SELECT * FROM tables WHERE table_code = ?1",nativeQuery = true)
@@ -76,4 +76,8 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
             "LIMIT 1;",nativeQuery = true)
     Optional<Tables> getTable();
 
+    //DucLVH
+    @Query(value = "select table_id,location, maximum_capacity, table_code, table_status, available_flag,delete_flag,on_Service "+
+            "from tables where table_id = ?1", nativeQuery = true)
+    Optional<Tables> findByIdTableByQuery(int id);
 }
