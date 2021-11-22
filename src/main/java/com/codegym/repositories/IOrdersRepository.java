@@ -62,6 +62,15 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
                     " inner join tables on `orders`.table_id = tables.table_id where tables.table_id = :id", nativeQuery = true)
     Orders showOrderDetail(Integer id);
 
+    // TaiHVK coding show table sum method 21/11/2021
+    @Query(value = "select sum(food_and_drink.fad_price * order_detail.quantity) from tables\n" +
+            "join orders on tables.table_id = orders.table_id \n" +
+            "             join order_detail on order_detail.order_id = orders.order_id \n" +
+            "             join food_and_drink on food_and_drink.fad_id = order_detail.fad_id\n" +
+            "             group by tables.table_id\n" +
+            "             having tables.table_id = :id", nativeQuery = true)
+    Double sumTableBill(Integer id);
+
     //DanhNT: Tìm kiếm hoá đơn
     @Query(value = "select *\n" +
             "from orders o\n" +

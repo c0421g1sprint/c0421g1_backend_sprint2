@@ -42,6 +42,9 @@ public interface IOrderService {
     // TaiHVK coding show table order detail method 17/11/2021
     Orders showOrderDetail(Integer id);
 
+    // TaiHVK coding show table sum method 21/11/2021
+    Double sumTableBill(Integer id);
+
     //DanhNT: tìm kiếm hoá đơn
     Page<Orders> findAllAdv(Pageable pageable, String date, String code);
 

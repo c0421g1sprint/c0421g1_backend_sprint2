@@ -65,6 +65,12 @@ public class OrderServiceImpl implements IOrderService {
         return this.ordersRepository.showOrderDetail(id);
     }
 
+    // TaiHVK coding show table sum method 21/11/2021
+    @Override
+    public Double sumTableBill(Integer id) {
+        return this.ordersRepository.sumTableBill(id);
+    }
+
     //DanhNT: Danh sách hoá đơn phân trang
     @Override
     public Page<Orders> findAllAdv(Pageable pageable, String date, String code) {
