@@ -22,4 +22,4 @@ public class LoginRequestDto {
     @NotNull
     @NotBlank
     private String password;
-    }
+}
