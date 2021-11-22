@@ -42,6 +42,7 @@ public class CategoryController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
+    //LamNT
     @GetMapping("/find-all")
     public ResponseEntity<List<Category>> showAll() {
         List<Category> categoryList = categoryService.findAllCategory();

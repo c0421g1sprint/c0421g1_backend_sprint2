@@ -28,6 +28,12 @@ public class CategoryServiceImpl implements ICategoryService {
         categoryRepository.updateCategory(category.getCategoryName(), category.getCategoryCode(), category.getCategoryId());
     }
 
+    //LamNT find category
+    @Override
+    public List<Category> findAllCategory() {
+        return this.categoryRepository.findAllCategory();
+    }
+
     //LinhDN
     @Override
     public Page<Category> viewAllCategory(Pageable pageable, String code, String name) {

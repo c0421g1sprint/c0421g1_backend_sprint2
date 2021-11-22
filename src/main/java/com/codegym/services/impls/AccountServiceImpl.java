@@ -19,6 +19,15 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     IAccountRepository accountRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ConfirmService confirmService;
+
+    @Autowired
+    private EmailSender emailSender;
+
     //PhucNK
     @Override
     public Account findAccountById(Integer AccountId) {
@@ -31,14 +40,10 @@ public class AccountServiceImpl implements IAccountService {
         accountRepository.save(account);
     }
 
-    //NhatDV
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public void editPassword(Integer id, String password) {
         password = passwordEncoder.encode(password);
-        accountRepository.editPassword(id,password);
+        accountRepository.editPassword(id, password);
     }
 
     //NhatDV

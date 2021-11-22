@@ -143,6 +143,7 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
+    // TaiHVK coding
     @GetMapping(value = "/on-service/sum-{id}")
     public ResponseEntity<Double> showOrderDetailSumMoney(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(this.iOrderService.sumTableBill(id), HttpStatus.OK);
