@@ -42,6 +42,15 @@ public class CategoryController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
+    @GetMapping("/find-all")
+    public ResponseEntity<List<Category>> showAll() {
+        List<Category> categoryList = categoryService.findAllCategory();
+        if (categoryList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
+    }
+
     //LinhDN view all category
     @RequestMapping("/list")
     public ResponseEntity<Page<Category>> viewAllCategory(@PageableDefault(value = 2,sort = "category_id",direction = Sort.Direction.ASC)

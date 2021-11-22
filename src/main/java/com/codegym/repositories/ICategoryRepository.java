@@ -27,6 +27,11 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
     @Query(value = "update `category` set category_name = ?1, category_code = ?2 where (category_id = ?3)", nativeQuery = true)
     void updateCategory(String category_name, String category_code, Integer category_id);
 
+    //LamNT Find All Category
+    @Query(value = "select category_id, category_name, category_code, delete_flag from `category`" +
+            "where delete_flag = false ", nativeQuery = true)
+    List<Category> findAllCategory();
+
     //LinhDN showList category
     @Query(value = "select category_id, category_code, category_name, delete_flag from category " +
             "where delete_flag = false and ((?1 is null or category_code like %?1%) and (?2 is null or category_name like %?2%)) ",

@@ -14,6 +14,9 @@ public interface ICategoryService {
     //LamNT update category
     void updateCategory(Category category);
 
+    //LamNT find all category
+    List<Category> findAllCategory();
+
     //LinhDN view all category
     Page<Category> viewAllCategory(Pageable pageable, String code, String name);
 
