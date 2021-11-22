@@ -140,6 +140,11 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/on-service/sum-{id}")
+    public ResponseEntity<Double> showOrderDetailSumMoney(@PathVariable(value = "id") Integer id) {
+        return new ResponseEntity<>(this.iOrderService.sumTableBill(id), HttpStatus.OK);
+    }
+
     //DanhNT: Danh sách hoá đơn phân trang
     @GetMapping("/list/{orderCode}/{date}")
     public ResponseEntity<Page<Orders>> showList(@PageableDefault(value = 5) Pageable pageable,
