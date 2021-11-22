@@ -26,4 +26,5 @@ public interface IFeedBackRepository extends JpaRepository<FeedBack, Integer> {
                         String feedback_creator, String feedback_date, String feedback_email, String feedback_image);
 
 
+
 }
