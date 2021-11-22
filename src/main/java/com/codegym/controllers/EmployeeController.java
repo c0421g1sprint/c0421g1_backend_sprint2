@@ -98,4 +98,16 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+    //NhatDV
+    @GetMapping("/userDetail")
+    public ResponseEntity<Employee> findUserDetail(@RequestParam("name") String name) {
+        Employee employee = iEmployeeService.getUserDetail(name);
+        if (employee!=null) {
+            return new ResponseEntity<>(employee, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+    }
 }

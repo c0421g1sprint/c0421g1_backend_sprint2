@@ -60,4 +60,9 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query(value="select * from employee where employee.account_name=:name",nativeQuery = true)
     Employee getEmployeeByAccountName(@Param("name") String name);
 
+//    Thông tin user by Nhật
+    @Query(value = "select e.employee_id,e.account_name,e.delete_flag,e.employee_image,a.account_id,a.account_username,a.account_password,e.employee_name,e.employee_address,e.employee_gender,e.employee_phone,e.employee_salary,e.employee_birthday,e.level_id\n" +
+            "from employee e inner join account a on e.account_id = a.account_id\n" +
+            "where a.account_username= ?1",nativeQuery = true)
+    Employee getUserDetail(@Param("name") String name);
 }

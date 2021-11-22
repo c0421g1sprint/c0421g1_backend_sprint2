@@ -73,4 +73,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Page<Employee> searchEmployee(Pageable pageable, String username, String nameEmployee, String phone) {
         return employeeRepository.searchEmployeeByAll(pageable,username,nameEmployee,phone);
     }
+
+    //NhatDV
+    @Override
+    public Employee getUserDetail(String name) {
+        return employeeRepository.getUserDetail(name);
+    }
 }

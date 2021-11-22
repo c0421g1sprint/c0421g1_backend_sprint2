@@ -33,4 +33,7 @@ public interface IEmployeeService {
 
     //MinhNN
     Page<Employee> searchEmployee(Pageable pageable, String username, String nameEmployee, String phone);
+
+    //NhatDV
+    Employee getUserDetail(String name);
 }
