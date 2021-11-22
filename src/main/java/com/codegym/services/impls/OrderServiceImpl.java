@@ -1,5 +1,7 @@
 package com.codegym.services.impls;
 
+import com.codegym.dto.IncomeWithDateDto;
+import com.codegym.dto.IncomesDto;
 import com.codegym.entity.order.Orders;
 import com.codegym.entity.table.Tables;
 import com.codegym.repositories.IOrdersRepository;
@@ -10,15 +12,28 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements IOrderService {
 
     // TaiHVK inject interfaces IOrdersRepository and ITablesRepository 17/11/2021
     @Autowired
-    private IOrdersRepository ordersRepository;
+    IOrdersRepository ordersRepository;
     @Autowired
     private ITablesRepository iTablesRepository;
 
+    //TaiNP coding find IncomeWithDate
+    @Override
+    public IncomeWithDateDto findIncomeWithDate(String startDate, String endDate) {
+        return ordersRepository.findIncomeWithDate(startDate, endDate);
+    }
+
+    //TaiNP coding show statisticsIncome
+    @Override
+    public List<IncomesDto> statisticsIncomes(String dateNow, String monDay, String sunDay, String firstMoth, String lastMonth, String firstYear, String lastYear) {
+        return ordersRepository.statisticsIncomes(dateNow, monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
+    }
 
     // TaiHVK coding show all available tables by list method 17/11/2021
     @Override
@@ -45,5 +60,17 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Orders showOrderDetail(Integer id) {
         return this.ordersRepository.showOrderDetail(id);
+    }
+
+    // TaiHVK coding show table sum method 21/11/2021
+    @Override
+    public Double sumTableBill(Integer id) {
+        return this.ordersRepository.sumTableBill(id);
+    }
+
+    //DanhNT: Danh sách hoá đơn phân trang
+    @Override
+    public Page<Orders> findAllAdv(Pageable pageable, String date, String code) {
+        return this.ordersRepository.findAllAdv(pageable, date, code);
     }
 }

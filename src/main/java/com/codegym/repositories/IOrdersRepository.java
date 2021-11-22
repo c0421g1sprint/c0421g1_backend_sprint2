@@ -1,20 +1,40 @@
 package com.codegym.repositories;
 
+import com.codegym.dto.IncomeWithDateDto;
+import com.codegym.dto.IncomesDto;
 import com.codegym.entity.order.Orders;
-
-import com.codegym.entity.table.Tables;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
 public interface IOrdersRepository extends JpaRepository<Orders,Integer> {
 
+    @Query(value = "select  sum(o.quantity* fd.fad_price) as 'incomeWithDate' from order_detail as o join food_and_drink " +
+            " as fd on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date between " +
+            " :startDate and :endDate", nativeQuery = true)
+    IncomeWithDateDto findIncomeWithDate(@Param("startDate") String startDate, @Param("endDate") String endDate);
+
+    @Query(value = "select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o join food_and_drink as fd" +
+            " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date = :dateNow" +
+            " union (select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o" +
+            " join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where" +
+            " os.create_date between :monDay and :sunDay) union (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :firstMoth and :lastMonth) union" +
+            " (select sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o join food_and_drink as fd" +
+            " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date between :firstYear and :lastYear)",  nativeQuery = true)
+    List<IncomesDto> statisticsIncomes(@Param("dateNow") String dateNow, @Param("monDay") String monDay,
+                                       @Param("sunDay") String sunDay, @Param("firstMoth") String firstMoth,
+                                       @Param("lastMonth") String lastMonth, @Param("firstYear") String firstYear,
+                                       @Param("lastYear") String lastYear);
 
     // TaiHVK coding change table on service status method 17/11/2021
     @Modifying
@@ -22,13 +42,11 @@ public interface IOrdersRepository extends JpaRepository<Orders,Integer> {
     @Query(value = "update tables set tables.on_service = 0 where tables.table_id = :id",  nativeQuery = true)
     void changeTableOnServiceStatus(int id);
 
-
     // TaiHVK coding reset table status method 17/11/2021
     @Modifying
     @Transactional
     @Query(value = "update tables set tables.table_status = 'Trống' where tables.table_id = :id",  nativeQuery = true)
     void resetTableStatus(int id);
-
 
     // TaiHVK coding show table order detail method 17/11/2021
     @Query(value= "select * from `orders` inner join order_detail on `orders`.order_id = order_detail.order_id " +
@@ -40,23 +58,24 @@ public interface IOrdersRepository extends JpaRepository<Orders,Integer> {
                     " inner join tables on `orders`.table_id = tables.table_id where tables.table_id = :id", nativeQuery = true)
     Orders showOrderDetail(Integer id);
 
-    public static void main(String[] args) {
-        int run = 2;
+    // TaiHVK coding show table sum method 21/11/2021
+    @Query(value = "select sum(food_and_drink.fad_price * order_detail.quantity) from tables\n" +
+            "join orders on tables.table_id = orders.table_id \n" +
+            "             join order_detail on order_detail.order_id = orders.order_id \n" +
+            "             join food_and_drink on food_and_drink.fad_id = order_detail.fad_id\n" +
+            "             group by tables.table_id\n" +
+            "             having tables.table_id = :id", nativeQuery = true)
+    Double sumTableBill(Integer id);
 
-        while (true) {
-            int count = 0;
-            for (int i = 1; i <= run; i++) {
-                if (run % i == 0) {
-                    count++;
-                }
-            }
-            if (count == 2) {
-                System.out.println(run);
-            }
-            if (run >= 100) {
-                break;
-            }
-            run++;
-        }
-    }
+    //DanhNT: Tìm kiếm hoá đơn
+    @Query(value = "select *\n" +
+            "from orders o\n" +
+            "where (?1 IS NULL OR o.create_date = ?1)\n" +
+            "and (?2 IS NULL OR o.order_code like %?2%)",
+            countQuery = "select count(*)\n" +
+                    "from orders o\n" +
+                    "where (?1 IS NULL OR o.create_date = ?1)\n" +
+                    "and (?2 IS NULL OR o.order_code like %?2%)",
+            nativeQuery = true)
+    Page<Orders> findAllAdv(Pageable pageable, String date, String code);
 }
