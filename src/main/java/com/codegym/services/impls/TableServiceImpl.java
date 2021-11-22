@@ -1,9 +1,14 @@
 package com.codegym.services.impls;
 
+import com.codegym.entity.table.Tables;
 import com.codegym.repositories.ITablesRepository;
 import com.codegym.services.ITableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class TableServiceImpl implements ITableService {

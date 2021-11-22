@@ -6,6 +6,9 @@ import com.codegym.entity.order.Orders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -25,11 +28,11 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     //TaiNP
     @Query(value = "select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o join food_and_drink as fd" +
             " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date = :dateNow" +
-            " union (select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o" +
+            " union all (select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o" +
             " join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where" +
-            " os.create_date between :monDay and :sunDay) union (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " os.create_date between :monDay and :sunDay) union all (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
             " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
-            " on o.order_id = os.order_id where os.create_date between :firstMoth and :lastMonth) union" +
+            " on o.order_id = os.order_id where os.create_date between :firstMoth and :lastMonth) union all" +
             " (select sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o join food_and_drink as fd" +
             " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date between :firstYear and :lastYear)", nativeQuery = true)
     List<IncomesDto> statisticsIncomes(@Param("dateNow") String dateNow, @Param("monDay") String monDay,

@@ -2,7 +2,10 @@ package com.codegym.controllers;
 
 import com.codegym.dto.IncomeWithDateDto;
 import com.codegym.dto.IncomesDto;
+import com.codegym.entity.order.OrderDetail;
+import com.codegym.services.IOrderDetailService;
 import com.codegym.services.IOrderService;
+import com.codegym.services.ITableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
+
 import com.codegym.entity.order.Orders;
 import com.codegym.entity.table.Tables;
 import org.springframework.data.domain.Page;
@@ -28,6 +33,14 @@ public class OrderController {
     // TaiHVK inject interfaces IOrderService 17/11/2021
     @Autowired
     private IOrderService iOrderService;
+
+    //BaoHG
+    @Autowired
+    private ITableService iTableService;
+
+    //BaoHG
+    @Autowired
+    private IOrderDetailService iOrderDetailService;
 
     //TaiNP coding show IncomeWithDate
     @GetMapping(value = "/income-date")
@@ -97,11 +110,9 @@ public class OrderController {
     @GetMapping(value = "/on-service")
     public ResponseEntity<Page<Tables>> showTableOnService(@PageableDefault(size = 6) Pageable pageable) {
         Page<Tables> tablesPage = this.iOrderService.showTableList(pageable);
-
         if (tablesPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-
         return new ResponseEntity<>(tablesPage, HttpStatus.OK);
     }
 
@@ -126,9 +137,8 @@ public class OrderController {
     @GetMapping(value = "/on-service/{id}")
     public ResponseEntity<Orders> showOrderDetail(@PathVariable(value = "id") Integer id) {
         Orders orders = this.iOrderService.showOrderDetail(id);
-
         if (orders == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
@@ -160,14 +170,6 @@ public class OrderController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
-    //BaoHG
-    @Autowired
-    private ITableService iTableService;
-
-    //BaoHG
-    @Autowired
-    private IOrderDetailService iOrderDetailService;
 
     //BaoHG
     @PatchMapping("/call-food/{id}")
@@ -202,7 +204,7 @@ public class OrderController {
 
     //BaoHG
     @PostMapping("/create/orderTable") // tao moi 1 thang order all null chi co value table
-    public ResponseEntity<Order> newOrderTable(@RequestBody Orders orders) {
+    public ResponseEntity<Orders> newOrderTable(@RequestBody Orders orders) {
         this.iOrderService.saveOrderTable(orders);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -240,7 +242,6 @@ public class OrderController {
     @GetMapping("orderDetail/{id}")
     public ResponseEntity<Optional<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
         Optional<OrderDetail> list = this.iOrderDetailService.findById(id);
-
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

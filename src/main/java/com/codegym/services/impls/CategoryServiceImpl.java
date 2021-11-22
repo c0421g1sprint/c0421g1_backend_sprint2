@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements ICategoryService {
 
@@ -38,13 +40,15 @@ public class CategoryServiceImpl implements ICategoryService {
         categoryRepository.deleteCategory(id);
     }
 
-    //BaoHG
+    //LinhDN
     @Override
     public Category detailCategory(Integer id) {
-        return categoryRepository.viewDetailCategory(id);
-        @Override
-        public List<Category> listAll () {
-            return this.iCategoryRepository.listAllNameCategory();
-        }
+        return this.categoryRepository.viewDetailCategory(id);
+    }
+
+    //BaoHG
+    @Override
+    public List<Category> listAll() {
+        return this.categoryRepository.listAllNameCategory();
     }
 }
