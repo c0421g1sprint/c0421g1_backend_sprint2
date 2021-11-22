@@ -9,17 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.Order;
 import javax.transaction.Transactional;
+
 import java.util.Optional;
 
 @Repository
 @Transactional
 public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
-
-
-//    @Modifying // tạo trước 1 cái table vs order
-//    @Query(value = "insert into `orders` (create_date,order_code,employee_id,table_id) value (null,null,null,?1);", nativeQuery = true)
-//    void createOrderTable(int tableId);
-
 
     @Modifying // tạo trước 1 cái table vs order
     @Query(value = "insert into `orders` (table_id) value (?1);", nativeQuery = true)

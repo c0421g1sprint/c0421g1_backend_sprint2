@@ -71,7 +71,7 @@ public class OrderController {
 
     @GetMapping("/list/orderNew") // lay ra thang order moi nhat
     public ResponseEntity<Optional<Orders>> getNewOrderDB() {
-        Optional<Orders>list = this.iOrderService.listNewOrder();
+        Optional<Orders> list = this.iOrderService.listNewOrder();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
@@ -88,6 +88,10 @@ public class OrderController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("orderDetail/{id}")
+    public ResponseEntity<Optional<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
+        Optional<OrderDetail> list = this.iOrderDetailService.findById(id);
 
-
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

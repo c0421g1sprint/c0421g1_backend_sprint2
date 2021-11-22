@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderDetailService implements IOrderDetailService {
@@ -21,6 +22,17 @@ public class OrderDetailService implements IOrderDetailService {
 
     @Override
     public void saveOrderTail(OrderDetail orderDetail) {
-        this.iOrderDetailRepository.save(orderDetail);
+        this.iOrderDetailRepository.createOrderDetail(orderDetail.getFad().getFadId(), orderDetail.getOrders().getOrderId(), orderDetail.getQuantity());
     }
+
+    @Override
+    public Optional<OrderDetail> findById(int id) {
+        return this.iOrderDetailRepository.findOrderDetailById(id);
+    }
+
+//
+//    @Override
+//    public void saveOrderTail(OrderDetail orderDetail) {
+//        this.iOrderDetailRepository.save(orderDetail);
+//    }
 }

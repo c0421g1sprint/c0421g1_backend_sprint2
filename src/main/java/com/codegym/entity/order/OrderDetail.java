@@ -18,7 +18,7 @@ public class OrderDetail {
     @EmbeddedId
     private OrderDetailKey orderDetailId;
 
-    @JsonBackReference(value = "order_detail")
+
     @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name = "order_id")
