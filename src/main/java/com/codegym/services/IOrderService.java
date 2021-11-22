@@ -10,6 +10,14 @@ import com.codegym.entity.table.Tables;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.codegym.entity.order.OrderDetail;
+import com.codegym.entity.order.Orders;
+import org.hibernate.criterion.Order;
+
+import java.util.List;
+import java.util.Optional;
+
+
 public interface IOrderService {
 
     //TaiNP coding find IncomeWithDate
@@ -39,4 +47,13 @@ public interface IOrderService {
 
     //DanhNT: Tìm hoá đơn theo ID
     Orders findById(Integer id);
+
+    //BaoHG
+    List<Orders> listOrder();
+
+    //BaoHG
+    void saveOrderTable(Orders orders);
+
+    //BaoHG
+    Optional<Orders> listNewOrder();
 }

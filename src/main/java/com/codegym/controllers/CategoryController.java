@@ -69,4 +69,15 @@ public class CategoryController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    //BaoHG
+    @GetMapping("/menu")
+    public ResponseEntity<List<Category>> findAllName() {
+        List<Category> list = this.iCategoryService.listAll();
+        if (list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
 }

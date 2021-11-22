@@ -12,14 +12,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class OrderServiceImpl implements IOrderService {
 
     // TaiHVK inject interfaces IOrdersRepository and ITablesRepository 17/11/2021
     @Autowired
     IOrdersRepository ordersRepository;
+
+    // TaiHVK inject interfaces IOrdersRepository and ITablesRepository 17/11/2021
     @Autowired
     private ITablesRepository iTablesRepository;
 
@@ -73,4 +73,24 @@ public class OrderServiceImpl implements IOrderService {
     public Orders findById(Integer id) {
         return this.ordersRepository.findById(id).orElse(null);
     }
+
+    //BaoHG
+    @Override
+    public List<Orders> listOrder() {
+        return this.ordersRepository.findAll();
+    }
+
+    //BaoHG
+    @Override
+    public void saveOrderTable(Orders orders) {
+        this.ordersRepository.createOrderTable(orders.getTables().getTableId());
+    }
+
+    //BaoHG
+    @Override
+    public Optional<Orders> listNewOrder() {
+       return this.ordersRepository.getNewOrder();
+    }
+
+
 }

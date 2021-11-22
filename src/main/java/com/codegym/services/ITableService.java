@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 public interface ITableService {
 
     //DucLVH do at 17/11/2021
-    void saveQuery(String location, String maximumCapacity,String tableCode);
+    void saveQuery(String location, String maximumCapacity, String tableCode);
 
     //DucLVH do at 17/11/2021
     void updateTable(Tables tables);
@@ -23,5 +23,17 @@ public interface ITableService {
     void deleteTableById(Integer id);
 
     //HauPT do at 17/11/2021
-    Page<Tables> getListTableByCodeAndStatus(Pageable pageable, String tableCode , String tableStatus);
+    Page<Tables> getListTableByCodeAndStatus(Pageable pageable, String tableCode, String tableStatus);
+
+    //BaoHG
+    void callFoodAndDrink(int id);
+
+    //BaoHG
+    void callEmp(int id);
+
+    //BaoHG
+    void pay(int id);
+
+    //BaoHG
+    Optional<Tables> tableRandom();
 }

@@ -13,7 +13,7 @@ public interface ICategoryService {
     void updateCategory(Category category);
 
     //LinhDN view all category
-    Page<Category> viewAllCategory(Pageable pageable,String code, String name);
+    Page<Category> viewAllCategory(Pageable pageable, String code, String name);
 
     //LinhDN delete category
     void deleteCategory(Integer id);
@@ -21,4 +21,6 @@ public interface ICategoryService {
     //LinhDN delete category
     Category detailCategory(Integer id);
 
+    //BaoHG
+    List<Category> listAll();
 }

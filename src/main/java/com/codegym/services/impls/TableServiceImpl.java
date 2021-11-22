@@ -1,17 +1,14 @@
 package com.codegym.services.impls;
 
-import com.codegym.entity.table.Tables;
 import com.codegym.repositories.ITablesRepository;
 import com.codegym.services.ITableService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TableServiceImpl implements ITableService {
     @Autowired
-private ITablesRepository tablesRepository;
+    private ITablesRepository tablesRepository;
 
     //DucLVH do at 17/11/2021
     @Override
@@ -47,5 +44,29 @@ private ITablesRepository tablesRepository;
     @Override
     public Page<Tables> getListTableByCodeAndStatus(Pageable pageable, String tableCode, String tableStatus) {
         return tablesRepository.getListTableByCodeAndStatus(pageable,tableCode,tableStatus);
+    }
+
+    //BaoHG
+    @Override
+    public void callFoodAndDrink(int id) {
+        this.tablesRepository.callFood(id);
+    }
+
+    //BaoHG
+    @Override
+    public void callEmp(int id) {
+        this.tablesRepository.callEmployee(id);
+    }
+
+    //BaoHG
+    @Override
+    public void pay(int id) {
+        this.tablesRepository.callPay(id);
+    }
+
+    //BaoHG
+    @Override
+    public Optional<Tables> tableRandom() {
+        return this.tablesRepository.getTable();
     }
 }

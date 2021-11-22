@@ -26,18 +26,25 @@ public class CategoryServiceImpl implements ICategoryService {
         categoryRepository.updateCategory(category.getCategoryName(), category.getCategoryCode(), category.getCategoryId());
     }
 
+    //LinhDN
     @Override
     public Page<Category> viewAllCategory(Pageable pageable, String code, String name) {
         return categoryRepository.viewAllCategoryByQuery(pageable, code, name);
     }
 
+    //LinhDN
     @Override
     public void deleteCategory(Integer id) {
         categoryRepository.deleteCategory(id);
     }
 
+    //BaoHG
     @Override
     public Category detailCategory(Integer id) {
         return categoryRepository.viewDetailCategory(id);
+        @Override
+        public List<Category> listAll () {
+            return this.iCategoryRepository.listAllNameCategory();
+        }
     }
 }

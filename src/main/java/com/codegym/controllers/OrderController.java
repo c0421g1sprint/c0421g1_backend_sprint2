@@ -160,4 +160,87 @@ public class OrderController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    //BaoHG
+    @Autowired
+    private ITableService iTableService;
+
+    //BaoHG
+    @Autowired
+    private IOrderDetailService iOrderDetailService;
+
+    //BaoHG
+    @PatchMapping("/call-food/{id}")
+    public void callFoodById(@PathVariable int id) {
+        this.iTableService.callFoodAndDrink(id);
+    }
+
+    //BaoHG
+    @PatchMapping("/call-employee/{id}")
+    public void callEmployeeById(@PathVariable int id) {
+        this.iTableService.callEmp(id);
+    }
+
+    //BaoHG
+    @PatchMapping("/call-pay/{id}")
+    public void callPayById(@PathVariable int id) {
+        this.iTableService.pay(id);
+    }
+
+    //BaoHG
+    @GetMapping("/table") // ley ra 1 cai ban bat ki neu no con trong
+    public ResponseEntity<Optional<Tables>> getTable() {
+        Optional<Tables> tables = this.iTableService.tableRandom();
+        if (tables.isPresent()) {
+            return new ResponseEntity<>(tables, HttpStatus.OK);
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
+    }
+
+    //BaoHG
+    @PostMapping("/create/orderTable") // tao moi 1 thang order all null chi co value table
+    public ResponseEntity<Order> newOrderTable(@RequestBody Orders orders) {
+        this.iOrderService.saveOrderTable(orders);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    //BaoHG
+    @PostMapping("/create/orderDetail")
+    public ResponseEntity<OrderDetail> newOrderDetail(@RequestBody OrderDetail orderDetail) {
+        this.iOrderDetailService.saveOrderTail(orderDetail);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    //BaoHG
+    @GetMapping("/list/orderNew") // lay ra thang order moi nhat
+    public ResponseEntity<Optional<Orders>> getNewOrderDB() {
+        Optional<Orders> list = this.iOrderService.listNewOrder();
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    //BaoHG
+    @GetMapping("/list/order") // lay ra all order
+    public ResponseEntity<List<Orders>> findAllOrder() {
+        List<Orders> list = this.iOrderService.listOrder();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    //BaoHG
+    @GetMapping("/list/orderDetail") // lay ra all order detail
+    public ResponseEntity<List<OrderDetail>> findAllOrderDetail() {
+        List<OrderDetail> list = this.iOrderDetailService.listOrderDetail();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    //BaoHG
+    @GetMapping("orderDetail/{id}")
+    public ResponseEntity<Optional<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
+        Optional<OrderDetail> list = this.iOrderDetailService.findById(id);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }
