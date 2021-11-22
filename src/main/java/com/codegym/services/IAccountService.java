@@ -17,4 +17,13 @@ public interface IAccountService {
 
     //NhatDV
     Account getAccountByName(String name);
+
+    //DungNM 21/11
+    Account findByUsername(String username);
+
+    //DungNM 21/11
+    void signUp(Account account);
+
+    //DungNM 21/11
+    Account findAccountByEmail(String email);
 }

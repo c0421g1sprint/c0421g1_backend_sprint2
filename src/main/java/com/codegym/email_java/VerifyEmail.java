@@ -1,4 +1,4 @@
-package com.codegym.entity.account;
+package com.codegym.email_java;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

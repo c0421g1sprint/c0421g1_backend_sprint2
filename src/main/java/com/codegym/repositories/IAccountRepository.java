@@ -32,4 +32,34 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
             "from account a \n" +
             "where a.account_username= ?1", nativeQuery = true)
     Account getAccountByName(@Param("name") String name);
+
+    //DungNM - Query account with username to verify httpBasic
+    @Query(value = "select " +
+            "account_id, email, account_password, account_username, delete_flag, active_flag " +
+            "from account a " +
+            "where a.account_username= ?1", nativeQuery = true)
+    Account findAccountByUsername(String username);
+
+    //DungNM - Query account with email
+    @Query(value = "select " +
+            "account_id, email, account_password, account_username, delete_flag, active_flag " +
+            "from account a " +
+            "where a.email = ?1", nativeQuery = true)
+    Account findAccountByEmail(@Param("account_email") String email);
+
+    //DungNM - insert account but not active
+    @Modifying
+    @Query(value = "insert into account (account_username, account_password, email, delete_flag, active_flag) " +
+            "values (?1, ?2, ?3, 0, 0)", nativeQuery = true)
+    void signUpAccount(@Param("account_username") String username, @Param("account_password") String password, @Param("email") String email);
+
+    //DungNM - set role user cho tai khoan vua moi dang ky
+    @Modifying
+    @Query(value = "insert into account_role (account_id, role_id) values(?1, 2)", nativeQuery = true)
+    void setRoleForUser(@Param("account_id") int idOfAccount);
+
+    //DungNM - Kích hoạt tài khoản sau khi xác minh qua gmail
+    @Modifying
+    @Query(value = "update account set active_flag = 1 where email = ?1", nativeQuery = true)
+    void enableActiveAccount(@Param("email") String email);
 }
