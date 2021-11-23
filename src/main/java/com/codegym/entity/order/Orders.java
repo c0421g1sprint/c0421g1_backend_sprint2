@@ -2,7 +2,6 @@ package com.codegym.entity.order;
 
 import com.codegym.entity.table.Tables;
 import com.codegym.entity.employee.Employee;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

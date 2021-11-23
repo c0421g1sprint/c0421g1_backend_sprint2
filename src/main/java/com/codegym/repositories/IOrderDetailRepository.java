@@ -1,8 +1,6 @@
 package com.codegym.repositories;
 
-import com.codegym.entity.food_and_drink.FoodAndDrink;
 import com.codegym.entity.order.OrderDetail;
-import com.codegym.entity.order.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -2,7 +2,6 @@ package com.codegym.controllers;
 
 import com.codegym.dto.EditPasswordAccountDto;
 import com.codegym.dto.LoginRequestDto;
-import com.codegym.email_java.ConfirmService;
 import com.codegym.entity.account.Account;
 import com.codegym.jwt_token.JwtProvider;
 import com.codegym.jwt_token.ResponseToken;
@@ -43,8 +42,7 @@ public class AccountController {
 
     @Autowired
     private JwtProvider tokenProvider;
-    @Autowired
-    private ConfirmService confirmService;
+
 
     //NhatDV code accout by id
     @GetMapping(value = "/{accountId}")
@@ -55,9 +53,9 @@ public class AccountController {
         } else {
             return new ResponseEntity<>(account, HttpStatus.OK);
         }
-// NhatDV code getAccountByName
     }
 
+    // NhatDV code getAccountByName
     @GetMapping("/userName")
     public ResponseEntity<Account> findUserDetail(@RequestParam("name") String name) {
         Account account = accountService.getAccountByName(name);

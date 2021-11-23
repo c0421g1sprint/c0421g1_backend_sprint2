@@ -1,6 +1,5 @@
 package com.codegym.services.impls;
 
-import com.codegym.entity.food_and_drink.Category;
 import com.codegym.entity.food_and_drink.FoodAndDrink;
 import com.codegym.repositories.IFoodAndDrinkRepository;
 import com.codegym.services.IFoodAndDrinkService;

@@ -1,10 +1,7 @@
 package com.codegym.controllers;
 
-import com.codegym.dto.CategoryDto;
 import com.codegym.dto.FoodAndDrinkDto;
-import com.codegym.entity.food_and_drink.Category;
 import com.codegym.entity.food_and_drink.FoodAndDrink;
-import com.codegym.repositories.IFoodAndDrinkRepository;
 import com.codegym.services.IFoodAndDrinkService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
