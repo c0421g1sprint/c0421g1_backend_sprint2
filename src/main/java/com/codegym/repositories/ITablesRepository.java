@@ -18,7 +18,7 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
     //DucLVH do at 17/11/2021
     @Transactional
     @Modifying
-    @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status,on_Service) values (0,0,?1,?2,?3,'trống','0')", nativeQuery = true)
+    @Query(value = "INSERT into tables (available_flag, delete_flag, location, maximum_capacity, table_code, table_status,on_Service) values (0,0,?1,?2,?3,'tốp','0')", nativeQuery = true)
     void saveQuery(String location, String maximumCapacity, String tableCode);
 
     //DucLVH do at 17/11/2021
