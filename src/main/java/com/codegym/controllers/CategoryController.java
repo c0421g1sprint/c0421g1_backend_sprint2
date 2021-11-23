@@ -83,6 +83,7 @@ public class CategoryController {
     }
 
     //BaoHG
+    //code dơ, không dùng code ni
     @GetMapping("/menu")
     public ResponseEntity<List<Category>> findAllName() {
         List<Category> list = this.categoryService.listAll();

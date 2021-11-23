@@ -49,9 +49,5 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        http.authorizeRequests().antMatchers("/", "/editPass").permitAll();
-//    }
+
 }

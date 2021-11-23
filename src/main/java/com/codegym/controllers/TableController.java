@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -49,25 +50,25 @@ public class TableController {
             this.tableService.updateTable(tables);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
     }
 
     //HauPT do at 18/11/2021
     @GetMapping(value = "/list")
-    public ResponseEntity<Page<Tables>> getListTables(@PageableDefault(value = 5) Pageable pageable){
+    public ResponseEntity<Page<Tables>> getListTables(@PageableDefault(value = 5) Pageable pageable) {
         Page<Tables> tables = tableService.getListTable(pageable);
-        if (tables.isEmpty()){
+        if (tables.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(tables,HttpStatus.OK);
+            return new ResponseEntity<>(tables, HttpStatus.OK);
         }
     }
 
     //HauPT do at 18/11/2021
-    @GetMapping(value = "/delete/{id}")
-    public ResponseEntity<Void> deleteTableById(@PathVariable Integer id){
-        if (id == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PatchMapping(value = "/delete")
+    public ResponseEntity<Void> deleteTableById(@RequestBody Integer id) {
+        Tables tables = this.tableService.findByIdQuery(id);
+        if (tables == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             tableService.deleteTableById(id);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -76,14 +77,14 @@ public class TableController {
 
     //HauPT do at 18/11/2021
     @GetMapping(value = "/search")
-    public ResponseEntity<Page<Tables>> SearchTable(@RequestParam( name = "tableCode" ,required = false) String tableCode,
-                                                    @RequestParam( name = "tableStatus" ,required = false) String tableStatus,
-                                                    @PageableDefault(value = 5) Pageable pageable){
-        Page<Tables> tables = tableService.getListTableByCodeAndStatus(pageable , tableCode ,tableStatus);
-        if (tables.isEmpty()){
+    public ResponseEntity<Page<Tables>> SearchTable(@RequestParam(name = "tableCode", required = false) String tableCode,
+                                                    @RequestParam(name = "tableStatus", required = false) String tableStatus,
+                                                    @PageableDefault(value = 5) Pageable pageable) {
+        Page<Tables> tables = tableService.getListTableByCodeAndStatus(pageable, tableCode, tableStatus);
+        if (tables.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(tables,HttpStatus.OK);
+            return new ResponseEntity<>(tables, HttpStatus.OK);
         }
     }
 

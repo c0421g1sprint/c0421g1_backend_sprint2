@@ -75,6 +75,7 @@ public class TableServiceImpl implements ITableService {
         return this.tablesRepository.getTable();
     }
 
+    //
     @Override
     public Tables findByIdQuery(int tableId) {
         return tablesRepository.findByIdTableByQuery(tableId).orElse(null);

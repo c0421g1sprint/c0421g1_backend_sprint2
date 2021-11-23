@@ -51,8 +51,13 @@ public class EmployeeController {
 
     //MinhNN
     @PatchMapping("/delete/{id}")
-    public void deleteEmployee(@PathVariable("id") Integer id) {
-        iEmployeeService.deleteEmployee(id);
+    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") Integer id) {
+        Employee employee = this.iEmployeeService.getEmployeeById(id);
+        if (employee != null){
+            this.iEmployeeService.deleteEmployee(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //MinhNN
@@ -87,6 +92,7 @@ public class EmployeeController {
     }
 
     //PhucNK
+    //lỗi nhập id bậy vẫn trả về ok
     @RequestMapping(value = "/updateEmployee", method = RequestMethod.PATCH)
     public ResponseEntity<?> updateEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
