@@ -23,20 +23,20 @@ public class FoodAndDrinkController {
 
     //LamNT create FoodAndDrink
     @PostMapping("/create")
-    public ResponseEntity<?> createFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
+    public ResponseEntity<Void> createFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
         FoodAndDrink foodAndDrink = new FoodAndDrink();
         BeanUtils.copyProperties(foodAndDrinkDto, foodAndDrink);
         foodAndDrinkService.createFoodAndDrink(foodAndDrink);
-        return new ResponseEntity<>(foodAndDrink, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //LamNT update FoodAndDrink
     @PatchMapping("/update")
-    public ResponseEntity<?> updateFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
+    public ResponseEntity<Void> updateFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
         FoodAndDrink foodAndDrink = new FoodAndDrink();
         BeanUtils.copyProperties(foodAndDrinkDto, foodAndDrink);
         foodAndDrinkService.updateFoodAndDrink(foodAndDrink);
-        return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")

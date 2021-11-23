@@ -22,20 +22,20 @@ public class CategoryController {
 
     //LamNT create category
     @PostMapping("/create")
-    public ResponseEntity<?> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
+    public ResponseEntity<Void> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDto, category);
         categoryService.saveCategory(category);
-        return new ResponseEntity<>(category, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //LamNT update category
     @PatchMapping("/update")
-    public ResponseEntity<?> updateCategory(@RequestBody @Validated CategoryDto categoryDto) {
+    public ResponseEntity<Void> updateCategory(@RequestBody @Validated CategoryDto categoryDto) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDto, category);
         categoryService.updateCategory(category);
-        return new ResponseEntity<>(category, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("find-all")
