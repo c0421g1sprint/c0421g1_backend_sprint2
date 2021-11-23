@@ -93,4 +93,15 @@ public class CategoryController {
             return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
+
+    //    LinhDN xem 1 category day du khong tham so
+    @RequestMapping("/listFull")
+    public ResponseEntity<List<Category>> viewAllCategoryNoParam(){
+        List<Category> categoryList = categoryService.viewAllCategoryNoParam();
+        if (categoryList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<>(categoryList,HttpStatus.OK);
+        }
+    }
 }

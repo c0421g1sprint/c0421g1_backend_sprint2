@@ -28,4 +28,7 @@ public interface ICategoryService {
 
     //BaoHG
     List<Category> listAll();
+
+    //LinhDN view all category khong tham so
+    List<Category> viewAllCategoryNoParam();
 }

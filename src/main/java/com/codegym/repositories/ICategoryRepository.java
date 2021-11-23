@@ -53,4 +53,12 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
     @Query(value = "select category_id, category_name , category_code,delete_flag\n" +
             "from category", nativeQuery = true)
     List<Category> listAllNameCategory();
+
+    //LinhDN showList category khong co tham so
+    @Query(value = "select category_id, category_code, category_name, delete_flag from category " +
+            "where delete_flag = false ",
+            countQuery ="select category_id, category_code, category_name, delete_flag from category " +
+                    "where delete_flag = false",
+            nativeQuery = true)
+    List<Category> viewAllCategoryByQueryNoParam();
 }

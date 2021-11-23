@@ -68,13 +68,14 @@ public class AccountController {
     }
 
     // NhatDV code edit password
-    @PatchMapping(value = "/editPass", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> editPassword(@RequestBody @Valid EditPasswordAccountDto editPasswordAccountDto, BindingResult bindingResult) {
+    @PatchMapping( value = "/editPass" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> editPassword (@RequestBody @Valid EditPasswordAccountDto editPasswordAccountDto , BindingResult bindingResult) {
         Integer id = editPasswordAccountDto.getAccountId();
         Account account = accountService.getAccountById(id);
         if (!passwordEncoder.matches(editPasswordAccountDto.getOldPassword(), account.getAccountPassword())
+                || passwordEncoder.matches(editPasswordAccountDto.getAccountPassword(),account.getAccountPassword())
                 || bindingResult.hasFieldErrors()
-                || !editPasswordAccountDto.getConfirmPassword().equals(editPasswordAccountDto.getAccountPassword())) {
+                ||!editPasswordAccountDto.getConfirmPassword().equals(editPasswordAccountDto.getAccountPassword()))  {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
 

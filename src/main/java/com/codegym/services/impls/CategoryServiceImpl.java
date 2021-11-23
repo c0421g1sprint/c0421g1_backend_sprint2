@@ -57,4 +57,10 @@ public class CategoryServiceImpl implements ICategoryService {
     public List<Category> listAll() {
         return this.categoryRepository.listAllNameCategory();
     }
+
+    //LinhDN danh sach category khong co tham so
+    @Override
+    public List<Category> viewAllCategoryNoParam() {
+        return categoryRepository.viewAllCategoryByQueryNoParam();
+    }
 }
