@@ -24,7 +24,7 @@ public class FoodAndDrinkController {
 
     //LamNT create category
     @PostMapping("/create")
-    public ResponseEntity<?> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
+    public ResponseEntity<Category> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDto, category);
         foodAndDrinkService.saveCategory(category);
@@ -33,7 +33,7 @@ public class FoodAndDrinkController {
 
     //LamNT update category
     @PatchMapping("/update")
-    public ResponseEntity<?> updateCategory(@RequestBody @Validated CategoryDto categoryDto) {
+    public ResponseEntity<Category> updateCategory(@RequestBody @Validated CategoryDto categoryDto) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDto, category);
         foodAndDrinkService.updateCategory(category);
@@ -42,7 +42,7 @@ public class FoodAndDrinkController {
 
     //LamNT create FoodAndDrink
     @PostMapping("/create-fad")
-    public ResponseEntity<?> createFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
+    public ResponseEntity<FoodAndDrink> createFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
         FoodAndDrink foodAndDrink = new FoodAndDrink();
         BeanUtils.copyProperties(foodAndDrinkDto, foodAndDrink);
         foodAndDrinkService.createFoodAndDrink(foodAndDrink);
@@ -51,7 +51,7 @@ public class FoodAndDrinkController {
 
     //LamNT update FoodAndDrink
     @PatchMapping("/update-fad")
-    public ResponseEntity<?> updateFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
+    public ResponseEntity<FoodAndDrink> updateFoodAndDrink(@RequestBody @Validated FoodAndDrinkDto foodAndDrinkDto) {
         FoodAndDrink foodAndDrink = new FoodAndDrink();
         BeanUtils.copyProperties(foodAndDrinkDto, foodAndDrink);
         foodAndDrinkService.updateFoodAndDrink(foodAndDrink);
