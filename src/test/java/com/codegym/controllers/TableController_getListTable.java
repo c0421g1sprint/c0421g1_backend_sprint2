@@ -13,20 +13,20 @@ import org.springframework.http.ResponseEntity;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TableController_getListTable {
+class TableController_getListTable {
 
     @Autowired
     private TableController tableController;
 
     @Test
-    public void getListTable_5()  {
+     void getListTable_5()  {
         ResponseEntity<Page<Tables>> pageResponseEntity
                 = this.tableController.getListTables(PageRequest.of(10, 5));
         Assertions.assertEquals(HttpStatus.NOT_FOUND, pageResponseEntity.getStatusCode());
     }
 
     @Test
-    public void getListTable_6() {
+     void getListTable_6() {
         ResponseEntity<Page<Tables>> pageResponseEntity
                 = this.tableController.getListTables(PageRequest.of(0, 5));
 

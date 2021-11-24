@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TableController_deleteTableById {
+class TableController_deleteTableById {
 
     @Autowired
     private MockMvc mockMvc;

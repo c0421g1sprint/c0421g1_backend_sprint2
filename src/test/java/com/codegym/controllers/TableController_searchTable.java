@@ -13,13 +13,13 @@ import org.springframework.http.ResponseEntity;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TableController_searchTable {
+class TableController_searchTable {
 
     @Autowired
     private TableController tableController;
 
     @Test
-    public void searchTable_1()  {
+     void searchTable_1()  {
         ResponseEntity<Page<Tables>> pageResponseEntity
                 = this.tableController.searchTable(PageRequest.of(0, 5), null , null);
         Assertions.assertEquals(HttpStatus.OK, pageResponseEntity.getStatusCode());
@@ -32,21 +32,21 @@ public class TableController_searchTable {
     }
 
     @Test
-    public void searchTable_2()  {
+     void searchTable_2()  {
         ResponseEntity<Page<Tables>> pageResponseEntity
                 = this.tableController.searchTable(PageRequest.of(0, 5), "" , "");
         Assertions.assertEquals(HttpStatus.NOT_FOUND, pageResponseEntity.getStatusCode());
     }
 
     @Test
-    public void searchTable_3()  {
+     void searchTable_3()  {
         ResponseEntity<Page<Tables>> pageResponseEntity
                 = this.tableController.searchTable(PageRequest.of(0, 5), "null" , "null");
         Assertions.assertEquals(HttpStatus.NOT_FOUND, pageResponseEntity.getStatusCode());
     }
 
     @Test
-    public void searchTable_4()  {
+     void searchTable_4()  {
         ResponseEntity<Page<Tables>> pageResponseEntity
                 = this.tableController.searchTable(PageRequest.of(0, 5), "TB-0001" , null);
         Assertions.assertEquals(HttpStatus.OK, pageResponseEntity.getStatusCode());
