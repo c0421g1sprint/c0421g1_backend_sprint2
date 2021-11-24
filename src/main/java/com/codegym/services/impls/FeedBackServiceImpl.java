@@ -4,11 +4,8 @@ import com.codegym.entity.feedback.FeedBack;
 import com.codegym.repositories.IFeedBackRepository;
 import com.codegym.services.IFeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 @Service
 public class FeedBackServiceImpl implements IFeedBackService {
@@ -22,5 +19,8 @@ public class FeedBackServiceImpl implements IFeedBackService {
 
     }
 
-
+    @Override
+    public FeedBack findFeedbackByCode(String feedbackCode) {
+        return this.feedBackRepository.findFeedbackByCode(feedbackCode);
+    }
 }

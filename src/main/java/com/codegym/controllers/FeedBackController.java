@@ -12,12 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 
 
 @RestController
@@ -30,7 +24,7 @@ public class FeedBackController {
 
 
     // Diep tao feedback 12/11
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public ResponseEntity<FeedBack> saveFeedback(@RequestBody @Validated FeedBackDto feedBackDto, BindingResult
             bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -42,5 +36,13 @@ public class FeedBackController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
+    @GetMapping("/find-feedback-code")  //OK (check Feedback duplicate)
+    public ResponseEntity<FeedBack> isFeedbackCodeDuplicated(@RequestParam(name = "feedbackCode", required = false) String feedbackCode) {
+        FeedBack feedBack = this.iFeedbackService.findFeedbackByCode(feedbackCode);
 
+        if (feedBack == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(feedBack, HttpStatus.OK);
+    }
 }
