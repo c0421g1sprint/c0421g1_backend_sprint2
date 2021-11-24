@@ -1,9 +1,9 @@
 package com.codegym.services;
 
-import com.codegym.dto.EmployeeDto;
+
 import com.codegym.entity.employee.Employee;
 import com.codegym.entity.employee.Level;
-import org.springframework.data.repository.query.Param;
+
 
 import java.util.List;
 
@@ -19,4 +19,8 @@ public interface IEmployeeService {
     void save(Employee employee);
 
     Employee getEmployeeByAccountName( String name);
+
+
+//    thêm tối nay
+    List<String> findAccountNameFromEmployee();
 }

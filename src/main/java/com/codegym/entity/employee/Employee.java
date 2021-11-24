@@ -23,7 +23,11 @@ public class Employee {
     private String employeeName;
     private String employeeAddress;
     private String employeePhone;
+
+
+    @Column(columnDefinition = "LONGTEXT")
     private String employeeImage;
+
     private Byte employeeGender;
     private String employeeBirthday;
     private double employeeSalary;

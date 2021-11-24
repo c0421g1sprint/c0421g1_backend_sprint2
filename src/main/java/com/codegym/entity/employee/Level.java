@@ -24,6 +24,6 @@ public class Level {
     @JsonBackReference
     @OneToMany(mappedBy = "level")
     private Set<Employee> employeeSet;
-//    không cho goi nguoc lại
+
 
 }

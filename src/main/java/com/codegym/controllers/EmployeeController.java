@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -30,36 +31,82 @@ public class EmployeeController {
     public ResponseEntity<Employee> findEmployeeById(@PathVariable int id) {
         Employee employee = iEmployeeService.getEmployeeById(id);
         if (employee != null) {
-            return new ResponseEntity<>(employee,HttpStatus.OK);
+            return new ResponseEntity<>(employee, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-    public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto,BindingResult bindingResult) {
-        Employee employeeCheck=iEmployeeService.getEmployeeByAccountName(employeeDto.getAccountName());
-        if(employeeCheck!=null){
+
+    @GetMapping("/listAccountName")
+    public ResponseEntity<List<String>> getAccountNameList() {
+        List<String> accountList = iEmployeeService.findAccountNameFromEmployee();
+//        if (accountList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        } else {
+//            return new ResponseEntity<>(accountList, HttpStatus.OK);
+//        }
+        return new ResponseEntity<>(accountList, HttpStatus.OK);
+    }
+
+
+
+
+
+    @PostMapping(value = "/createEmployee")
+    public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
+        Employee employeeCheck = iEmployeeService.getEmployeeByAccountName(employeeDto.getAccountName());
+        if (employeeCheck != null) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
+
+//thêm vào sáng ngày 25/11 2 giờ sáng
+        new EmployeeDto().validate(employeeDto,bindingResult);
+
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
-//            employee.setDeleteFlag(false);
+
             this.iEmployeeService.save(employee);
+
+//            this.updateEmployeeAccount(employee);
+
+//            Employee employeeUpdate=iEmployeeService.getEmployeeById(employee.getEmployeeId());
+//            System.out.println(employeeUpdate);
+//            Account account=iAccountService.findAccountByUserName(employee.getAccountName());
+//            employee.setAccount(account);
+//            this.iEmployeeService.save(employee);
+
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
 
-    @RequestMapping(value = "/updateEmployee", method = RequestMethod.PATCH)
-    public ResponseEntity<?> updateEmployee(@RequestBody  @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
+//    public  void updateEmployeeAccount(Employee employee){
+//        Employee employeeUpdate=iEmployeeService.getEmployeeById(employee.getEmployeeId());
+//        System.out.println(employeeUpdate);
+//
+//            Account account=iAccountService.findAccountByUserName(employee.getAccountName());
+//            employee.setAccount(account);
+//            this.iEmployeeService.save(employee);
+//
+//    }
+
+
+    @PatchMapping(value = "/updateEmployee" )
+    public ResponseEntity<?> updateEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
+
+
+        //thêm vào sáng ngày 25/11 2 giờ sáng
+        new EmployeeDto().validate(employeeDto,bindingResult);
+
+
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            Employee employee=new Employee();
-            BeanUtils.copyProperties(employeeDto,employee);
+            Employee employee = new Employee();
+            BeanUtils.copyProperties(employeeDto, employee);
             this.iEmployeeService.update(employee);
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -102,34 +149,3 @@ public class EmployeeController {
 
 
 
-//    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-//    public ResponseEntity<Employee> saveEmployee(@RequestBody  @Validated EmployeeDto employeeDto,BindingResult bindingResult) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        } else {
-//            Employee employee = new Employee();
-//            BeanUtils.copyProperties(employeeDto, employee);
-//            this.iEmployeeService.save(employee);
-//            return new ResponseEntity<>(HttpStatus.CREATED);
-//        }
-//    }
-
-
-
-//    @RequestMapping(value = "/updateEmployee", method = RequestMethod.PATCH)
-//    public ResponseEntity<?> updateEmployee(@RequestBody  @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        } else {
-//            Employee employee=new Employee();
-//            BeanUtils.copyProperties(employeeDto,employee);
-//
-//            this.iEmployeeService.update(employee);
-//
-//            Account account=iAccountService.findAccountById(employee.getAccount().getAccountId());
-//            account.setAccountUsername(employee.getAccountName());
-//            this.iAccountService.save(account);
-//
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//    }

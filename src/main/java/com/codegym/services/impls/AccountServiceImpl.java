@@ -20,4 +20,9 @@ public class AccountServiceImpl implements IAccountService {
     public void save(Account account) {
         accountRepository.save(account);
     }
+//thêm vao 11/24
+    @Override
+    public Account findAccountByUserName(String accountName) {
+        return accountRepository.findAccountByUserName(accountName);
+    }
 }

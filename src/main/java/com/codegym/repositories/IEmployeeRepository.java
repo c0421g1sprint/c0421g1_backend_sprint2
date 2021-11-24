@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -27,5 +28,9 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(value="select * from employee where employee.account_name=:name",nativeQuery = true)
     Employee getEmployeeByAccountName(@Param("name") String name);
+
+//    thêm vào tối ngayf24/11
+    @Query(value="select employee.account_name from employee",nativeQuery=true)
+    List<String> findAccountNameFromEmployee();
 
 }

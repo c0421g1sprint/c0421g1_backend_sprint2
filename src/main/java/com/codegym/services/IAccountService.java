@@ -6,4 +6,8 @@ public interface IAccountService {
 
     Account findAccountById(Integer AccountId);
     void save(Account account);
+
+
+//    thêm vào
+    Account findAccountByUserName(String accountName);
 }

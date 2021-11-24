@@ -1,6 +1,6 @@
 package com.codegym.services.impls;
 
-import com.codegym.dto.EmployeeDto;
+
 import com.codegym.entity.employee.Employee;
 import com.codegym.entity.employee.Level;
 import com.codegym.repositories.IEmployeeRepository;
@@ -45,6 +45,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public Employee getEmployeeByAccountName(String name) {
         return employeeRepository.getEmployeeByAccountName(name);
+    }
+
+
+//    thêm tối nay
+    @Override
+    public List<String> findAccountNameFromEmployee() {
+        return employeeRepository.findAccountNameFromEmployee();
     }
 
 
