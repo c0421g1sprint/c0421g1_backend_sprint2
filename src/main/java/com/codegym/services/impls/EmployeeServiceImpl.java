@@ -1,5 +1,6 @@
 package com.codegym.services.impls;
 
+
 import com.codegym.entity.employee.Employee;
 import com.codegym.entity.employee.Level;
 import com.codegym.repositories.IEmployeeRepository;
@@ -14,9 +15,12 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
+
+    //PhucNK
     @Autowired
     IEmployeeRepository employeeRepository;
 
+    //PhucNK
     @Autowired
     ILevel iLevel;
 
@@ -79,4 +83,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Employee getUserDetail(String name) {
         return employeeRepository.getUserDetail(name);
     }
+//    thêm tối nay phucnk
+    @Override
+    public List<String> findAccountNameFromEmployee() {
+        return employeeRepository.findAccountNameFromEmployee();
+    }
+
+
 }

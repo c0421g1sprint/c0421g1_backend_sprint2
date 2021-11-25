@@ -50,15 +50,21 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query(value = "INSERT INTO `employee` (`delete_flag`,`employee_address`,`employee_birthday`,`employee_gender`,`employee_image`,`employee_name`,`employee_phone`,`employee_salary`,`level_id`,`account_name`) " +
             "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10);",nativeQuery = true)
     void createNewEmployee(Boolean deleteFlag, String address, String birthday, Byte gender, String image, String name, String phone, Double salary, Integer levelId,String accountName);
+    //PhucNK
 
     //PhucNK
     @Modifying
     @Query(value = "update employee set delete_flag = ?1,employee_address = ?2,employee_birthday= ?3,employee_gender = ?4,employee_image=?5,employee_name=?6,employee_phone=?7,employee_salary=?8,level_id=?9,account_name=?10 where (employee_id = ?11);", nativeQuery = true)
     void updateEmployee(Boolean deleteFlag, String address, String birthday, Byte gender, String image, String name, String phone,Double salary, Integer levelId,String accountName,Integer employeeId);
 
+
     //PhucNK
     @Query(value="select * from employee where employee.account_name=:name",nativeQuery = true)
     Employee getEmployeeByAccountName(@Param("name") String name);
+
+//    thêm vào tối ngayf24/11 PHUCnK
+    @Query(value="select employee.account_name from employee",nativeQuery=true)
+    List<String> findAccountNameFromEmployee();
 
 //    Thông tin user by Nhật
     @Query(value = "select e.employee_id,e.account_name,e.delete_flag,e.employee_image,a.account_id,a.account_username,a.account_password,e.employee_name,e.employee_address,e.employee_gender,e.employee_phone,e.employee_salary,e.employee_birthday,e.level_id\n" +

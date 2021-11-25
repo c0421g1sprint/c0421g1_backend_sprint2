@@ -17,27 +17,22 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
-
     private String employeeName;
-
     private String employeeAddress;
-
     private String employeePhone;
 
+
+    @Column(columnDefinition = "LONGTEXT")
     private String employeeImage;
-
     private Byte employeeGender;
-
     private String employeeBirthday;
-
     private double employeeSalary;
-
     private boolean deleteFlag;
 
+    //tu them vao PhucNK
     private String accountName;
 
     @ManyToOne(targetEntity = Level.class)
@@ -51,5 +46,4 @@ public class Employee {
     @JsonBackReference(value = "employee_orders")
     @OneToMany(mappedBy = "employee")
     private Set<Orders> ordersSet;
-
 }
