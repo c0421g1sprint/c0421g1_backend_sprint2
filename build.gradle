@@ -2,20 +2,10 @@ plugins {
     id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id "org.sonarqube" version "3.0"
-<<<<<<< HEAD
+
 }
 
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://3.141.167.6:9000/'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'C0421G1_ReviewCode_PhucNK'
-        property 'sonar.projectName', 'C0421G1_ReviewCode_PhucNK'
-    }
-=======
->>>>>>> origin/manager_order_BaoHG
-}
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -34,28 +24,17 @@ repositories {
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+//    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'com.auth0:java-jwt:3.18.2'
 
 
 }
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://3.141.167.6:9000/'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'C0421G1_ReviewCode_BaoHG'
-        property 'sonar.projectName', 'C0421G1_ReviewCode_BaoHG'
-    }
-}
 
-test {
-    useJUnitPlatform()
-}
