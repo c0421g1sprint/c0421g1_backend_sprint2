@@ -13,28 +13,34 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
+
+    //PhucNK
     @Autowired
     IEmployeeRepository employeeRepository;
 
+    //PhucNK
     @Autowired
     ILevel iLevel;
 
+    //PhucNK
     @Override
     public List<Level> findAllLevelByQuery() {
         return iLevel.findAllLevelByQuery();
     }
 
+    //PhucNK
     @Override
     public Employee getEmployeeById(int id) {
         return employeeRepository.getEmployeeById(id);
     }
 
+    //PhucNK
     @Override
     public void save(Employee employee) {
         employeeRepository.createNewEmployee(employee.isDeleteFlag(),employee.getEmployeeAddress(),employee.getEmployeeBirthday(),employee.getEmployeeGender(),employee.getEmployeeImage(),employee.getEmployeeName(),employee.getEmployeePhone(),employee.getEmployeeSalary(),employee.getLevel().getLevelId(),employee.getAccountName());
     }
 
-
+    //PhucNK
     @Override
     public void update(Employee employee) {
         employeeRepository.updateEmployee(employee.isDeleteFlag(),employee.getEmployeeAddress(),
@@ -42,13 +48,14 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 employee.getEmployeeName(),employee.getEmployeePhone(),employee.getEmployeeSalary(),employee.getLevel().getLevelId(),employee.getAccountName(),employee.getEmployeeId());
     }
 
+    //PhucNK
     @Override
     public Employee getEmployeeByAccountName(String name) {
         return employeeRepository.getEmployeeByAccountName(name);
     }
 
 
-//    thêm tối nay
+//    thêm tối nay phucnk
     @Override
     public List<String> findAccountNameFromEmployee() {
         return employeeRepository.findAccountNameFromEmployee();

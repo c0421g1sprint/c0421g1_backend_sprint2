@@ -1,7 +1,6 @@
 package com.codegym.controllers;
 
 import com.codegym.dto.EmployeeDto;
-import com.codegym.entity.account.Account;
 import com.codegym.entity.employee.Employee;
 import com.codegym.entity.employee.Level;
 import com.codegym.services.IAccountService;
@@ -27,6 +26,8 @@ public class EmployeeController {
     @Autowired
     IAccountService iAccountService;
 
+
+    //PhucNK
     @GetMapping("/{id}")
     public ResponseEntity<Employee> findEmployeeById(@PathVariable int id) {
         Employee employee = iEmployeeService.getEmployeeById(id);
@@ -37,7 +38,7 @@ public class EmployeeController {
         }
     }
 
-
+    //PhucNK
     @GetMapping("/listAccountName")
     public ResponseEntity<List<String>> getAccountNameList() {
         List<String> accountList = iEmployeeService.findAccountNameFromEmployee();
@@ -52,7 +53,7 @@ public class EmployeeController {
 
 
 
-
+    //PhucNK
     @PostMapping(value = "/createEmployee")
     public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
         Employee employeeCheck = iEmployeeService.getEmployeeByAccountName(employeeDto.getAccountName());
@@ -70,37 +71,16 @@ public class EmployeeController {
             BeanUtils.copyProperties(employeeDto, employee);
 
             this.iEmployeeService.save(employee);
-
-//            this.updateEmployeeAccount(employee);
-
-//            Employee employeeUpdate=iEmployeeService.getEmployeeById(employee.getEmployeeId());
-//            System.out.println(employeeUpdate);
-//            Account account=iAccountService.findAccountByUserName(employee.getAccountName());
-//            employee.setAccount(account);
-//            this.iEmployeeService.save(employee);
-
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
 
-//    public  void updateEmployeeAccount(Employee employee){
-//        Employee employeeUpdate=iEmployeeService.getEmployeeById(employee.getEmployeeId());
-//        System.out.println(employeeUpdate);
-//
-//            Account account=iAccountService.findAccountByUserName(employee.getAccountName());
-//            employee.setAccount(account);
-//            this.iEmployeeService.save(employee);
-//
-//    }
 
-
+    //PhucNK
     @PatchMapping(value = "/updateEmployee" )
     public ResponseEntity<?> updateEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
-
-
         //thêm vào sáng ngày 25/11 2 giờ sáng
         new EmployeeDto().validate(employeeDto,bindingResult);
-
 
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -112,6 +92,8 @@ public class EmployeeController {
         }
     }
 
+
+    //PhucNK
     @GetMapping("/listLevel")
     public ResponseEntity<List<Level>> getLevelList
             () {

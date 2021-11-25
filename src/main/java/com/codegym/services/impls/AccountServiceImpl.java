@@ -8,19 +8,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
+
+    //PhucNK
     @Autowired
     IAccountRepository accountRepository;
 
+    //PhucNK
     @Override
     public Account findAccountById(Integer AccountId) {
         return accountRepository.findAccountById(AccountId);
     }
 
+    //PhucNK
     @Override
     public void save(Account account) {
         accountRepository.save(account);
     }
-//thêm vao 11/24
+//thêm vao 11/24 phucNk
     @Override
     public Account findAccountByUserName(String accountName) {
         return accountRepository.findAccountByUserName(accountName);

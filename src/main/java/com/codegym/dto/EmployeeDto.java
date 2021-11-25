@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDto implements Validator {
-
+//PhucNK
     private Integer employeeId;
 
     @NotNull(message = "Tên nhân viên không được để trống.")
@@ -29,7 +29,6 @@ public class EmployeeDto implements Validator {
     @Size(min = 3, max = 50, message = "Tên nhân viên tối thiểu phải có 3 kí tự,tối đa 50 kí tự.")
     @Pattern(regexp = "^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s ]*$", message = "Tên nhân viên không được chứa ký tự đặc biệt và số.")
     private String employeeName;
-
 
     @NotNull(message = "Địa chỉ không được để trống")
     @NotBlank(message = "Địa chỉ không được để trống")
@@ -47,32 +46,24 @@ public class EmployeeDto implements Validator {
     @NotNull(message = "Vui lòng chọn giới tính của nhân viên.")
     private Byte employeeGender;
 
-
     @NotNull(message = "Ngày sinh không được để trống.")
     @NotBlank(message = "Ngày sinh không được để trống.")
     private String employeeBirthday;
 
-
-
     @NotNull(message = "Vui lòng điền thông tin.")
     @Min(value = 1, message = "lương phải là số dương.")
-    private double employeeSalary;
 
+    private double employeeSalary;
     private boolean deleteFlag;
 
-
     @NotNull(message = "Tên đăng nhập  không được để trống")
-    @Pattern(regexp = "^[A-Za-z_]\\w*$", message = "Tên đăng nhập không bắt đầu là số,không có dấu và phải viết liền.")
+    @Pattern(regexp = "^[A-Za-z_]\\w*$", message = "Tên đăng nhập không bắt đầu là số,không có dấu,kí tự đặc biệt và không có khoảng trắng.")
     @Size(min = 6, max = 50, message = "Tên đăng nhập phải lớn hơn 6 và nhỏ hơn 50 kí tự")
+
     private String accountName;
-
-
     private Level level;
-
     private Account account;
-
     private Set<Orders> ordersSet;
-
 
     @Override
     public boolean supports(Class<?> clazz) {
