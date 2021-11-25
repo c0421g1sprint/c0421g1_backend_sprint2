@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/food-and-drink")
 public class FoodAndDrinkController {
 
-    @Autowired
+
+    @Autowired //BaoHG
     private IFoodAndDrinkService foodAndDrinkService;
 
     //LamNT create FoodAndDrink
@@ -144,6 +146,16 @@ public class FoodAndDrinkController {
 
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/search/food") //  //BaoHG tim theo id food
+    public ResponseEntity<List<FoodAndDrink>> searchFood(@RequestParam(value = "search") String search) {
+        List<FoodAndDrink> foodAndDrink = this.foodAndDrinkService.searchFoodAndDrink(search);
+        if (foodAndDrink.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
         }
     }
 

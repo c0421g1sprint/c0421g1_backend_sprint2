@@ -10,11 +10,7 @@ import com.codegym.entity.table.Tables;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.codegym.entity.order.OrderDetail;
-import com.codegym.entity.order.Orders;
-import org.hibernate.criterion.Order;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -59,4 +55,6 @@ public interface IOrderService {
 
     //BaoHG
     Optional<Orders> listNewOrder();
+
+
 }

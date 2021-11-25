@@ -6,7 +6,9 @@ import com.codegym.services.IFoodAndDrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -78,9 +80,14 @@ public class FoodAndDrinkServiceImpl implements IFoodAndDrinkService {
         return this.foodAndDrinkRepository.findAllFood();
     }
 
-    //BaoHG
+
     @Override
     public Optional<FoodAndDrink> findFoodById(int id) {
         return this.foodAndDrinkRepository.findFoodById(id);
+    }
+
+    @Override //BaoHG
+    public List<FoodAndDrink> searchFoodAndDrink(String name) {
+        return this.foodAndDrinkRepository.searchFood(name);
     }
 }

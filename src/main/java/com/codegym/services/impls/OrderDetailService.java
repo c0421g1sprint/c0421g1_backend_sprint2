@@ -7,32 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+
 
 @Service
 public class OrderDetailService implements IOrderDetailService {
     @Autowired
-    private IOrderDetailRepository iOrderDetailRepository;
+    private IOrderDetailRepository iOrderDetailRepository; //BaoHG
 
-    @Override
+    @Override // BaoHG
     public List<OrderDetail> listOrderDetail() {
         return this.iOrderDetailRepository.findAll();
 
     }
 
-    @Override
+    @Override // BaoHG
     public void saveOrderTail(OrderDetail orderDetail) {
         this.iOrderDetailRepository.createOrderDetail(orderDetail.getFad().getFadId(), orderDetail.getOrders().getOrderId(), orderDetail.getQuantity());
     }
 
-    @Override
-    public Optional<OrderDetail> findById(int id) {
+    @Override //BaoHG
+    public List<OrderDetail> findByOrderId(int id) {
         return this.iOrderDetailRepository.findOrderDetailById(id);
     }
 
-//
 //    @Override
-//    public void saveOrderTail(OrderDetail orderDetail) {
-//        this.iOrderDetailRepository.save(orderDetail);
+//    public void deleteOrderDetailByFadId(int id ) {
+//        this.iOrderDetailRepository.deleteById(id);
 //    }
+
+    @Override //BaoHG
+    public void deleteOrderDetailByFadId(int id) {
+        this.iOrderDetailRepository.deleteOrderDetail(id);
+    }
+
+
 }

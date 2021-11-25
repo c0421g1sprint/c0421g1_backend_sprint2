@@ -13,14 +13,16 @@ import java.util.Optional;
 
 @Service
 public class TableServiceImpl implements ITableService {
-    @Autowired
-    private ITablesRepository tablesRepository;
+    @Autowired //BaoHG
+    ITablesRepository tablesRepository;
+
 
     //DucLVH do at 17/11/2021
     @Override
     public void saveQuery(String location, String maximumCapacity, String tableCode) {
         this.tablesRepository.saveQuery(location,maximumCapacity,tableCode);
     }
+
 
     //DucLVH do at 17/11/2021
     @Override
@@ -58,19 +60,16 @@ public class TableServiceImpl implements ITableService {
         this.tablesRepository.callFood(id);
     }
 
-    //BaoHG
-    @Override
+    @Override // BaoHG
     public void callEmp(int id) {
         this.tablesRepository.callEmployee(id);
     }
 
-    //BaoHG
-    @Override
+    @Override // BaoHG
     public void pay(int id) {
         this.tablesRepository.callPay(id);
     }
 
-    //BaoHG
     @Override
     public Optional<Tables> tableRandom() {
         return this.tablesRepository.getTable();

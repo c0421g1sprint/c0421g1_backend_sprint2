@@ -42,4 +42,6 @@ public interface IFoodAndDrinkService {
 
     //BaoHG
     Optional<FoodAndDrink> findFoodById(int id);
+    //BaoHG
+     List<FoodAndDrink> searchFoodAndDrink(String name);
 }

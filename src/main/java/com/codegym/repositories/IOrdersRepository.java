@@ -99,4 +99,5 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
             "from orders order by order_id desc limit 1;", nativeQuery = true)
     Optional<Orders> getNewOrder();
 
+
 }

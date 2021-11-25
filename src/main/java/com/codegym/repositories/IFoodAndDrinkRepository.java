@@ -3,6 +3,7 @@ package com.codegym.repositories;
 import com.codegym.entity.food_and_drink.FoodAndDrink;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -91,4 +93,10 @@ public interface IFoodAndDrinkRepository extends JpaRepository<FoodAndDrink, Int
     //BaoHG
     @Query(value = "select * from food_and_drink", nativeQuery = true)
     List<FoodAndDrink> findAllFood();
+
+    @Query(value = "select * \n" +
+            "from food_and_drink \n" +
+            "where  fad_name = ?1 or fad_price = ?1",nativeQuery = true)
+    List<FoodAndDrink>searchFood(String search);
+
 }

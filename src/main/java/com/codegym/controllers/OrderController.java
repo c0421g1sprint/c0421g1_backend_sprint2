@@ -6,6 +6,7 @@ import com.codegym.entity.order.OrderDetail;
 import com.codegym.services.IOrderDetailService;
 import com.codegym.services.IOrderService;
 import com.codegym.services.ITableService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,7 @@ public class OrderController {
     @Autowired
     private IOrderDetailService iOrderDetailService;
 
+    @PatchMapping("/call-food/{id}")  //BaoHG
     //TaiNP coding show IncomeWithDate
     @GetMapping(value = "/income-date")
     public ResponseEntity<IncomeWithDateDto> showIncomeWithDate(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws ParseException {
@@ -183,14 +186,12 @@ public class OrderController {
         this.iTableService.callFoodAndDrink(id);
     }
 
-    //BaoHG
-    @PatchMapping("/call-employee/{id}")
+    @PatchMapping("/call-employee/{id}") //BaoHG
     public void callEmployeeById(@PathVariable int id) {
         this.iTableService.callEmp(id);
     }
 
-    //BaoHG
-    @PatchMapping("/call-pay/{id}")
+    @PatchMapping("/call-pay/{id}") //BaoHG
     public void callPayById(@PathVariable int id) {
         this.iTableService.pay(id);
     }
@@ -246,8 +247,20 @@ public class OrderController {
 
     //BaoHG
     @GetMapping("orderDetail/{id}")
-    public ResponseEntity<Optional<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
-        Optional<OrderDetail> list = this.iOrderDetailService.findById(id);
+    public ResponseEntity<List<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
+        List<OrderDetail> list = this.iOrderDetailService.findByOrderId(id);
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete/orderDetail/{id}") //  //BaoHG xoa 1 mon trong orderDetail
+    public ResponseEntity<OrderDetail> newOrderDetail(@PathVariable int id) {
+        List<OrderDetail> orderDetail = this.iOrderDetailService.findByOrderId(id);
+        if (orderDetail.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            this.iOrderDetailService.deleteOrderDetailByFadId(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
     }
 }

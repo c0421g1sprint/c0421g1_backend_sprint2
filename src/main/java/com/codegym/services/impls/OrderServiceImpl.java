@@ -19,7 +19,8 @@ import java.util.Optional;
 public class OrderServiceImpl implements IOrderService {
 
     // TaiHVK inject interfaces IOrdersRepository and ITablesRepository 17/11/2021
-    @Autowired
+
+    @Autowired //BaoHG
     IOrdersRepository ordersRepository;
 
     // TaiHVK inject interfaces IOrdersRepository and ITablesRepository 17/11/2021
@@ -51,6 +52,27 @@ public class OrderServiceImpl implements IOrderService {
         this.ordersRepository.changeTableOnServiceStatus(id);
     }
 
+    // TaiHVK coding show table order detail method 17/11/2021
+    @Override
+    public Orders showOrderDetail(Integer id) {
+        return this.ordersRepository.showOrderDetail(id);
+    }
+
+    @Override
+    public Double sumTableBill(Integer id) {
+        return this.ordersRepository.sumTableBill(id);
+    }
+
+    @Override
+    public Page<Orders> findAllAdv(Pageable pageable, String date, String code) {
+        return this.ordersRepository.findAllAdv(pageable, date, code);
+    }
+
+    @Override
+    public Orders findById(Integer id) {
+        return this.ordersRepository.findById(id).orElse(null);
+    }
+
 
     // TaiHVK coding reset table status method 17/11/2021
     @Override
@@ -58,46 +80,19 @@ public class OrderServiceImpl implements IOrderService {
         this.ordersRepository.resetTableStatus(id);
     }
 
-
-    // TaiHVK coding show table order detail method 17/11/2021
-    @Override
-    public Orders showOrderDetail(Integer id) {
-        return this.ordersRepository.showOrderDetail(id);
-    }
-
-    // TaiHVK coding show table sum method 21/11/2021
-    @Override
-    public Double sumTableBill(Integer id) {
-        return this.ordersRepository.sumTableBill(id);
-    }
-
-    //DanhNT: Danh sách hoá đơn phân trang
-    @Override
-    public Page<Orders> findAllAdv(Pageable pageable, String date, String code) {
-        return this.ordersRepository.findAllAdv(pageable, date, code);
-    }
-
-    //DanhNT: Tìm hoá đơn theo ID
-    @Override
-    public Orders findById(Integer id) {
-        return this.ordersRepository.findById(id).orElse(null);
-    }
-
-    //BaoHG
-    @Override
+    @Override // BaoHG
     public List<Orders> listOrder() {
         return this.ordersRepository.findAll();
     }
 
-    //BaoHG
-    @Override
+    @Override // BaoHG
     public void saveOrderTable(Orders orders) {
         this.ordersRepository.createOrderTable(orders.getTables().getTableId());
     }
 
-    //BaoHG
     @Override
-    public Optional<Orders> listNewOrder() {
+    public //BaoHG
+     Optional<Orders> listNewOrder() {
        return this.ordersRepository.getNewOrder();
     }
 

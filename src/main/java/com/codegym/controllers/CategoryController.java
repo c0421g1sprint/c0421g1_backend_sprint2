@@ -63,6 +63,7 @@ public class CategoryController {
         return new ResponseEntity<>(categories,HttpStatus.OK);
     }
 
+    @GetMapping("/menu") //BaoHG
     //LinhDN delete category
     @PatchMapping("/delete/{id}")
     public void deleteCategory(@PathVariable("id") Integer id){
