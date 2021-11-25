@@ -7,20 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class FeedBackServiceImpl implements IFeedBackService {
     @Autowired
     IFeedBackRepository feedBackRepository;
 
-// diep create feedback 12/11
+
+    // diep create feedback 12/11
     @Override
     public void save(FeedBack feedback) {
-        this.feedBackRepository.createFeedback(feedback.getFeedbackId(), feedback.getFeedbackCode(), feedback.getFeedbackContent(),feedback.getFeedbackCreator(), feedback.getFeedbackDate(), feedback.getFeedbackEmail(), feedback.getFeedbackImage());
-
-    }
-
-    @Override
-    public FeedBack findFeedbackByCode(String feedbackCode) {
-        return this.feedBackRepository.findFeedbackByCode(feedbackCode);
+        this.feedBackRepository.createFeedback(feedback.getFeedbackId(), feedback.getFeedbackCode(),
+                feedback.getFeedbackContent(), feedback.getFeedbackCreator(), feedback.getFeedbackDate(),
+                feedback.getFeedbackEmail(), feedback.getFeedbackImage());
     }
 }
+

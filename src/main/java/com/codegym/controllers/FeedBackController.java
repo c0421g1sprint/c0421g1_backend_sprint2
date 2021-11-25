@@ -1,6 +1,4 @@
 package com.codegym.controllers;
-
-
 import com.codegym.dto.FeedBackDto;
 import com.codegym.entity.feedback.FeedBack;
 import com.codegym.services.IFeedBackService;
@@ -31,18 +29,14 @@ public class FeedBackController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             FeedBack feedback = new FeedBack();
+            String prefix = "FEB-";
+            String postNumb = String.valueOf((int)(Math.random()*8900) + 1000);
+
             BeanUtils.copyProperties(feedBackDto, feedback);
+            feedback.setFeedbackCode(prefix + postNumb);
             this.iFeedbackService.save(feedback);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
-    @GetMapping("/find-feedback-code")  //OK (check Feedback duplicate)
-    public ResponseEntity<FeedBack> isFeedbackCodeDuplicated(@RequestParam(name = "feedbackCode", required = false) String feedbackCode) {
-        FeedBack feedBack = this.iFeedbackService.findFeedbackByCode(feedbackCode);
 
-        if (feedBack == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(feedBack, HttpStatus.OK);
-    }
 }

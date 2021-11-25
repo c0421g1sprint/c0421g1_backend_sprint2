@@ -2,9 +2,7 @@ package com.codegym.repositories;
 
 import com.codegym.entity.feedback.FeedBack;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.data.jpa.repository.Modifying;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -24,11 +22,8 @@ public interface IFeedBackRepository extends JpaRepository<FeedBack, Integer> {
                         String feedback_creator, String feedback_date, String feedback_email, String feedback_image);
 
 
-    @Query(value="select feedback_id, feedback_code,feedback_content, feedback_creator, feedback_date,feedback_email,feedback_image\n" +
-            "from feed_back\n" +
-            "where feedback_code = ?;",
-            nativeQuery = true)
-    FeedBack findFeedbackByCode(String feedbackCode);
+
+
 
 
 }
