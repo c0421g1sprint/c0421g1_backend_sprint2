@@ -7,7 +7,7 @@ import com.codegym.entity.account.Account;
 import com.codegym.repositories.IAccountRepository;
 import com.codegym.services.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,8 +19,8 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     IAccountRepository accountRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ConfirmService confirmService;
@@ -42,8 +42,8 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public void editPassword(Integer id, String password) {
-        password = passwordEncoder.encode(password);
-        accountRepository.editPassword(id, password);
+//        password = passwordEncoder.encode(password);
+//        accountRepository.editPassword(id, password);
     }
 
     //NhatDV
@@ -75,8 +75,8 @@ public class AccountServiceImpl implements IAccountService {
         if (registerAccount != null) {
             throw new IllegalStateException("email haved already exist");
         }
-        String encode = passwordEncoder.encode(account.getAccountPassword());
-        account.setAccountPassword(encode);
+//        String encode = passwordEncoder.encode(account.getAccountPassword());
+//        account.setAccountPassword(encode);
         this.accountRepository.signUpAccount(account.getAccountUsername(), account.getAccountPassword(), account.getEmail());
         registerAccount = this.accountRepository.findAccountByUsername(account.getAccountUsername());
         this.accountRepository.setRoleForUser(registerAccount.getAccountId());

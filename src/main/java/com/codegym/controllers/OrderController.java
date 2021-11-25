@@ -44,7 +44,7 @@ public class OrderController {
     @Autowired
     private IOrderDetailService iOrderDetailService;
 
-    @PatchMapping("/call-food/{id}")  //BaoHG
+
     //TaiNP coding show IncomeWithDate
     @GetMapping(value = "/income-date")
     public ResponseEntity<IncomeWithDateDto> showIncomeWithDate(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws ParseException {
