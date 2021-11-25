@@ -23,8 +23,8 @@ public class EmployeeController {
     @Autowired
     IEmployeeService iEmployeeService;
 
-    @Autowired
-    IAccountService iAccountService;
+//    @Autowired
+//    IAccountService iAccountService;
 
 
     //PhucNK
@@ -60,8 +60,7 @@ public class EmployeeController {
         if (employeeCheck != null) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
-
-//thêm vào sáng ngày 25/11 2 giờ sáng
+//thêm vào sáng ngày 25/11
         new EmployeeDto().validate(employeeDto,bindingResult);
 
         if (bindingResult.hasFieldErrors()) {
