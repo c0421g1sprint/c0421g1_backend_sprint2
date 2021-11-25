@@ -4,6 +4,8 @@ import com.codegym.entity.table.Tables;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 
 public interface ITableService {
 
@@ -15,6 +17,9 @@ public interface ITableService {
 
     //DucLVH do at 17/11/2021
     String checkTableCode(String tableCode);
+
+    //DucLVH do at 24/11/2021
+    Tables findByIdQuery(int tableId);
 
     //HauPt do at 17/11/2021
     Page<Tables> getListTable(Pageable pageable);

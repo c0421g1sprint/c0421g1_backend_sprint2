@@ -64,9 +64,10 @@ public class TableController {
     }
 
     //HauPT do at 18/11/2021
-    @GetMapping(value = "/delete/{id}")
-    public ResponseEntity<Void> deleteTableById(@PathVariable Integer id){
-        if (id == null){
+    @PatchMapping(value = "/delete")
+    public ResponseEntity<Void> deleteTableById(@RequestBody Integer id){
+        Tables tables = tableService.findByIdQuery(id);
+        if (tables == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             tableService.deleteTableById(id);
@@ -85,6 +86,16 @@ public class TableController {
         } else {
             return new ResponseEntity<>(tables,HttpStatus.OK);
         }
+    }
+
+    //DucLVH do at 24/11/2021
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Tables> findByIdQuery(@PathVariable int id) {
+        Tables account = this.tableService.findByIdQuery(id);
+        if (account == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 }
 
