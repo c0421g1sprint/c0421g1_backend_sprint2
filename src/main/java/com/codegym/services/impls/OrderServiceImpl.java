@@ -29,7 +29,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Optional<Orders> listNewOrder() {
-       return this.ordersRepository.getNewOrder();
+        return this.ordersRepository.getNewOrder();
     }
 
 

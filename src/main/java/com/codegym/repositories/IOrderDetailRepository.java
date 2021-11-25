@@ -1,14 +1,15 @@
 package com.codegym.repositories;
 
-import com.codegym.entity.food_and_drink.FoodAndDrink;
+
 import com.codegym.entity.order.OrderDetail;
-import com.codegym.entity.order.Orders;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -24,6 +25,16 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
 
     @Query(value = "select * \n" +
             "from order_detail\n" +
-            "where order_id = ? ", nativeQuery = true)
-    Optional<OrderDetail> findOrderDetailById(int orderId);
+            "where order_id = ?1 ", nativeQuery = true)
+    List<OrderDetail> findOrderDetailById(int orderId);
+
+
+
+    @Modifying
+    @Query(value = "delete from `order_detail`\n" +
+            "where `order_id` = ?1", nativeQuery = true)
+    void deleteOrderDetail(int id);
+
+
+
 }

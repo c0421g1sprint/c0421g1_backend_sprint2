@@ -6,13 +6,13 @@ import com.codegym.entity.table.Tables;
 import com.codegym.services.IOrderDetailService;
 import com.codegym.services.IOrderService;
 import com.codegym.services.ITableService;
-import org.hibernate.criterion.Order;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Table;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +58,7 @@ public class OrderController {
     }
 
     @PostMapping("/create/orderTable") // tao moi 1 thang order all null chi co value table
-    public ResponseEntity<Order> newOrderTable(@RequestBody Orders orders) {
+    public ResponseEntity<Orders> newOrderTable(@RequestBody Orders orders) {
         this.iOrderService.saveOrderTable(orders);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -68,6 +68,12 @@ public class OrderController {
         this.iOrderDetailService.saveOrderTail(orderDetail);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+//    @DeleteMapping("/delete/orderDetail/{id}") // xoa 1 mon trong orderDetail
+//    public ResponseEntity<Orders> newOrderDetail(@PathVariable int id) {
+//        this.iOrderService.deleteOrderDetailByFoodId(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @GetMapping("/list/orderNew") // lay ra thang order moi nhat
     public ResponseEntity<Optional<Orders>> getNewOrderDB() {
@@ -89,9 +95,21 @@ public class OrderController {
     }
 
     @GetMapping("orderDetail/{id}")
-    public ResponseEntity<Optional<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
-        Optional<OrderDetail> list = this.iOrderDetailService.findById(id);
+    public ResponseEntity<List<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
+        List<OrderDetail> list = this.iOrderDetailService.findByOrderId(id);
 
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete/orderDetail/{id}") // xoa 1 mon trong orderDetail
+    public ResponseEntity<OrderDetail> newOrderDetail(@PathVariable int id) {
+        List<OrderDetail> orderDetail = this.iOrderDetailService.findByOrderId(id);
+        if (orderDetail.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            this.iOrderDetailService.deleteOrderDetailByFadId(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
     }
 }

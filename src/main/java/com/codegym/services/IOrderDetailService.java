@@ -10,5 +10,7 @@ public interface IOrderDetailService {
 
     void saveOrderTail(OrderDetail orderDetail);
 
-    Optional<OrderDetail> findById(int id);
+    List<OrderDetail> findByOrderId(int id);
+
+    void deleteOrderDetailByFadId(int id);
 }

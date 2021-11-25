@@ -1,18 +1,13 @@
 package com.codegym.controllers;
 
-import com.codegym.dto.CartDto;
-import com.codegym.dto.FoodAndDrinkDto;
 import com.codegym.entity.food_and_drink.FoodAndDrink;
 import com.codegym.services.IFoodAndDrinkService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +38,7 @@ public class FoodAndDrinkController {
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(list,HttpStatus.OK);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
 
@@ -58,6 +53,16 @@ public class FoodAndDrinkController {
 
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/search/food") // tim theo id food
+    public ResponseEntity<List<FoodAndDrink>> searchFood(@RequestParam(value = "search") String search) {
+        List<FoodAndDrink> foodAndDrink = this.foodAndDrinkService.searchFoodAndDrink(search);
+        if (foodAndDrink.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(foodAndDrink, HttpStatus.OK);
         }
     }
 

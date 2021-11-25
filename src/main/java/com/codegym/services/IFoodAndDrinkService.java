@@ -9,6 +9,10 @@ import java.util.Optional;
 
 public interface IFoodAndDrinkService {
     List<FoodAndDrink> findFoodCategoryId(int id);
+
     List<FoodAndDrink> listAll();
+
     Optional<FoodAndDrink> findFoodById(int id);
+
+    List<FoodAndDrink> searchFoodAndDrink(String name);
 }

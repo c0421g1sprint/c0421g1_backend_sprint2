@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.Order;
 import javax.transaction.Transactional;
 
 import java.util.Optional;
@@ -23,5 +22,6 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     @Query(value = "select * \n" +
             "from orders order by order_id desc limit 1;", nativeQuery = true)
     Optional<Orders> getNewOrder();
+
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class OrderDetailService implements IOrderDetailService {
     @Autowired
@@ -26,13 +27,19 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
-    public Optional<OrderDetail> findById(int id) {
+    public List<OrderDetail> findByOrderId(int id) {
         return this.iOrderDetailRepository.findOrderDetailById(id);
     }
 
-//
 //    @Override
-//    public void saveOrderTail(OrderDetail orderDetail) {
-//        this.iOrderDetailRepository.save(orderDetail);
+//    public void deleteOrderDetailByFadId(int id ) {
+//        this.iOrderDetailRepository.deleteById(id);
 //    }
+
+    @Override
+    public void deleteOrderDetailByFadId(int id) {
+        this.iOrderDetailRepository.deleteOrderDetail(id);
+    }
+
+
 }
