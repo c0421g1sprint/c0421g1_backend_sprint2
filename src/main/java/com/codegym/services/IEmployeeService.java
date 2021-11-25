@@ -36,4 +36,7 @@ public interface IEmployeeService {
 
     //NhatDV
     Employee getUserDetail(String name);
+
+    //    thêm tối nay PHUCnk
+    List<String> findAccountNameFromEmployee();
 }

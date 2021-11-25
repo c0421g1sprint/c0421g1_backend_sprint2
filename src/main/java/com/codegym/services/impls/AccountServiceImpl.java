@@ -1,5 +1,8 @@
 package com.codegym.services.impls;
 
+import com.codegym.email_java.ConfirmService;
+import com.codegym.email_java.VerifyEmail;
+import com.codegym.email_java.email.EmailSender;
 import com.codegym.entity.account.Account;
 import com.codegym.repositories.IAccountRepository;
 import com.codegym.services.IAccountService;
