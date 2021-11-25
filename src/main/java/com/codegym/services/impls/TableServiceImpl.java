@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,7 +30,7 @@ public class TableServiceImpl implements ITableService {
 
     //DucLVH do at 17/11/2021
     @Override
-    public String checkTableCode(String tableCode) {
+    public List<Tables> checkTableCode(String tableCode) {
         return this.tablesRepository.checkTableCode(tableCode);
     }
 

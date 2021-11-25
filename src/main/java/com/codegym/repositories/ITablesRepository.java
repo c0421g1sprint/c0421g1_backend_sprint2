@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -23,7 +24,7 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
 
     //DucLVH do at 17/11/2021
     @Query(value ="SELECT * FROM tables WHERE table_code = ?1",nativeQuery = true)
-    String checkTableCode(String tableCode);
+    List<Tables> checkTableCode(String tableCode);
 
     //  HauPT do at 17/11/2021
     @Query(value ="SELECT * FROM `tables` WHERE delete_flag = 0",nativeQuery = true)

@@ -28,8 +28,8 @@ public class TableController {
     //DucLVH do at 17/11/2021
     @PostMapping(value = "/add")
     public ResponseEntity<List<FieldError>> createTable(@RequestBody TablesDto tablesDto) {
-        String tableCode = tableService.checkTableCode(tablesDto.getTableCode());
-        if (tableCode != null) {
+        List<Tables> tableCode = tableService.checkTableCode(tablesDto.getTableCode());
+        if (tableCode.size() != 0) {
             return new ResponseEntity<>(
                     HttpStatus.NOT_ACCEPTABLE);
         }
@@ -42,7 +42,9 @@ public class TableController {
     //DucLVH do at 17/11/2021
     @RequestMapping(value = "/update", method = RequestMethod.PATCH)
     public ResponseEntity<?> updateTeacher(@RequestBody @Validated TablesDto tablesDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
+        List<Tables> tableCode = tableService.checkTableCode(tablesDto.getTableCode());
+        if (bindingResult.hasFieldErrors() || tableCode.size() != 0
+        ) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             Tables tables = new Tables();
