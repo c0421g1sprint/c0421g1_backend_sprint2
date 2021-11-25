@@ -18,10 +18,10 @@ import java.util.Optional;
 public class FoodAndDrinkController {
 
 
-    @Autowired
+    @Autowired //BaoHG
     private IFoodAndDrinkService foodAndDrinkService;
 
-    @GetMapping("/{id}") // loc theo category cua food
+    @GetMapping("/{id}") //  BaoHG loc theo category cua food
     public ResponseEntity<List<FoodAndDrink>> findFoodCategoryId(@PathVariable int id) {
         List<FoodAndDrink> list = this.foodAndDrinkService.findFoodCategoryId(id);
         if (list.isEmpty()) {
@@ -32,7 +32,7 @@ public class FoodAndDrinkController {
         }
     }
 
-    @GetMapping("/allFood") // lay all food
+    @GetMapping("/allFood") //  BaoHG lay all food
     public ResponseEntity<List<FoodAndDrink>> listAllFood() {
         List<FoodAndDrink> list = this.foodAndDrinkService.listAll();
         if (list.isEmpty()) {
@@ -43,7 +43,7 @@ public class FoodAndDrinkController {
     }
 
 
-    @GetMapping("/food/{id}") // tim theo id food
+    @GetMapping("/food/{id}") //  //BaoHG tim theo id food
     public ResponseEntity<Optional<FoodAndDrink>> findFoodAndDrinkById(@PathVariable int id) {
         Optional<FoodAndDrink> foodAndDrink = this.foodAndDrinkService.findFoodById(id);
 
@@ -56,7 +56,7 @@ public class FoodAndDrinkController {
         }
     }
 
-    @GetMapping("/search/food") // tim theo id food
+    @GetMapping("/search/food") //  //BaoHG tim theo id food
     public ResponseEntity<List<FoodAndDrink>> searchFood(@RequestParam(value = "search") String search) {
         List<FoodAndDrink> foodAndDrink = this.foodAndDrinkService.searchFoodAndDrink(search);
         if (foodAndDrink.isEmpty()) {

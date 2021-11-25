@@ -7,8 +7,8 @@ import java.util.Optional;
 
 
 public interface ITableService {
-    void callFoodAndDrink(int id);
-    void callEmp(int id);
-    void pay(int id);
-    Optional<Tables> tableRandom();
+    void callFoodAndDrink(int id); //BaoHG
+    void callEmp(int id);//BaoHG
+    void pay(int id);//BaoHG
+    Optional<Tables> tableRandom();//BaoHG
 }

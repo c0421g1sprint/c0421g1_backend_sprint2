@@ -30,17 +30,17 @@ public class OrderController {
     @Autowired
     private IOrderDetailService iOrderDetailService;
 
-    @PatchMapping("/call-food/{id}")
+    @PatchMapping("/call-food/{id}")  //BaoHG
     public void callFoodById(@PathVariable int id) {
         this.iTableService.callFoodAndDrink(id);
     }
 
-    @PatchMapping("/call-employee/{id}")
+    @PatchMapping("/call-employee/{id}") //BaoHG
     public void callEmployeeById(@PathVariable int id) {
         this.iTableService.callEmp(id);
     }
 
-    @PatchMapping("/call-pay/{id}")
+    @PatchMapping("/call-pay/{id}") //BaoHG
     public void callPayById(@PathVariable int id) {
         this.iTableService.pay(id);
     }
@@ -57,13 +57,13 @@ public class OrderController {
         }
     }
 
-    @PostMapping("/create/orderTable") // tao moi 1 thang order all null chi co value table
+    @PostMapping("/create/orderTable") //  //BaoHG  tao moi 1 thang order all null chi co value table
     public ResponseEntity<Orders> newOrderTable(@RequestBody Orders orders) {
         this.iOrderService.saveOrderTable(orders);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/create/orderDetail")
+    @PostMapping("/create/orderDetail")  //BaoHG
     public ResponseEntity<OrderDetail> newOrderDetail(@RequestBody OrderDetail orderDetail) {
         this.iOrderDetailService.saveOrderTail(orderDetail);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -75,33 +75,33 @@ public class OrderController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 
-    @GetMapping("/list/orderNew") // lay ra thang order moi nhat
+    @GetMapping("/list/orderNew") //  BaoHG lay ra thang order moi nhat
     public ResponseEntity<Optional<Orders>> getNewOrderDB() {
         Optional<Orders> list = this.iOrderService.listNewOrder();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/list/order") // lay ra all order
+    @GetMapping("/list/order") //  BaoHG lay ra all order
     public ResponseEntity<List<Orders>> findAllOrder() {
         List<Orders> list = this.iOrderService.listOrder();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/list/orderDetail") // lay ra all order detail
+    @GetMapping("/list/orderDetail") //  BaoHG lay ra all order detail
     public ResponseEntity<List<OrderDetail>> findAllOrderDetail() {
         List<OrderDetail> list = this.iOrderDetailService.listOrderDetail();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("orderDetail/{id}")
+    @GetMapping("orderDetail/{id}")  //BaoHG
     public ResponseEntity<List<OrderDetail>> findByIdOrderDetail(@PathVariable int id) {
         List<OrderDetail> list = this.iOrderDetailService.findByOrderId(id);
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/orderDetail/{id}") // xoa 1 mon trong orderDetail
+    @DeleteMapping("delete/orderDetail/{id}") //  //BaoHG xoa 1 mon trong orderDetail
     public ResponseEntity<OrderDetail> newOrderDetail(@PathVariable int id) {
         List<OrderDetail> orderDetail = this.iOrderDetailService.findByOrderId(id);
         if (orderDetail.isEmpty()) {

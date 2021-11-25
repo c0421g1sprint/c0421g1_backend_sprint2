@@ -19,7 +19,7 @@ public class CategoryController {
     @Autowired
     private ICategoryService iCategoryService;
 
-    @GetMapping("/menu")
+    @GetMapping("/menu") //BaoHG
     public ResponseEntity<List<Category>> findAllName() {
         List<Category> list = this.iCategoryService.listAll();
         if (list.isEmpty()) {

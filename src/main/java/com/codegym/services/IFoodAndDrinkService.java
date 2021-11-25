@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IFoodAndDrinkService {
-    List<FoodAndDrink> findFoodCategoryId(int id);
+    List<FoodAndDrink> findFoodCategoryId(int id); //  BaoHG
 
-    List<FoodAndDrink> listAll();
+    List<FoodAndDrink> listAll(); // BaoHG
 
-    Optional<FoodAndDrink> findFoodById(int id);
+    Optional<FoodAndDrink> findFoodById(int id); //BaoHG
 
-    List<FoodAndDrink> searchFoodAndDrink(String name);
+    List<FoodAndDrink> searchFoodAndDrink(String name); // BaoHG
 }

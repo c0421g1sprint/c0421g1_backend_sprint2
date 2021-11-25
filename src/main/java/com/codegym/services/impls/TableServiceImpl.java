@@ -11,25 +11,25 @@ import java.util.Optional;
 
 @Service
 public class TableServiceImpl implements ITableService {
-    @Autowired
+    @Autowired //BaoHG
     ITablesRepository tablesRepository;
 
-    @Override
+    @Override // BaoHG
     public void callFoodAndDrink(int id) {
         this.tablesRepository.callFood(id);
     }
 
-    @Override
+    @Override // BaoHG
     public void callEmp(int id) {
         this.tablesRepository.callEmployee(id);
     }
 
-    @Override
+    @Override // BaoHG
     public void pay(int id) {
         this.tablesRepository.callPay(id);
     }
 
-    @Override
+    @Override //BaoHG
     public Optional<Tables> tableRandom() {
         return this.tablesRepository.getTable();
     }

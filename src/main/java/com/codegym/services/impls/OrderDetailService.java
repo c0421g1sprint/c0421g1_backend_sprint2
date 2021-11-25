@@ -13,20 +13,20 @@ import java.util.Optional;
 @Service
 public class OrderDetailService implements IOrderDetailService {
     @Autowired
-    private IOrderDetailRepository iOrderDetailRepository;
+    private IOrderDetailRepository iOrderDetailRepository; //BaoHG
 
-    @Override
+    @Override // BaoHG
     public List<OrderDetail> listOrderDetail() {
         return this.iOrderDetailRepository.findAll();
 
     }
 
-    @Override
+    @Override // BaoHG
     public void saveOrderTail(OrderDetail orderDetail) {
         this.iOrderDetailRepository.createOrderDetail(orderDetail.getFad().getFadId(), orderDetail.getOrders().getOrderId(), orderDetail.getQuantity());
     }
 
-    @Override
+    @Override //BaoHG
     public List<OrderDetail> findByOrderId(int id) {
         return this.iOrderDetailRepository.findOrderDetailById(id);
     }
@@ -36,7 +36,7 @@ public class OrderDetailService implements IOrderDetailService {
 //        this.iOrderDetailRepository.deleteById(id);
 //    }
 
-    @Override
+    @Override //BaoHG
     public void deleteOrderDetailByFadId(int id) {
         this.iOrderDetailRepository.deleteOrderDetail(id);
     }

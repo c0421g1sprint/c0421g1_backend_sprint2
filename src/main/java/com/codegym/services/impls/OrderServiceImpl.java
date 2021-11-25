@@ -13,21 +13,21 @@ import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements IOrderService {
-    @Autowired
+    @Autowired //BaoHG
     IOrdersRepository ordersRepository;
 
 
-    @Override
+    @Override // BaoHG
     public List<Orders> listOrder() {
         return this.ordersRepository.findAll();
     }
 
-    @Override
+    @Override // BaoHG
     public void saveOrderTable(Orders orders) {
         this.ordersRepository.createOrderTable(orders.getTables().getTableId());
     }
 
-    @Override
+    @Override //BaoHG
     public Optional<Orders> listNewOrder() {
         return this.ordersRepository.getNewOrder();
     }

@@ -9,10 +9,10 @@ import java.util.Optional;
 
 
 public interface IOrderService {
-    List<Orders> listOrder();
+    List<Orders> listOrder(); //BaoHG
 
-    void saveOrderTable(Orders orders);
+    void saveOrderTable(Orders orders);//BaoHG
 
-    Optional<Orders> listNewOrder();
+    Optional<Orders> listNewOrder();//BaoHG
 
 }
