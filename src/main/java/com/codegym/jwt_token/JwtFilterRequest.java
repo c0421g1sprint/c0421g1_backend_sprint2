@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-//Kiet login 23/10 Filter to verify token or refresh token if expire
 @Slf4j
 @Component
 public class JwtFilterRequest extends OncePerRequestFilter {
