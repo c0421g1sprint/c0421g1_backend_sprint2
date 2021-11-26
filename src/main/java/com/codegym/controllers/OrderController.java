@@ -201,8 +201,8 @@ public class OrderController {
     public ResponseEntity<Optional<Tables>> getTable() {
         Optional<Tables> tables = this.iTableService.tableRandom();
         if (tables.isPresent()) {
+            this.iOrderService.resetTableStatus2(tables.get().getTableId());
             return new ResponseEntity<>(tables, HttpStatus.OK);
-
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 

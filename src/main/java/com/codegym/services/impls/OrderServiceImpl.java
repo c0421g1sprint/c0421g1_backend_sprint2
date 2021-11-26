@@ -96,5 +96,10 @@ public class OrderServiceImpl implements IOrderService {
        return this.ordersRepository.getNewOrder();
     }
 
+    @Override
+    public void resetTableStatus2(int id) {
+        this.ordersRepository.resetTableStatus2(id);
+    }
+
 
 }

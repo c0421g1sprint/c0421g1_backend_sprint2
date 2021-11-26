@@ -55,6 +55,8 @@ public interface IOrderService {
 
     //BaoHG
     Optional<Orders> listNewOrder();
+    //TaiVK
+    void resetTableStatus2(int id);
 
 
 }

@@ -18,14 +18,13 @@ public class FeedBackDto {
     // Diep tạo dto
 
     private Integer feedbackId;
-    @NotNull
-    @NotEmpty
+
     private String feedbackCode;
 
     private String feedbackCreator;
 
     private String feedbackEmail;
-    @Size(min = 5)
+
     private String feedbackContent;
 
     private String feedbackDate;

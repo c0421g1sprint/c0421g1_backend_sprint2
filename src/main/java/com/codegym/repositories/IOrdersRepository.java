@@ -99,5 +99,10 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
             "from orders order by order_id desc limit 1;", nativeQuery = true)
     Optional<Orders> getNewOrder();
 
+    @Modifying
+    @Transactional
+    @Query(value = "update tables set tables.table_status = 'Có Khách' where tables.table_id = :id", nativeQuery = true)
+    void resetTableStatus2(int id);
+
 
 }

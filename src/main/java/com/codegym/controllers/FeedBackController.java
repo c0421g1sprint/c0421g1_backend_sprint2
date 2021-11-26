@@ -50,14 +50,17 @@ public class FeedBackController {
     }
 
     // Diep tao feedback 12/11
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public ResponseEntity<FeedBack> saveFeedback(@RequestBody @Validated FeedBackDto feedBackDto, BindingResult
             bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             FeedBack feedback = new FeedBack();
+            String prefix = "FEB-";
+            String postNumb = String.valueOf((int)(Math.random()*8900) + 1000);
             BeanUtils.copyProperties(feedBackDto, feedback);
+            feedback.setFeedbackCode(prefix + postNumb);
             this.feedBackService.save(feedback);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
