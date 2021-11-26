@@ -7,16 +7,14 @@ import com.codegym.services.IAccountService;
 import com.codegym.services.IEmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-
-
 
 import java.util.List;
 
@@ -31,8 +29,6 @@ public class EmployeeController {
     //PhucNK
     @Autowired
     IAccountService iAccountService;
-//
-
 
     //PhucNK
     @GetMapping("/{id}")
@@ -59,7 +55,7 @@ public class EmployeeController {
     @PatchMapping("/delete/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable("id") Integer id) {
         Employee employee = this.iEmployeeService.getEmployeeById(id);
-        if (employee != null){
+        if (employee != null) {
             this.iEmployeeService.deleteEmployee(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -79,7 +75,6 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
 
-
     //PhucNK
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
     public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
@@ -87,8 +82,8 @@ public class EmployeeController {
         if (employeeCheck != null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-//thêm vào sáng ngày 25/11
-        new EmployeeDto().validate(employeeDto,bindingResult);
+        //thêm vào sáng ngày 25/11
+        new EmployeeDto().validate(employeeDto, bindingResult);
 
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -101,12 +96,11 @@ public class EmployeeController {
         }
     }
 
-
     //PhucNK
-    @PatchMapping(value = "/updateEmployee" )
+    @PatchMapping(value = "/updateEmployee")
     public ResponseEntity<?> updateEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
         //thêm vào sáng ngày 25/11 2 giờ sáng
-        new EmployeeDto().validate(employeeDto,bindingResult);
+        new EmployeeDto().validate(employeeDto, bindingResult);
 
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -122,45 +116,21 @@ public class EmployeeController {
     @GetMapping("/userDetail")
     public ResponseEntity<Employee> findUserDetail(@RequestParam("name") String name) {
         Employee employee = iEmployeeService.getUserDetail(name);
-        if (employee!=null) {
+        if (employee != null) {
             return new ResponseEntity<>(employee, HttpStatus.OK);
-        }else {
+        } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
+    @GetMapping("/listLevel")
+    public ResponseEntity<List<Level>> getLevelList
+            () {
+        List<Level> levelList = iEmployeeService.findAllLevelByQuery();
+        if (levelList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(levelList, HttpStatus.OK);
+        }
+    }
 }
-
-
-
-
-//    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-//    public ResponseEntity<Employee> saveEmployee(@RequestBody  @Validated EmployeeDto employeeDto,BindingResult bindingResult) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        } else {
-//            Employee employee = new Employee();
-//            BeanUtils.copyProperties(employeeDto, employee);
-//            this.iEmployeeService.save(employee);
-//            return new ResponseEntity<>(HttpStatus.CREATED);
-//        }
-//    }
-
-
-
-//    @RequestMapping(value = "/updateEmployee", method = RequestMethod.PATCH)
-//    public ResponseEntity<?> updateEmployee(@RequestBody  @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        } else {
-//            Employee employee=new Employee();
-//            BeanUtils.copyProperties(employeeDto,employee);
-//
-//            this.iEmployeeService.update(employee);
-//
-//            Account account=iAccountService.findAccountById(employee.getAccount().getAccountId());
-//            account.setAccountUsername(employee.getAccountName());
-//            this.iAccountService.save(account);
-//
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//    }

@@ -16,7 +16,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private IAccountService accountService;
 
-    // DungNM - AuthenticationManager user this function
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = this.accountService.findByUsername(username);

@@ -39,7 +39,7 @@ public class Employee {
     @JoinColumn(name = "level_id", referencedColumnName = "levelId")
     private Level level;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "accountId")
     private Account account;
 

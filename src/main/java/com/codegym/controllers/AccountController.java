@@ -43,7 +43,6 @@ public class AccountController {
     @Autowired
     private JwtProvider tokenProvider;
 
-
     //NhatDV code accout by id
     @GetMapping(value = "/{accountId}")
     public ResponseEntity<Account> editPassword(@PathVariable Integer accountId) {
@@ -87,13 +86,12 @@ public class AccountController {
     //DungNM 21/11 - login API use to authentication by HttpBasic 23/10
     @PostMapping("/login")
     public ResponseEntity<ResponseToken> loginAccount(@Valid @RequestBody LoginRequestDto loginRequestDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
+        if (bindingResult.hasFieldErrors()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails user = userDetailsService.loadUserByUsername(loginRequestDto.getUsername());
-        System.out.println(user.toString());
         List<String> roles = new ArrayList<>();
         for (GrantedAuthority items : user.getAuthorities()) {
             roles.add(items.getAuthority());
