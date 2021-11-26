@@ -32,8 +32,13 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().formLogin().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().antMatchers("/api/account/login").permitAll()
-                .and().authorizeRequests().antMatchers("/api/feed-back/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//                .and().authorizeRequests().antMatchers("/api/account/login","/api/food-and-drink/find-top-five-popular",
+//                "/api/food-and-drink/find-top-five-new","/api/feed-back/add","/api/category/menu", "/api/order/**","/api/food-and-drink/**").permitAll()
+                .and().authorizeRequests().antMatchers("/api/**").permitAll()
+
+//                .and().authorizeRequests().antMatchers("/api/feed-back/find-feed-back-by-id").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//                .and().authorizeRequests().antMatchers("/api/").access("hasAnyRole('ROLE_ADMIN')")
+//                .and().authorizeRequests().antMatchers("/api/table/**","/").access("hasAnyRole('ROLE_USER')")
                 .anyRequest().authenticated().
                 and().cors();
         http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
