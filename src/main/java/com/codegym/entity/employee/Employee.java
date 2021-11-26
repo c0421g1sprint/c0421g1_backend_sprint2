@@ -24,7 +24,6 @@ public class Employee {
     private String employeeAddress;
     private String employeePhone;
 
-
     @Column(columnDefinition = "LONGTEXT")
     private String employeeImage;
     private Byte employeeGender;
@@ -39,7 +38,7 @@ public class Employee {
     @JoinColumn(name = "level_id", referencedColumnName = "levelId")
     private Level level;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "account_id", referencedColumnName = "accountId")
     private Account account;
 
