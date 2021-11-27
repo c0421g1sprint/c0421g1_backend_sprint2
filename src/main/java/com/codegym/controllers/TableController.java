@@ -70,7 +70,7 @@ public class TableController {
     public ResponseEntity<Void> deleteTableById(@RequestBody Integer id) {
         Tables tables = this.tableService.findByIdQuery(id);
         if (tables == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             tableService.deleteTableById(id);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -95,7 +95,7 @@ public class TableController {
     public ResponseEntity<Tables> findByIdQuery(@PathVariable int id) {
         Tables account = this.tableService.findByIdQuery(id);
         if (account == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         System.out.println(account);
         return new ResponseEntity<>(account, HttpStatus.OK);

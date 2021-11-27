@@ -61,7 +61,7 @@ public class AccountController {
         if (account != null) {
             return new ResponseEntity<>(account, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }

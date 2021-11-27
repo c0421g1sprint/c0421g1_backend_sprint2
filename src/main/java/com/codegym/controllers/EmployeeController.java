@@ -119,7 +119,7 @@ public class EmployeeController {
         if (employee != null) {
             return new ResponseEntity<>(employee, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

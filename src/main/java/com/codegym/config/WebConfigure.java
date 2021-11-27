@@ -30,12 +30,23 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().formLogin().and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().antMatchers("/**").permitAll()
-//                .and().authorizeRequests().antMatchers("api/classroom/**").access("hasRole('ROLE_ADMIN')")
-                .anyRequest().authenticated().
-                and().cors();
+        http.csrf().disable()
+                //phân quyền Account
+                .authorizeRequests().antMatchers("/api/account/login").permitAll()
+                .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_ADMIN')")
+                //phân quyền Employee
+                .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_ADMIN')")
+                //phân quyền Table
+                .and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                //phân quyền Category
+//                .and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                //phân quyền FoodAndDrink
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/delete/**", "/api/food-and-drink/create", "/api/food-and-drink/update").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/**").permitAll()
+
+                .anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().cors();
         http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
     }
 
