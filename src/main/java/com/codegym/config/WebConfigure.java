@@ -32,14 +32,16 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 //phân quyền Account
-                .authorizeRequests().antMatchers("/api/account/login").permitAll()
-                .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_ADMIN')")
+                .authorizeRequests().antMatchers("/api/account/**").permitAll()
+//                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName").permitAll()
+//                .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 //phân quyền Employee
+                .and().authorizeRequests().antMatchers("/api/employee/userDetail").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
                 .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_ADMIN')")
                 //phân quyền Table
                 .and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 //phân quyền Category
-//                .and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                //.and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 //phân quyền FoodAndDrink
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/delete/**", "/api/food-and-drink/create", "/api/food-and-drink/update").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/**").permitAll()
