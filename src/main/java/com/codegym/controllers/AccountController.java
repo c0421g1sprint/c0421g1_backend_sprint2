@@ -2,6 +2,7 @@ package com.codegym.controllers;
 
 import com.codegym.dto.EditPasswordAccountDto;
 import com.codegym.dto.LoginRequestDto;
+import com.codegym.email_java.email.EmailSender;
 import com.codegym.entity.account.Account;
 import com.codegym.jwt_token.JwtProvider;
 import com.codegym.jwt_token.ResponseToken;
@@ -42,6 +43,9 @@ public class AccountController {
 
     @Autowired
     private JwtProvider tokenProvider;
+
+    @Autowired
+    private EmailSender emailSender;
 
     //NhatDV code accout by id
     @GetMapping(value = "/{accountId}")
@@ -98,5 +102,26 @@ public class AccountController {
         }
         String token = tokenProvider.generateToken(user);
         return new ResponseEntity<>(new ResponseToken(token, user.getUsername(), roles), HttpStatus.OK);
+    }
+
+    //DungNM login refresh password if client forget
+    @GetMapping(value = "/refreshPassword")
+    public ResponseEntity<String> refreshPassword(@RequestParam(required = false) String email){
+        if (!email.matches("^[a-zA-Z0-9]+\\@[a-z]+\\.[a-z]+$")){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Account account = this.accountService.findAccountByEmail(email);
+        if (account != null){
+            try {
+                String randomPass = String.valueOf((int)((Math.random()+1)*100000));
+                this.accountService.editPassword(account.getAccountId(), randomPass);
+                String contentEmail  =  this.emailSender.buildForgetPassEmail(randomPass);
+                this.emailSender.send(account.getEmail(), contentEmail);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }catch (Exception ex){
+                return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

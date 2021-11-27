@@ -32,7 +32,7 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 //phân quyền Account
-                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName").permitAll()
+                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName","/api/account/refreshPassword").permitAll()
                 .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 
                 //phân quyền Employee
