@@ -127,7 +127,6 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     // TaiHVK coding reset table status method 17/11/2021
     @PatchMapping(value = "/on-service/reset/{id}")
     public ResponseEntity<Void> changeTableStatus(@PathVariable int id) {

@@ -35,16 +35,32 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/api/account/**").permitAll()
 //                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName").permitAll()
 //                .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+
                 //phân quyền Employee
-                .and().authorizeRequests().antMatchers("/api/employee/userDetail").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-                .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_ADMIN')")
+                .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+
                 //phân quyền Table
+                .and().authorizeRequests().antMatchers("/api/table/delete", "/api/table/add").access("hasAnyRole('ROLE_ADMIN')")
                 .and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-                //phân quyền Category
-                //.and().authorizeRequests().antMatchers("/api/table/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-                //phân quyền FoodAndDrink
-                .and().authorizeRequests().antMatchers("/api/food-and-drink/delete/**", "/api/food-and-drink/create", "/api/food-and-drink/update").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-                .and().authorizeRequests().antMatchers("/api/food-and-drink/**").permitAll()
+
+                //phân quyền Category - linhDN
+                .and().authorizeRequests().antMatchers("/api/category/menu").permitAll()
+                .and().authorizeRequests().antMatchers("/api/category/list", "/api/category/delete").access("hasAnyRole('ROLE_USER')")
+                .and().authorizeRequests().antMatchers("/api/category/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+
+                //phân quyền FoodAndDrink - linhDN
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular").permitAll()
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/list", "/api/food-and-drink/delete").access("hasAnyRole('ROLE_USER')")
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+
+                //phân quyền order - danhNT
+                .and().authorizeRequests().antMatchers("/api/order/list/**", "/api/order/find/**",
+                "/api/order/income-date/**", "/api/order/income-statistics/**", "/api/order/on-service/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                .and().authorizeRequests().antMatchers("/api/order/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+
+                //phân quyền Feedback
+                .and().authorizeRequests().antMatchers("/api/feed-back/add").permitAll()
+                .and().authorizeRequests().antMatchers("/api/feed-back/list-by-date/**", "/api/feed-back/find-feed-back-by-id/**").access("hasAnyRole('ROLE_ADMIN')")
 
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

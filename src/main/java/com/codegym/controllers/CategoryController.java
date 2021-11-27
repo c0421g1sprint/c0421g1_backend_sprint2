@@ -47,7 +47,7 @@ public class CategoryController {
     public ResponseEntity<List<Category>> showAll() {
         List<Category> categoryList = categoryService.findAllCategory();
         if (categoryList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
@@ -62,7 +62,6 @@ public class CategoryController {
         }
         return new ResponseEntity<>(categories,HttpStatus.OK);
     }
-
 
     //LinhDN delete category
     @PatchMapping("/delete/{id}")
