@@ -32,9 +32,8 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 //phân quyền Account
-                .authorizeRequests().antMatchers("/api/account/**").permitAll()
-//                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName").permitAll()
-//                .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName").permitAll()
+                .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 
                 //phân quyền Employee
                 .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
@@ -49,11 +48,12 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/api/category/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 
                 //phân quyền FoodAndDrink - linhDN
-                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular").permitAll()
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular", "/api/food-and-drink/allFood").permitAll()
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/list", "/api/food-and-drink/delete").access("hasAnyRole('ROLE_USER')")
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 
                 //phân quyền order - danhNT
+                .and().authorizeRequests().antMatchers("/api/order/table").permitAll()
                 .and().authorizeRequests().antMatchers("/api/order/list/**", "/api/order/find/**",
                 "/api/order/income-date/**", "/api/order/income-statistics/**", "/api/order/on-service/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .and().authorizeRequests().antMatchers("/api/order/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
