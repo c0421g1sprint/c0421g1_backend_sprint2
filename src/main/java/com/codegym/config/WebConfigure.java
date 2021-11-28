@@ -48,7 +48,7 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/api/category/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 
                 //phân quyền FoodAndDrink - linhDN
-                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular", "/api/food-and-drink/allFood").permitAll()
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular", "/api/food-and-drink/allFood","/api/food-and-drink/*").permitAll()
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/list", "/api/food-and-drink/delete").access("hasAnyRole('ROLE_USER')")
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 

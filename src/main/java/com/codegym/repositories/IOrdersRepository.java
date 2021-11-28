@@ -28,18 +28,91 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     //TaiNP
     @Query(value = "select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o join food_and_drink as fd" +
             " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date = :dateNow" +
-            " union all (select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o" +
             " join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where" +
-            " os.create_date between :monDay and :sunDay) union all (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " os.create_date between :monDay and :sunDay)" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
             " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
-            " on o.order_id = os.order_id where os.create_date between :firstMoth and :lastMonth) union all" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-01-01' and :year" +
+            " '-01-31')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-02-01' and :year" +
+            " '-02-29')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-03-01' and :year" +
+            " '-03-31')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-04-01' and :year" +
+            " '-04-30')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-05-01' and :year" +
+            " '-05-31')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-06-01' and :year" +
+            " '-06-30')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            "  '-07-01' and :year" +
+            " '-07-31')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-08-01' and :year" +
+            " '-08-31')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-09-01' and :year" +
+            " '-09-30')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-10-01' and :year" +
+            " '-10-31')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-11-01' and :year" +
+            " '-11-30')" +
+            " union all" +
+            " (select  sum(o.quantity* fd.fad_price) as 'incomes'" +
+            " from order_detail as o join food_and_drink as fd on o.fad_id = fd.fad_id join orders as os" +
+            " on o.order_id = os.order_id where os.create_date between :year" +
+            " '-12-01' and :year" +
+            " '-12-31')" +
+            " union all" +
             " (select sum(o.quantity* fd.fad_price) as 'incomes' from order_detail as o join food_and_drink as fd" +
-            " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date between :firstYear and :lastYear)", nativeQuery = true)
-    List<IncomesDto> statisticsIncomes(@Param("dateNow") String dateNow, @Param("monDay") String monDay,
-                                       @Param("sunDay") String sunDay, @Param("firstMoth") String firstMoth,
-                                       @Param("lastMonth") String lastMonth, @Param("firstYear") String firstYear,
-                                       @Param("lastYear") String lastYear);
-
+            " on o.fad_id = fd.fad_id join orders as os on o.order_id = os.order_id where os.create_date between :year" +
+            " '-01-01' and :year" +
+            " '-12-31')",  nativeQuery = true)
+    List<IncomesDto> statisticsIncomes(@Param("dateNow") String dateNow,
+                                       @Param("monDay") String monDay,
+                                       @Param("sunDay") String sunDay,
+                                       @Param("year") String year);
     // TaiHVK coding change table on service status method 17/11/2021
     @Modifying
     @Transactional
@@ -103,6 +176,7 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     @Transactional
     @Query(value = "update tables set tables.table_status = 'Có Khách' where tables.table_id = :id", nativeQuery = true)
     void resetTableStatus2(int id);
+
 
 
 }

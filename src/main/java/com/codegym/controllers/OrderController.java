@@ -1,5 +1,7 @@
 package com.codegym.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.codegym.dto.IncomeWithDateDto;
 import com.codegym.dto.IncomesDto;
 import com.codegym.entity.order.OrderDetail;
@@ -51,61 +53,56 @@ public class OrderController {
         if (startDate.equals("") || endDate.equals("")){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        Date dateStart = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+        Date dateEnd = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+
+        if(dateStart.after(dateEnd)){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
         IncomeWithDateDto incomeWithDateDto = this.iOrderService.findIncomeWithDate(startDate, endDate);
         return new ResponseEntity<>(incomeWithDateDto, HttpStatus.ACCEPTED);
     }
 
     //TaiNP coding show statisticsIncome
     @GetMapping(value = "/income-statistics")
-    public ResponseEntity<List<IncomesDto>> statisticsIncome() {
+    public ResponseEntity<List<IncomesDto>> statisticsIncome(@RequestParam(required = false) String year) {
+
+        DateTimeFormatter myForMat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String monDay = "";
         String sunDay = "";
-        String firstMoth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String lastMonth = "";
-        String firstYear = LocalDate.of(LocalDate.now().getYear(), 1, 1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String lastYear = LocalDate.of(LocalDate.now().getYear(), 12, 31).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDate dateNow = LocalDate.now();
         DayOfWeek date = dateNow.getDayOfWeek();
 
-        if(LocalDate.now().getMonthValue() == 1|| LocalDate.now().getMonthValue() == 3|| LocalDate.now().getMonthValue() == 5||
-                LocalDate.now().getMonthValue() == 7|| LocalDate.now().getMonthValue() == 8|| LocalDate.now().getMonthValue() == 10||
-                LocalDate.now().getMonthValue() == 12){
-            lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 31).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }else if(LocalDate.now().getMonthValue() == 2){
-            lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 29).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }else {
-            lastMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if(year.equals("")){
+            year = String.valueOf(LocalDate.now().getYear());
         }
 
         if(date.name().equals("MONDAY")){
-            monDay = dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.plusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            monDay = dateNow.format(myForMat);
+            sunDay = dateNow.plusDays(6).format(myForMat);
+        }else if(date.name().equals("TUESDAY")){
+            monDay = dateNow.minusDays(1).format(myForMat);
+            sunDay = dateNow.plusDays(5).format(myForMat);
+        }else if(date.name().equals("WEDNESDAY")){
+            monDay = dateNow.minusDays(2).format(myForMat);
+            sunDay = dateNow.plusDays(4).format(myForMat);
+        }else if(date.name().equals("THURSDAY")){
+            monDay = dateNow.minusDays(3).format(myForMat);
+            sunDay = dateNow.plusDays(3).format(myForMat);
+        }else if(date.name().equals("FRIDAY")){
+            monDay = dateNow.minusDays(4).format(myForMat);
+            sunDay = dateNow.plusDays(2).format(myForMat);
+        }else if(date.name().equals("SATURDAY")){
+            monDay = dateNow.minusDays(5).format(myForMat);
+            sunDay = dateNow.plusDays(1).format(myForMat);
+        }else if(date.name().equals("SUNDAY")){
+            monDay = dateNow.minusDays(6).format(myForMat);
+            sunDay = dateNow.format(myForMat);
         }
-        if(date.name().equals("TUESDAY")){
-            monDay = dateNow.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.plusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        List<IncomesDto> incomesDto = iOrderService.statisticsIncomes(dateNow.toString(), monDay, sunDay, year);
+        if(incomesDto.get(14) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if(date.name().equals("WEDNESDAY")){
-            monDay = dateNow.minusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.plusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-        if(date.name().equals("THURSDAY")){
-            monDay = dateNow.minusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-        if(date.name().equals("FRIDAY")){
-            monDay = dateNow.minusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-        if(date.name().equals("SATURDAY")){
-            monDay = dateNow.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-        if(date.name().equals("SUNDAY")){
-            monDay = dateNow.minusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            sunDay = dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-        List<IncomesDto> incomesDto = iOrderService.statisticsIncomes(dateNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
         return new ResponseEntity<>(incomesDto, HttpStatus.ACCEPTED);
     }
 
@@ -126,6 +123,7 @@ public class OrderController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     // TaiHVK coding reset table status method 17/11/2021
     @PatchMapping(value = "/on-service/reset/{id}")
@@ -154,8 +152,8 @@ public class OrderController {
     //DanhNT: Danh sách hoá đơn phân trang
     @GetMapping("/list/{orderCode}/{date}")
     public ResponseEntity<Page<Orders>> showList(@PageableDefault(value = 5) Pageable pageable,
-            @PathVariable(required = false) String orderCode,
-                                      @PathVariable(required = false) String date){
+                                                 @PathVariable(required = false) String orderCode,
+                                                 @PathVariable(required = false) String date){
         if (orderCode.equals("null")){
             orderCode = null;
         }

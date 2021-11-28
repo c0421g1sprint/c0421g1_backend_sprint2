@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/feed-back")
@@ -49,7 +51,6 @@ public class FeedBackController {
         }
     }
 
-    // Diep tao feedback 12/11
     @PostMapping("/add")
     public ResponseEntity<FeedBack> saveFeedback(@RequestBody @Validated FeedBackDto feedBackDto, BindingResult
             bindingResult) {
@@ -58,8 +59,9 @@ public class FeedBackController {
         } else {
             FeedBack feedback = new FeedBack();
             String prefix = "FEB-";
-            String postNumb = String.valueOf((int)(Math.random()*8900) + 1000);
+            String postNumb = String.valueOf((int) (Math.random() * 8900) + 1000);
             BeanUtils.copyProperties(feedBackDto, feedback);
+            feedback.setFeedbackDate(new Date(System.currentTimeMillis()).toString());
             feedback.setFeedbackCode(prefix + postNumb);
             this.feedBackService.save(feedback);
             return new ResponseEntity<>(HttpStatus.CREATED);

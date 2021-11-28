@@ -80,7 +80,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> saveEmployee(@RequestBody @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
         Employee employeeCheck = iEmployeeService.getEmployeeByAccountName(employeeDto.getAccountName());
         if (employeeCheck != null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         //thêm vào sáng ngày 25/11
         new EmployeeDto().validate(employeeDto, bindingResult);
