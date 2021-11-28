@@ -56,10 +56,10 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     @Query(value = "select * from `orders` inner join order_detail on `orders`.order_id = order_detail.order_id " +
             "inner join food_and_drink on food_and_drink.fad_id = order_detail.fad_id" +
             " inner join tables on `orders`.table_id = tables.table_id " +
-            "where tables.table_id = :id",
+            "where tables.table_id = :id order by `orders`.order_id",
             countQuery = "select count(*) from `orders` inner join order_detail on `orders`.order_id = order_detail.order_id " +
                     "inner join food_and_drink on food_and_drink.fad_id = order_detail.fad_id" +
-                    " inner join tables on `orders`.table_id = tables.table_id where tables.table_id = :id", nativeQuery = true)
+                    " inner join tables on `orders`.table_id = tables.table_id where tables.table_id = :id order by `orders`.order_id", nativeQuery = true)
     Orders showOrderDetail(Integer id);
 
     // TaiHVK coding show table sum method 21/11/2021
@@ -104,5 +104,8 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     @Query(value = "update tables set tables.table_status = 'Có Khách' where tables.table_id = :id", nativeQuery = true)
     void resetTableStatus2(int id);
 
-
+    // TaiHVK bổ sung code 27/11
+    @Modifying
+    @Query(value = "update orders set create_date = ?1, order_code = ?2, employee_id = ?3 where table_id = ?4 ", nativeQuery = true)
+    void updateOrder(String date, String code, int id, int tableId);
 }

@@ -91,6 +91,11 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public void updateOrder(String date, String code, int id, int tableId) {
+        this.ordersRepository.updateOrder(date, code, id, tableId);
+    }
+
+    @Override
     public //BaoHG
      Optional<Orders> listNewOrder() {
        return this.ordersRepository.getNewOrder();

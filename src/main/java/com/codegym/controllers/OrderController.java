@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -141,7 +142,7 @@ public class OrderController {
     public ResponseEntity<Orders> showOrderDetail(@PathVariable(value = "id") Integer id) {
         Orders orders = this.iOrderService.showOrderDetail(id);
         if (orders == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
@@ -262,5 +263,15 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
+    }
+
+    // TaiHVK
+    @PatchMapping(value = "/on-service/update/{id}")
+    public ResponseEntity<Void> updateOrder(@PathVariable int id) {
+        String code = "HD" + ((int) (Math.random() * 8999) + 1000);
+        String date = new Date(System.currentTimeMillis()).toString();
+        int idEmployee = (int) (Math.random() * 9) + 1;
+        this.iOrderService.updateOrder(date, code, idEmployee, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

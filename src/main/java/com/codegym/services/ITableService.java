@@ -42,4 +42,5 @@ public interface ITableService {
 
     //DucLVH
     Tables findByIdQuery(int tableId);
+
 }

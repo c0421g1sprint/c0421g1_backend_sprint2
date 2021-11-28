@@ -58,5 +58,6 @@ public interface IOrderService {
     //TaiVK
     void resetTableStatus2(int id);
 
-
+    // TaiHVK update order 27/11
+    void updateOrder(String date, String code, int id, int tableId);
 }
