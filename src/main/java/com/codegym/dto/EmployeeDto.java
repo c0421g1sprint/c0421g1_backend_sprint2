@@ -27,7 +27,7 @@ public class EmployeeDto implements Validator {
     @NotNull(message = "Tên nhân viên không được để trống.")
     @NotBlank(message = "Tên nhân viên không được để trống.")
     @Size(min = 3, max = 50, message = "Tên nhân viên tối thiểu phải có 3 kí tự,tối đa 50 kí tự.")
-    @Pattern(regexp = "^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s ]*$", message = "Tên nhân viên không được chứa ký tự đặc biệt và số.")
+    @Pattern(regexp = "^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀẾỂưạảấầẩẫậắằẳẵặẹẻẽềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s ]*$", message = "Tên nhân viên không được chứa ký tự đặc biệt và số.")
     private String employeeName;
 
     @NotNull(message = "Địa chỉ không được để trống")

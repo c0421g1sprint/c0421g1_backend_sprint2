@@ -177,6 +177,10 @@ public interface IOrdersRepository extends JpaRepository<Orders, Integer> {
     @Query(value = "update tables set tables.table_status = 'Có Khách' where tables.table_id = :id", nativeQuery = true)
     void resetTableStatus2(int id);
 
+    // TaiHVK bổ sung code 27/11
+    @Modifying
+    @Query(value = "update orders set create_date = ?1, order_code = ?2, employee_id = ?3 where table_id = ?4 ", nativeQuery = true)
+    void updateOrder(String date, String code, int id, int tableId);
 
 
 }

@@ -36,7 +36,7 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 
                 //phân quyền Employee
-                .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_ADMIN')")
 
                 //phân quyền Table
                 .and().authorizeRequests().antMatchers("/api/table/delete", "/api/table/add").access("hasAnyRole('ROLE_ADMIN')")

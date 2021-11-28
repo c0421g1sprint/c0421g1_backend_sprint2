@@ -60,7 +60,7 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
 
 
     //PhucNK
-    @Query(value="select * from employee where employee.account_name=:name",nativeQuery = true)
+    @Query(value="select * from employee where employee.account_name=:name and employee.delete_flag = 0",nativeQuery = true)
     Employee getEmployeeByAccountName(@Param("name") String name);
 
 //    thêm vào tối ngayf24/11 PHUCnK

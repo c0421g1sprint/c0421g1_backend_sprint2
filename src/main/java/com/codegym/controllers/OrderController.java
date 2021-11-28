@@ -260,4 +260,14 @@ public class OrderController {
         }
 
     }
+
+    // TaiHVK
+    @PatchMapping(value = "/on-service/update/{id}")
+    public ResponseEntity<Void> updateOrder(@PathVariable int id) {
+        String code = "HD" + ((int) (Math.random() * 8999) + 1000);
+        String date = new Date(System.currentTimeMillis()).toString();
+        int idEmployee = (int) (Math.random() * 9) + 1;
+        this.iOrderService.updateOrder(date, code, idEmployee, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

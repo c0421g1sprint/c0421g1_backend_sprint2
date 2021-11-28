@@ -33,10 +33,9 @@ public class OrderServiceImpl implements IOrderService {
         return ordersRepository.findIncomeWithDate(startDate, endDate);
     }
 
-    //TaiNP coding show statisticsIncome
     @Override
-    public List<IncomesDto> statisticsIncomes(String dateNow, String monDay, String sunDay, String firstMoth, String lastMonth, String firstYear, String lastYear) {
-        return ordersRepository.statisticsIncomes(dateNow, monDay, sunDay, firstMoth, lastMonth, firstYear, lastYear);
+    public List<IncomesDto> statisticsIncomes(String dateNow, String monDay, String sunDay, String year) {
+        return this.ordersRepository.statisticsIncomes(dateNow, monDay, sunDay, year);
     }
 
     // TaiHVK coding show all available tables by list method 17/11/2021
@@ -101,5 +100,8 @@ public class OrderServiceImpl implements IOrderService {
         this.ordersRepository.resetTableStatus2(id);
     }
 
-
+    @Override
+    public void updateOrder(String date, String code, int id, int tableId) {
+        this.ordersRepository.updateOrder(date, code, id, tableId);
+    }
 }
