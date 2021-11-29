@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public void update(Employee employee) {
         employeeRepository.updateEmployee(employee.isDeleteFlag(),employee.getEmployeeAddress(),
                 employee.getEmployeeBirthday(),employee.getEmployeeGender(),employee.getEmployeeImage(),
-                employee.getEmployeeName(),employee.getEmployeePhone(),employee.getEmployeeSalary(),employee.getLevel().getLevelId(),employee.getAccountName(),employee.getEmployeeId());
+                employee.getEmployeeName(),employee.getEmployeePhone(),employee.getEmployeeSalary(),employee.getLevel().getLevelId(),employee.getEmployeeId());
     }
 
     //PhucNK
@@ -89,6 +89,4 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public List<String> findAccountNameFromEmployee() {
         return employeeRepository.findAccountNameFromEmployee();
     }
-
-
 }

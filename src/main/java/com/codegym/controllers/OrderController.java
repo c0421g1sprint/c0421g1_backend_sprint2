@@ -101,7 +101,7 @@ public class OrderController {
         }
         List<IncomesDto> incomesDto = iOrderService.statisticsIncomes(dateNow.toString(), monDay, sunDay, year);
         if(incomesDto.get(14) == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(incomesDto, HttpStatus.ACCEPTED);
     }
