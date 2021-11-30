@@ -32,10 +32,12 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 //phân quyền Account
-                .authorizeRequests().antMatchers("/api/account/login","/api/account/userName","/api/account/refreshPassword").permitAll()
+                .authorizeRequests().antMatchers("/api/account/login", "/api/account/userName", "/api/account/refreshPassword").permitAll()
                 .and().authorizeRequests().antMatchers("/api/account/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 
                 //phân quyền Employee
+//                .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_ADMIN')")
+                .and().authorizeRequests().antMatchers("/api/employee/userDetail/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
                 .and().authorizeRequests().antMatchers("/api/employee/**").access("hasAnyRole('ROLE_ADMIN')")
 
                 //phân quyền Table
@@ -48,15 +50,17 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/api/category/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 
                 //phân quyền FoodAndDrink - linhDN
-                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular", "/api/food-and-drink/allFood","/api/food-and-drink/*").permitAll()
+                .and().authorizeRequests().antMatchers("/api/food-and-drink/find-top-five-new", "/api/food-and-drink/find-top-five-popular", "/api/food-and-drink/allFood", "/api/food-and-drink/*").permitAll()
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/list", "/api/food-and-drink/delete").access("hasAnyRole('ROLE_USER')")
                 .and().authorizeRequests().antMatchers("/api/food-and-drink/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 
                 //phân quyền order - danhNT
-                .and().authorizeRequests().antMatchers("/api/order/table").permitAll()
+                .and().authorizeRequests().antMatchers("/api/order/delete/orderDetail/**", "/api/order/orderDetail/**", "/api/order/list/orderDetail",
+                        "/api/order/list/order", "/api/order/list/orderNew", "/api/order/create/orderDetail", "/api/order/create/orderTable", "/api/order/table", "/api/order/call-food/**", "/api/order/call-pay/**", "/api/order/call-employee/**",
+                        "/api/order/on-service/update/**", "/api/order/on-service/handle/**",
+                        "/api/order/on-service/reset/**").permitAll()
                 .and().authorizeRequests().antMatchers("/api/order/list/**", "/api/order/find/**",
-                "/api/order/income-date/**", "/api/order/income-statistics/**", "/api/order/on-service/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-                .and().authorizeRequests().antMatchers("/api/order/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                        "/api/order/income-date/**", "/api/order/income-statistics/**", "/api/order/on-service/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 
                 //phân quyền Feedback
                 .and().authorizeRequests().antMatchers("/api/feed-back/add").permitAll()

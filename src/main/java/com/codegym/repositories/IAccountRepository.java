@@ -44,7 +44,7 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     @Query(value = "select " +
             "account_id, email, account_password, account_username, delete_flag, active_flag " +
             "from account a " +
-            "where a.email = ?1", nativeQuery = true)
+            "where a.email = ?1 and a.delete_flag = false", nativeQuery = true)
     Account findAccountByEmail(@Param("account_email") String email);
 
     //DungNM - insert account but not active

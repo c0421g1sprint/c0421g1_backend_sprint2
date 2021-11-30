@@ -42,9 +42,7 @@ public class TableController {
     //DucLVH do at 17/11/2021
     @RequestMapping(value = "/update", method = RequestMethod.PATCH)
     public ResponseEntity<?> updateTeacher(@RequestBody @Validated TablesDto tablesDto, BindingResult bindingResult) {
-        List<Tables> tableCode = tableService.checkTableCode(tablesDto.getTableCode());
-        if (bindingResult.hasFieldErrors() || tableCode.size() != 0
-        ) {
+        if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             Tables tables = new Tables();
