@@ -37,7 +37,7 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     @Query(value = "select " +
             "account_id, email, account_password, account_username, delete_flag, active_flag " +
             "from account a " +
-            "where a.account_username= ?1", nativeQuery = true)
+            "where a.account_username= ?1 and a.delete_flag=false", nativeQuery = true)
     Account findAccountByUsername(String username);
 
     //DungNM - Query account with email
