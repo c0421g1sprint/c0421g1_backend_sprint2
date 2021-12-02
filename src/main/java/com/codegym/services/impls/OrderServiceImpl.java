@@ -104,4 +104,9 @@ public class OrderServiceImpl implements IOrderService {
     public void updateOrder(String date, String code, int id, int tableId) {
         this.ordersRepository.updateOrder(date, code, id, tableId);
     }
+
+    @Override
+    public List<Tables> showTableList2() {
+        return this.iTablesRepository.showTableList2();
+    }
 }

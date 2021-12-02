@@ -59,4 +59,7 @@ public interface IOrderService {
 
     // TaiHVK update order 27/11
     void updateOrder(String date, String code, int id, int tableId);
+
+    // TaiHVK 01/12/2021
+    List<Tables> showTableList2();
 }

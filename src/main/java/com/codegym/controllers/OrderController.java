@@ -270,4 +270,10 @@ public class OrderController {
         this.iOrderService.updateOrder(date, code, idEmployee, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // TaiHVK 01/12/2021
+    @GetMapping(value = "/on-service-no-pageable")
+    public ResponseEntity<List<Tables>> showListNoPageable() {
+        return new ResponseEntity<>(this.iOrderService.showTableList2(), HttpStatus.OK);
+    }
 }

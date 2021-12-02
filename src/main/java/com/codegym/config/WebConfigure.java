@@ -57,7 +57,7 @@ public class WebConfigure extends WebSecurityConfigurerAdapter {
                 //phân quyền order - danhNT
                 .and().authorizeRequests().antMatchers("/api/order/delete/orderDetail/**", "/api/order/orderDetail/**", "/api/order/list/orderDetail",
                         "/api/order/list/order", "/api/order/list/orderNew", "/api/order/create/orderDetail", "/api/order/create/orderTable", "/api/order/table", "/api/order/call-food/**", "/api/order/call-pay/**", "/api/order/call-employee/**",
-                        "/api/order/on-service/update/**", "/api/order/on-service/handle/**",
+                        "/api/order/on-service/update/**", "/api/order/on-service/handle/**", "/api/order/on-service-no-pageable",
                         "/api/order/on-service/reset/**").permitAll()
                 .and().authorizeRequests().antMatchers("/api/order/list/**", "/api/order/find/**",
                         "/api/order/income-date/**", "/api/order/income-statistics/**", "/api/order/on-service/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")

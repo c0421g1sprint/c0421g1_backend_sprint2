@@ -82,4 +82,11 @@ public interface ITablesRepository extends JpaRepository<Tables,Integer> {
     @Query(value = "select table_id,location, maximum_capacity, table_code, table_status, available_flag,delete_flag,on_Service "+
             "from tables where table_id = ?1", nativeQuery = true)
     Optional<Tables> findByIdTableByQuery(int id);
+
+    // TaiHVK 01/12/2021
+    @Query(value = "select tables.table_id, tables.table_code , tables.available_flag, tables.delete_flag, tables.location as location, tables.maximum_capacity, tables.table_status, tables.on_service from tables " +
+            " where tables.delete_flag = false order by tables.table_code ",
+            countQuery = "select count(*) from tables " +
+                    " where tables.delete_flag = false order by tables.table_code ",  nativeQuery = true)
+    List<Tables> showTableList2();
 }
